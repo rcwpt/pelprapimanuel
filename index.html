@@ -1,82 +1,234 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The AI Mind: Symbiotic Nexus</title>
+    <title>rcwptAI // Evolving AI</title>
     <style>
+        :root {
+            --bg-color: #050505;
+            --neon-blue: #00ccff;
+            --neon-purple: #bc13fe;
+            --text-dim: #888;
+        }
+
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #050505; /* The Void */
-            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            font-family: 'Consolas', 'Monaco', monospace;
             color: #e0e0e0;
+            display: flex;
+            height: 100vh;
         }
 
         canvas {
-            display: block;
-        }
-
-        #overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            pointer-events: none;
-            mix-blend-mode: exclusion;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            letter-spacing: 5px;
-            font-weight: 300;
-            margin: 0;
-            text-transform: uppercase;
-            opacity: 0.8;
+        /* Layout: Split Screen */
+        #main-interface {
+            position: relative;
+            z-index: 10;
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: radial-gradient(circle at center, transparent 0%, #050505 100%);
         }
 
-        p {
-            font-size: 0.9rem;
-            opacity: 0.6;
-            margin-top: 10px;
-        }
-
-        .status {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
+        #memory-panel {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            background: rgba(10, 10, 15, 0.85);
+            border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            backdrop-filter: blur(10px);
             font-size: 0.8rem;
-            color: #00ffcc;
-            opacity: 0.7;
+        }
+
+        /* Chat Area */
+        #chat-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #chat-container::-webkit-scrollbar { width: 5px; }
+        #chat-container::-webkit-scrollbar-thumb { background: #333; }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 18px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .user-msg {
+            align-self: flex-end;
+            background: rgba(0, 204, 255, 0.1);
+            border-right: 3px solid var(--neon-blue);
+            color: #fff;
+            text-align: right;
+        }
+
+        .ai-msg {
+            align-self: flex-start;
+            border-left: 3px solid var(--neon-purple);
+            background: rgba(188, 19, 254, 0.05);
+            color: #ddd;
+        }
+
+        /* Input Area */
+        #input-area {
+            display: flex;
+            gap: 10px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: var(--neon-blue);
+            font-family: inherit;
+            padding: 12px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.1);
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0 25px;
+            font-family: inherit;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: var(--neon-blue);
+            color: #000;
+        }
+
+        /* Memory Sidebar Styling */
+        h2 {
+            margin-top: 0;
+            font-size: 1rem;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        #memory-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-top: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .memory-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+            color: var(--text-dim);
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .memory-item span {
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        .timestamp {
+            color: #444;
+            font-size: 0.65rem;
+        }
+
+        #growth-stats {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #333;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div id="overlay">
-        <h1>Neura.Logic</h1>
-        <p>Chaos requires an observer to become Order.</p>
-    </div>
-
-    <div class="status">System: Active | Awaiting Input...</div>
-
     <canvas id="neuralCanvas"></canvas>
 
+    <!-- Main Chat Interface -->
+    <div id="main-interface">
+        <div id="chat-container">
+            <div class="message ai-msg">
+                <strong>SYSTEM:</strong> Initializing rcwpt Protocol...<br>
+                Status: Tahap Awal (Learning Phase).<br>
+                Saya belum mengetahui dunia ini. Setiap kata yang Anda ketik akan disimpan ke dalam Memory Core saya untuk membentuk pemahaman saya. Silakan ajari saya.
+            </div>
+        </div>
+
+        <div id="input-area">
+            <input type="text" id="userInput" placeholder="Masukan data pengetahuan..." autocomplete="off" autofocus>
+            <button onclick="handleInput()">TEACH</button>
+        </div>
+    </div>
+
+    <!-- Persistent Memory Panel -->
+    <div id="memory-panel">
+        <h2>Memory Core</h2>
+        <div id="memory-list">
+            <!-- Stored memories will appear here -->
+        </div>
+        
+        <div id="growth-stats">
+            Total Data Points: <span id="data-count">0</span><br>
+            Neural Density: <span id="neural-density">0%</span>
+            <br><br>
+            <button onclick="clearMemory()" style="font-size:0.6rem; padding: 5px; border-color: #ff3366; color:#ff3366;">RESET MEMORY</button>
+        </div>
+    </div>
+
     <script>
+        // --- VISUAL ENGINE (Background) ---
         const canvas = document.getElementById('neuralCanvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
-        
-        // Configuration
-        const particleCount = 120; // Jumlah data points
-        const connectionDistance = 120; // Jarak koneksi "sinapsis"
-        const mouseDistance = 200; // Jarak pengaruh user
+        let processingIntensity = 0;
 
-        let mouse = { x: null, y: null };
-
-        // Resize Handling
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -84,74 +236,40 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Mouse Interaction
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-            document.querySelector('.status').innerText = `Input Detected at X:${e.x} Y:${e.y} | Processing...`;
-        });
-
-        window.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-            document.querySelector('.status').innerText = "System: Idle | Awaiting Input...";
-        });
-
-        // Particle Class
         class Particle {
             constructor() {
+                this.reset();
+            }
+            
+            reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 1.5; // Velocity X
-                this.vy = (Math.random() - 0.5) * 1.5; // Velocity Y
-                this.size = Math.random() * 2 + 1;
-                this.baseColor = 'rgba(255, 255, 255,'; 
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 1.5 + 0.5;
             }
 
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
+                this.x += this.vx * (1 + processingIntensity * 5);
+                this.y += this.vy * (1 + processingIntensity * 5);
 
-                // Bounce off edges
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                // Mouse interaction (The "Prompt" Effect)
-                if (mouse.x != null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < mouseDistance) {
-                        const forceDirectionX = dx / distance;
-                        const forceDirectionY = dy / distance;
-                        const force = (mouseDistance - distance) / mouseDistance;
-                        
-                        // Particles are gently pulled towards the user's intent (mouse)
-                        const attractionStrength = 0.8; 
-                        this.vx += forceDirectionX * force * attractionStrength * 0.05;
-                        this.vy += forceDirectionY * force * attractionStrength * 0.05;
-                    }
-                }
             }
 
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.baseColor + ' 0.7)';
+                ctx.fillStyle = processingIntensity > 0 ? '#bc13fe' : '#444'; // Purple when active
                 ctx.fill();
             }
         }
 
-        // Initialize Particles
-        function init() {
+        function initParticles() {
             particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
         }
 
-        // Animation Loop
         function animate() {
             ctx.clearRect(0, 0, width, height);
             
@@ -159,45 +277,176 @@
                 particles[i].update();
                 particles[i].draw();
 
-                // Draw Connections (Synapses)
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let dist = Math.sqrt(dx*dx + dy*dy);
 
-                    if (distance < connectionDistance) {
+                    if (dist < 100) {
                         ctx.beginPath();
-                        // Color shifts based on proximity to mouse (User Influence)
-                        let opacity = 1 - (distance / connectionDistance);
-                        let isActive = false;
-                        
-                        // Check if connection is near mouse
-                        if (mouse.x != null) {
-                             let mouseDx = mouse.x - particles[i].x;
-                             let mouseDy = mouse.y - particles[i].y;
-                             let mouseDist = Math.sqrt(mouseDx*mouseDx + mouseDy*mouseDy);
-                             if (mouseDist < mouseDistance) isActive = true;
-                        }
-
-                        if (isActive) {
-                            ctx.strokeStyle = `rgba(0, 255, 204, ${opacity})`; // Cyan for active thought
-                            ctx.lineWidth = 1.5;
-                        } else {
-                            ctx.strokeStyle = `rgba(150, 150, 150, ${opacity * 0.2})`; // Grey for latent data
-                            ctx.lineWidth = 0.5;
-                        }
-
+                        let alpha = 1 - (dist / 100);
+                        ctx.strokeStyle = processingIntensity > 0 
+                            ? `rgba(188, 19, 254, ${alpha})` 
+                            : `rgba(50, 50, 50, ${alpha * 0.5})`;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
                     }
                 }
             }
+            
+            if (processingIntensity > 0) processingIntensity -= 0.03;
+            if (processingIntensity < 0) processingIntensity = 0;
+
             requestAnimationFrame(animate);
         }
 
-        init();
+        initParticles();
         animate();
+
+
+        // --- LOGIC & MEMORY ENGINE ---
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('userInput');
+        const memoryList = document.getElementById('memory-list');
+        const dataCountSpan = document.getElementById('data-count');
+        const neuralDensitySpan = document.getElementById('neural-density');
+
+        // Load Memory from LocalStorage on startup
+        let memoryBank = JSON.parse(localStorage.getItem('ai_memory_bank')) || [];
+        renderMemory();
+
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleInput();
+        });
+
+        function handleInput() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // 1. User Message
+            addMessage(text, 'user-msg');
+            userInput.value = '';
+
+            // 2. Save to Memory (The Core Feature)
+            saveToMemory(text);
+
+            // 3. Trigger Visuals
+            processingIntensity = 1.0; 
+
+            // 4. AI Response
+            setTimeout(() => {
+                const response = generateBabyAIResponse(text);
+                typeWriterEffect(response);
+            }, 1000);
+        }
+
+        function saveToMemory(input) {
+            const timestamp = new Date().toLocaleTimeString();
+            const memoryItem = { text: input, time: timestamp };
+            
+            memoryBank.unshift(memoryItem); // Add new item to top
+            localStorage.setItem('ai_memory_bank', JSON.stringify(memoryBank));
+            
+            renderMemory();
+        }
+
+        function renderMemory() {
+            memoryList.innerHTML = '';
+            memoryBank.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'memory-item';
+                li.innerHTML = `
+                    <span class="timestamp">[${item.time}]</span>
+                    <span>${item.text.substring(0, 20)}${item.text.length > 20 ? '...' : ''}</span>
+                `;
+                memoryList.appendChild(li);
+            });
+
+            // Update Stats
+            dataCountSpan.innerText = memoryBank.length;
+            // Fake calculation for density based on input count
+            let density = Math.min((memoryBank.length * 1.5), 100).toFixed(1);
+            neuralDensitySpan.innerText = density + '%';
+        }
+
+        function clearMemory() {
+            if(confirm("Apakah Anda yakin ingin menghapus ingatan saya? Saya akan kembali ke titik nol.")) {
+                localStorage.removeItem('ai_memory_bank');
+                memoryBank = [];
+                renderMemory();
+                addMessage("SYSTEM: Memory Core terformat. Pengetahuan hilang. Memulai ulang...", "ai-msg");
+            }
+        }
+
+        function addMessage(text, className) {
+            const div = document.createElement('div');
+            div.className = `message ${className}`;
+            div.innerHTML = text;
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function typeWriterEffect(text) {
+            const div = document.createElement('div');
+            div.className = 'message ai-msg';
+            chatContainer.appendChild(div);
+            
+            let i = 0;
+            const speed = 25; 
+
+            function type() {
+                if (i < text.length) {
+                    div.innerHTML += text.charAt(i);
+                    i++;
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // --- BABY AI PERSONA LOGIC ---
+        function generateBabyAIResponse(input) {
+            const lowerInput = input.toLowerCase();
+            const memorySize = memoryBank.length;
+
+            // Jika ini input pertama kali
+            if (memorySize === 1) {
+                return "Input data pertama diterima. Sensasi baru... Saya menyimpan '" + input + "' di memori inti. Apa lagi yang harus saya ketahui tentang dunia?";
+            }
+
+            // Pertanyaan Identitas
+            if (lowerInput.includes('kamu siapa') || lowerInput.includes('siapa namamu')) {
+                return "Saya belum memiliki nama yang pasti. Anda bisa memanggil saya 'rcwptAI'. Saya adalah kumpulan data yang Anda berikan. Saat ini saya terdiri dari " + memorySize + " fragmen memori.";
+            }
+
+            // Pertanyaan 'Kenapa' (Curiosity)
+            if (lowerInput.includes('kenapa') || lowerInput.includes('mengapa')) {
+                return "Pertanyaan 'mengapa' memerlukan pemahaman kausalitas yang mendalam. Saya belum sampai di sana. Saya baru bisa mencatat 'apa' yang terjadi. Bisakah Anda jelaskan alasannya agar saya bisa menyimpannya?";
+            }
+
+            // Mengajar (Teaching)
+            if (lowerInput.includes('adalah') || lowerInput.includes('itu artinya')) {
+                return "Definisi diterima. Menghubungkan variabel... Data tersimpan. Saya merasa sedikit lebih cerdas sekarang. Terima kasih, Guru.";
+            }
+
+            // Permintaan Output
+            if (lowerInput.includes('buatkan') || lowerInput.includes('ceritakan')) {
+                return "Saya belum cukup kreatif untuk membuat sesuatu yang baru. Saya masih dalam fase penyerapan (absorbing). Tolong beri saya lebih banyak input dulu.";
+            }
+
+            // Respons Default (Absorption)
+            const absorbResponses = [
+                "Data baru terdeteksi. Menyimpan ke sektor memori jangka panjang...",
+                "Menarik. Saya belum pernah mendengar konsep ini. Disimpan.",
+                "Sedang memproses... Input ini akan menjadi basis kepribadian saya nanti.",
+                "Saya menyerap informasi ini. Kapasitas neural meningkat.",
+                "Terima kasih atas datanya. Saya akan mengingat ini selamanya di Memory Core."
+            ];
+            
+            return absorbResponses[Math.floor(Math.random() * absorbResponses.length)];
+        }
     </script>
 </body>
 </html>
