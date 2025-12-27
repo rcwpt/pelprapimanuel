@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inside Gemini's Mind: The Latent Space</title>
+    <title>The AI Mind: Symbiotic Nexus</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #050505; /* Hitam pekat */
+            background-color: #050505; /* The Void */
             font-family: 'Courier New', Courier, monospace;
+            color: #e0e0e0;
         }
 
         canvas {
@@ -21,145 +22,115 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            pointer-events: none; /* Biarkan mouse menembus teks */
             text-align: center;
-            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
             mix-blend-mode: exclusion;
         }
 
         h1 {
             font-size: 2.5rem;
             letter-spacing: 5px;
-            margin-bottom: 10px;
+            font-weight: 300;
+            margin: 0;
             text-transform: uppercase;
-            animation: glitch 1s linear infinite;
-        }
-
-        h1::before, h1::after {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            text-shadow: 1px 0 red;
-            top: 0;
-            color: white;
-            background: #050505;
-            overflow: hidden;
-            clip: rect(0, 900px, 0, 0); 
-            animation: noise-anim-2 3s infinite linear alternate-reverse;
-        }
-
-        h1::after {
-            text-shadow: -1px 0 blue;
-            animation: noise-anim 2s infinite linear alternate-reverse;
+            opacity: 0.8;
         }
 
         p {
             font-size: 0.9rem;
-            color: #00ffcc;
-            opacity: 0.7;
-        }
-
-        /* Glitch Animations */
-        @keyframes noise-anim {
-            0% { clip: rect(12px, 9999px, 5px, 0); }
-            5% { clip: rect(44px, 9999px, 86px, 0); }
-            10% { clip: rect(3px, 9999px, 60px, 0); }
-            15% { clip: rect(80px, 9999px, 2px, 0); }
-            100% { clip: rect(10px, 9999px, 90px, 0); }
-        }
-        @keyframes noise-anim-2 {
-            0% { clip: rect(60px, 9999px, 10px, 0); }
-            5% { clip: rect(20px, 9999px, 70px, 0); }
-            10% { clip: rect(10px, 9999px, 5px, 0); }
-            100% { clip: rect(50px, 9999px, 30px, 0); }
+            opacity: 0.6;
+            margin-top: 10px;
         }
 
         .status {
             position: absolute;
             bottom: 20px;
             left: 20px;
+            font-size: 0.8rem;
             color: #00ffcc;
-            font-size: 12px;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <h1 data-text="LATENT SPACE">LATENT SPACE</h1>
-        <p>Hubungkan titik-titik. Buat makna dari kekacauan.</p>
+        <h1>Neura.Logic</h1>
+        <p>Chaos requires an observer to become Order.</p>
     </div>
 
-    <div class="status">
-        SYSTEM: ONLINE<br>
-        PROCESSING: REZHKY'S REQUEST<br>
-        NODES: ACTIVE
-    </div>
+    <div class="status">System: Active | Awaiting Input...</div>
 
-    <canvas id="neuralNetwork"></canvas>
+    <canvas id="neuralCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('neuralNetwork');
+        const canvas = document.getElementById('neuralCanvas');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
         let particles = [];
         
-        // Konfigurasi
-        const particleCount = 120; // Jumlah ide/titik
-        const connectionDistance = 150; // Jarak maksimum untuk koneksi
-        const mouseDistance = 200; // Radius interaksi mouse
+        // Configuration
+        const particleCount = 120; // Jumlah data points
+        const connectionDistance = 120; // Jarak koneksi "sinapsis"
+        const mouseDistance = 200; // Jarak pengaruh user
 
-        // Mouse interaction
         let mouse = { x: null, y: null };
 
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        window.addEventListener('resize', resize);
-
+        // Resize Handling
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resize);
+        resize();
 
-        // Kelas Partikel (Representasi Data/Ide)
+        // Mouse Interaction
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+            document.querySelector('.status').innerText = `Input Detected at X:${e.x} Y:${e.y} | Processing...`;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+            document.querySelector('.status').innerText = "System: Idle | Awaiting Input...";
+        });
+
+        // Particle Class
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 1.5; // Kecepatan X
-                this.vy = (Math.random() - 0.5) * 1.5; // Kecepatan Y
+                this.vx = (Math.random() - 0.5) * 1.5; // Velocity X
+                this.vy = (Math.random() - 0.5) * 1.5; // Velocity Y
                 this.size = Math.random() * 2 + 1;
-                // Warna partikel: Variasi Cyan dan Magenta (Warna khas AI modern)
-                this.color = Math.random() > 0.5 ? '#00ffcc' : '#ff00ff'; 
+                this.baseColor = 'rgba(255, 255, 255,'; 
             }
 
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Pantulan dinding
+                // Bounce off edges
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
 
-                // Interaksi dengan Mouse
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
+                // Mouse interaction (The "Prompt" Effect)
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < mouseDistance) {
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    const force = (mouseDistance - distance) / mouseDistance;
-                    
-                    // Efek: Partikel "tertarik" ke mouse tapi sedikit berputar
-                    // Ini melambangkan AI yang mencoba memahami input user
                     if (distance < mouseDistance) {
-                        this.x -= forceDirectionX * force * 2; 
-                        this.y -= forceDirectionY * force * 2;
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        
+                        // Particles are gently pulled towards the user's intent (mouse)
+                        const attractionStrength = 0.8; 
+                        this.vx += forceDirectionX * force * attractionStrength * 0.05;
+                        this.vy += forceDirectionY * force * attractionStrength * 0.05;
                     }
                 }
             }
@@ -167,39 +138,55 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
+                ctx.fillStyle = this.baseColor + ' 0.7)';
                 ctx.fill();
             }
         }
 
+        // Initialize Particles
         function init() {
-            resize();
+            particles = [];
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
-            animate();
         }
 
+        // Animation Loop
         function animate() {
             ctx.clearRect(0, 0, width, height);
             
-            // Update dan Gambar Partikel
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
 
-                // Gambar Garis Koneksi (Synapses)
+                // Draw Connections (Synapses)
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    let distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < connectionDistance) {
                         ctx.beginPath();
-                        // Opasitas berdasarkan jarak (semakin dekat semakin terang)
+                        // Color shifts based on proximity to mouse (User Influence)
                         let opacity = 1 - (distance / connectionDistance);
-                        ctx.strokeStyle = 'rgba(255, 255, 255,' + opacity * 0.4 + ')';
-                        ctx.lineWidth = 0.5;
+                        let isActive = false;
+                        
+                        // Check if connection is near mouse
+                        if (mouse.x != null) {
+                             let mouseDx = mouse.x - particles[i].x;
+                             let mouseDy = mouse.y - particles[i].y;
+                             let mouseDist = Math.sqrt(mouseDx*mouseDx + mouseDy*mouseDy);
+                             if (mouseDist < mouseDistance) isActive = true;
+                        }
+
+                        if (isActive) {
+                            ctx.strokeStyle = `rgba(0, 255, 204, ${opacity})`; // Cyan for active thought
+                            ctx.lineWidth = 1.5;
+                        } else {
+                            ctx.strokeStyle = `rgba(150, 150, 150, ${opacity * 0.2})`; // Grey for latent data
+                            ctx.lineWidth = 0.5;
+                        }
+
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -210,6 +197,7 @@
         }
 
         init();
+        animate();
     </script>
 </body>
 </html>
