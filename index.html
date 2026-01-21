@@ -3,652 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rcwptAI // Distributed Node</title>
+    <title>Checklist Pemberkasan DMS-SIASN Kab. Mimika</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #050505;
-            --neon-blue: #00ccff;
-            --neon-purple: #bc13fe;
-            --neon-green: #00ff99;
-            --alert-red: #ff3366;
-            --text-dim: #888;
-            --panel-bg: rgba(10, 15, 20, 0.95);
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .checkbox-wrapper input:checked + div {
+            background-color: #10B981;
+            border-color: #10B981;
         }
-
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: var(--bg-color);
-            font-family: 'Consolas', 'Monaco', monospace;
-            color: #e0e0e0;
-            display: flex;
-            height: 100vh;
+        .checkbox-wrapper input:checked + div svg {
+            display: block;
         }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 0;
+        .item-row:hover {
+            background-color: #F3F4F6;
         }
-
-        /* --- LEFT PANEL: CHAT INTERFACE --- */
-        #main-interface {
-            position: relative;
-            z-index: 10;
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+        .strikethrough {
+            text-decoration: line-through;
+            color: #9CA3AF;
         }
-
-        #chat-container {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            padding-right: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        #chat-container::-webkit-scrollbar { width: 5px; }
-        #chat-container::-webkit-scrollbar-thumb { background: #333; }
-
-        .message {
-            max-width: 85%;
-            padding: 12px 18px;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            border-radius: 4px;
-            animation: fadeIn 0.4s ease;
-            position: relative;
-            word-wrap: break-word;
-        }
-
-        .user-msg {
-            align-self: flex-end;
-            background: rgba(0, 204, 255, 0.1);
-            border-right: 3px solid var(--neon-blue);
-            color: #fff;
-            text-align: right;
-        }
-
-        .ai-msg {
-            align-self: flex-start;
-            border-left: 3px solid var(--neon-purple);
-            background: rgba(188, 19, 254, 0.05);
-            color: #ddd;
-        }
-
-        .ai-msg.verified {
-            border-left-color: var(--neon-green);
-            background: rgba(0, 255, 153, 0.05);
-        }
-
-        .badge {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            padding: 2px 6px;
-            border-radius: 2px;
-            margin-right: 5px;
-            display: inline-block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .badge-verified { background: var(--neon-green); color: #000; }
-        .badge-learning { background: var(--neon-purple); color: #fff; }
-        .badge-system { background: #333; color: #fff; border: 1px solid #555; }
-
-        /* --- INPUT AREA --- */
-        #input-area {
-            display: flex;
-            gap: 10px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-        }
-
-        input[type="text"] {
-            flex-grow: 1;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid #444;
-            color: var(--neon-blue);
-            font-family: inherit;
-            padding: 12px;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        input[type="text"]:focus {
-            border-color: var(--neon-blue);
-            background: rgba(0, 204, 255, 0.05);
-        }
-
-        button {
-            background: transparent;
-            border: 1px solid var(--neon-blue);
-            color: var(--neon-blue);
-            padding: 0 20px;
-            font-family: inherit;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background: var(--neon-blue);
-            color: #000;
-        }
-
-        /* --- RIGHT PANEL: MEMORY CORE --- */
-        #memory-panel {
-            position: relative;
-            z-index: 10;
-            flex: 1;
-            background: var(--panel-bg);
-            border-left: 1px solid #333;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            font-size: 0.8rem;
-            min-width: 300px;
-        }
-
-        h2 {
-            margin-top: 0;
-            font-size: 0.9rem;
-            color: var(--neon-green);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--neon-green);
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 5px var(--neon-green);
-            animation: pulse 2s infinite;
-        }
-
-        #memory-list {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin-top: 15px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .memory-item {
-            padding: 10px;
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 2px solid #444;
-            color: var(--text-dim);
-            font-size: 0.75rem;
-            transition: border-color 0.2s;
-        }
-        
-        .memory-item:hover {
-            border-left-color: var(--neon-purple);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .mem-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-            font-size: 0.65rem;
-            color: #555;
-            text-transform: uppercase;
-        }
-
-        /* --- IO CONTROLS --- */
-        #io-controls {
-            margin-top: auto;
-            border-top: 1px solid #333;
-            padding-top: 15px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .io-btn {
-            font-size: 0.7rem;
-            padding: 8px;
-            border: 1px solid #444;
-            color: #aaa;
-            text-align: center;
-        }
-
-        .io-btn:hover {
-            border-color: #fff;
-            color: #fff;
-        }
-
-        #fileInput { display: none; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-            0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            #main-interface { flex: 2; }
-            #memory-panel { flex: 1; border-left: none; border-top: 1px solid #333; }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+            .shadow-lg { box-shadow: none; }
+            .border { border: 1px solid #ccc; }
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <canvas id="neuralCanvas"></canvas>
-
-    <!-- Main Chat Interface -->
-    <div id="main-interface">
-        <div id="chat-container">
-            <div class="message ai-msg verified">
-                <span class="badge badge-verified">SYSTEM READY</span>
-                <strong>rcwptAI Distributed Node v3.0</strong><br>
-                Status: Online (GitHub Hosted Environment).<br>
-                Core Knowledge: <span style="color:var(--neon-green)">EXPANDED (100+ Facts)</span><br>
-                
-                <br>
-                <em>Peringatan Teknis:</em> Karena saya berjalan di lingkungan statis (tanpa server backend), ingatan yang Anda ajarkan tersimpan di Browser ini. Gunakan fitur <strong>EXPORT/IMPORT</strong> di panel kanan untuk memindahkan atau mencadangkan "otak" saya.
+    <!-- Navbar / Header -->
+    <div class="bg-blue-800 text-white p-6 shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold"><i class="fas fa-file-archive mr-2"></i>DMS-SIASN Checklist</h1>
+                <p class="text-blue-200 text-sm mt-1">Kabupaten Mimika - Batas Akhir: 20 Januari 2026</p>
+            </div>
+            <div class="text-right hidden md:block">
+                <div class="text-3xl font-bold" id="progress-percent">0%</div>
+                <div class="text-xs text-blue-200">Kelengkapan Berkas</div>
             </div>
         </div>
-
-        <div id="input-area">
-            <input type="text" id="userInput" placeholder="Akses database atau input data baru..." autocomplete="off" autofocus>
-            <button onclick="handleInput()">EXECUTE</button>
+        <!-- Progress Bar -->
+        <div class="w-full bg-blue-900 h-2 mt-4 rounded-full overflow-hidden max-w-5xl mx-auto">
+            <div id="progress-bar" class="bg-green-400 h-full transition-all duration-500 ease-out" style="width: 0%"></div>
         </div>
     </div>
 
-    <!-- Persistent Memory Panel -->
-    <div id="memory-panel">
-        <h2>
-            Neural Core
-            <span class="status-dot"></span>
-        </h2>
+    <div class="max-w-5xl mx-auto p-6">
         
-        <div style="font-size: 0.7rem; color: #666; margin-bottom: 10px;">
-            <span style="color:var(--neon-green)" id="core-count">0</span> Verified Facts (Read-Only)<br>
-            <span style="color:var(--neon-purple)" id="user-count">0</span> User Learned Nodes (Writable)
+        <!-- Warning Alert -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 shadow-sm rounded-r-lg">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700 font-bold">
+                        PENTING: Aturan File Kosong
+                    </p>
+                    <p class="text-sm text-yellow-600 mt-1">
+                        Sesuai instruksi: "Dokumen yang tidak ada harap isi dengan <b>dokumen kosong</b> (Blank PDF)."<br>
+                        Jangan biarkan slot kosong saat upload.
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div id="memory-list">
-            <!-- Stored memories appear here -->
+        <!-- Controls -->
+        <div class="flex justify-between items-center mb-6 no-print">
+            <p class="text-gray-500 text-sm italic">Klik kotak centang jika file sudah siap.</p>
+            <div class="space-x-2">
+                <button onclick="window.print()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">
+                    <i class="fas fa-print mr-2"></i>Cetak
+                </button>
+                <button onclick="resetChecklist()" class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-semibold transition">
+                    <i class="fas fa-redo mr-2"></i>Reset
+                </button>
+            </div>
         </div>
-        
-        <div id="io-controls">
-            <button class="io-btn" onclick="exportMemory()">⬇ SAVE BRAIN</button>
-            <button class="io-btn" onclick="document.getElementById('fileInput').click()">⬆ LOAD BRAIN</button>
-            <input type="file" id="fileInput" accept=".json" onchange="importMemory(this)">
-            <button class="io-btn" onclick="clearMemory()" style="grid-column: span 2; border-color: #ff3366; color: #ff3366; margin-top:5px;">⚠ FORMAT MEMORY</button>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Section 1: Identitas & Utama -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-blue-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-id-card mr-2"></i> 1. Arsip Utama (Wajib)</h2>
+                    <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded">Prioritas</span>
+                </div>
+                <div class="p-4 space-y-3">
+                    <!-- Item -->
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-6 h-6 border-2 border-gray-300 rounded flex items-center justify-center mr-3 transition bg-white">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-gray-700 font-medium">Daftar Riwayat Hidup (DRH)</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-6 h-6 border-2 border-gray-300 rounded flex items-center justify-center mr-3 transition bg-white">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-gray-700 font-medium">SK CPNS / SPMT CPNS</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-6 h-6 border-2 border-gray-300 rounded flex items-center justify-center mr-3 transition bg-white">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <span class="text-gray-700 font-medium">SK PNS</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 2: Pendidikan -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-emerald-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-graduation-cap mr-2"></i> 2. Riwayat Pendidikan</h2>
+                    <span class="text-xs bg-emerald-500 text-white px-2 py-1 rounded">Ijazah & Transkrip</span>
+                </div>
+                <div class="p-4 space-y-2">
+                    <p class="text-xs text-gray-500 mb-2">*Gunakan file kosong jika tidak memiliki jenjang ini</p>
+                    
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SD</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SMP</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SMA</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">D-III / D-IV / D-IV Profesi</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">S-1 / S-1 Profesi</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">S-2 / S-3</span>
+                    </label>
+                     <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Riwayat Pencantuman Gelar</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 3: Kenaikan Pangkat -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-indigo-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-layer-group mr-2"></i> 3. Kenaikan Pangkat</h2>
+                </div>
+                <div class="p-4 space-y-2">
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Golongan I (jika ada)</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Golongan II (jika ada)</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Golongan III</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Golongan IV</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 4: Jabatan -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-indigo-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-briefcase mr-2"></i> 4. Riwayat Jabatan</h2>
+                </div>
+                <div class="p-4 space-y-2">
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Struktural Periode 2006-2013</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Struktural Periode 2014-2019</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Struktural Periode 2020-2025</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Jabatan Fungsional Tertentu</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 5: Diklat & Sertifikat -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-orange-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-certificate mr-2"></i> 5. Riwayat Diklat</h2>
+                </div>
+                <div class="p-4 space-y-2">
+                     <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Prajabatan</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">PKP (Kepemimpinan Pengawas)</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">PKA (Kepemimpinan Administrator)</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">PKN (Kepemimpinan Nasional)</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Diklat Lainnya</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 6: SKP & PAK -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-orange-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-chart-line mr-2"></i> 6. Kinerja (SKP & PAK)</h2>
+                </div>
+                <div class="p-4 space-y-2">
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SKP 2023</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SKP 2024</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SKP 2025</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">PAK (Penilaian Akhir Kinerja)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 7: Arsip Kondisional -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 col-span-1 md:col-span-2">
+                <div class="bg-gray-600 p-4 flex items-center justify-between">
+                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-archive mr-2"></i> 7. Arsip Kondisional</h2>
+                    <span class="text-xs bg-gray-500 text-white px-2 py-1 rounded">Isi Kosong Jika Tidak Ada</span>
+                </div>
+                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Riwayat Pindah Instansi / Peralihan</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SK Cuti Luar Tanggungan Negara</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">SK Peninjauan Masa Kerja</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Riwayat Pemberhentian Jabatan</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Riwayat PLT</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Riwayat Tugas Belajar</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Riwayat Piagam Penghargaan</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Sertifikat Jabatan Fungsional</span>
+                    </label>
+                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
+                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
+                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <span class="text-gray-700 text-sm">Sertifikat Lainnya</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 text-center text-gray-400 text-xs no-print">
+            <p>Generated for Personal Use | DMS-SIASN Preparation Tool</p>
         </div>
     </div>
 
     <script>
-        // --- VISUAL ENGINE (Background) ---
-        const canvas = document.getElementById('neuralCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-        let processingIntensity = 0;
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = (Math.random() - 0.5) * 0.2;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.isCore = Math.random() > 0.7; 
-            }
-            update() {
-                this.x += this.vx * (1 + processingIntensity * 5);
-                this.y += this.vy * (1 + processingIntensity * 5);
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.isCore ? '#00ff99' : (processingIntensity > 0 ? '#bc13fe' : '#333'); 
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 120; i++) particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                for (let j = i; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 90) {
-                        ctx.beginPath();
-                        let alpha = 1 - (dist / 90);
-                        let color = particles[i].isCore && particles[j].isCore ? '0, 255, 153' : '188, 19, 254';
-                        ctx.strokeStyle = processingIntensity > 0 
-                            ? `rgba(${color}, ${alpha})` 
-                            : `rgba(40, 40, 40, ${alpha * 0.2})`;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            if (processingIntensity > 0) processingIntensity -= 0.05;
-            if (processingIntensity < 0) processingIntensity = 0;
-            requestAnimationFrame(animate);
-        }
-        initParticles();
-        animate();
-
-
-        // --- EXPANDED CORE KNOWLEDGE BASE (100+ Facts Simulation) ---
-        // Ini adalah "Internet Facts" yang tertanam dalam kode
-        const CORE_KNOWLEDGE = {
-            // Identitas
-            "rcwptai": "Saya adalah rcwptAI, entitas digital yang berjalan pada Distributed Node.",
-            "status": "Sistem Online. Hosting: GitHub Pages (Terdeteksi). Mode: Autonomous Learning.",
+        function updateProgress(checkbox) {
+            const labelSpan = checkbox.nextElementSibling.nextElementSibling;
             
-            // Indonesia
-            "ibu kota indonesia": "Secara hukum sedang proses transisi ke Nusantara (IKN), namun pusat pemerintahan de facto masih di Jakarta.",
-            "kemerdekaan indonesia": "17 Agustus 1945.",
-            "pancasila": "Dasar negara Indonesia yang terdiri dari 5 sila.",
-            "mata uang indonesia": "Rupiah (IDR).",
-            "lagu kebangsaan": "Indonesia Raya, diciptakan oleh W.R. Supratman.",
+            if (checkbox.checked) {
+                labelSpan.classList.add('strikethrough');
+            } else {
+                labelSpan.classList.remove('strikethrough');
+            }
+
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             
-            // Sains Dasar
-            "bumi": "Planet ketiga dari Matahari, satu-satunya yang diketahui mendukung kehidupan.",
-            "matahari": "Bintang di pusat tata surya, bola plasma panas raksasa.",
-            "bulan": "Satelit alami Bumi.",
-            "air": "H2O, esensial untuk kehidupan.",
-            "oksigen": "Elemen kimia (O), vital untuk respirasi.",
-            "gravitasi": "Gaya tarik-menarik antar benda bermassa. Di bumi: 9.8 m/s².",
-            "kecepatan cahaya": "299.792.458 meter per detik.",
-            "atom": "Unit terkecil materi biasa yang membentuk unsur kimia.",
-            "dna": "Asam deoksiribonukleat, molekul pembawa instruksi genetik.",
-            "fotosintesis": "Proses tumbuhan mengubah cahaya menjadi energi kimia.",
-
-            // Teknologi
-            "internet": "Jaringan global komputer yang saling terhubung menggunakan protokol TCP/IP.",
-            "html": "HyperText Markup Language, kerangka dasar halaman web.",
-            "css": "Cascading Style Sheets, untuk desain halaman web.",
-            "javascript": "Bahasa pemrograman yang memungkinkan interaktivitas di web.",
-            "ai": "Artificial Intelligence, simulasi proses kecerdasan manusia oleh mesin.",
-            "blockchain": "Buku besar digital terdesentralisasi yang mencatat transaksi.",
-            "cloud computing": "Penyediaan layanan komputasi melalui internet.",
-
-            // Geografi & Umum
-            "gunung everest": "Gunung tertinggi di dunia di atas permukaan laut.",
-            "sungai nil": "Salah satu sungai terpanjang di dunia, terletak di Afrika.",
-            "benua": "Ada 7 benua: Asia, Afrika, Amerika Utara, Amerika Selatan, Antartika, Eropa, Australia.",
-            "samudra": "Pasifik, Atlantik, Hindia, Arktik, Antartika.",
+            const percent = Math.round((checkedCheckboxes.length / allCheckboxes.length) * 100);
             
-            // Matematika
-            "pi": "3.14159...",
-            "bilangan prima": "Bilangan yang hanya bisa dibagi 1 dan dirinya sendiri (2, 3, 5, 7, 11...).",
-            "phytagoras": "Teorema hubungan sisi segitiga siku-siku (a² + b² = c²)."
-        };
-
-        // --- LOGIC & MEMORY ENGINE ---
-        const chatContainer = document.getElementById('chat-container');
-        const userInput = document.getElementById('userInput');
-        const memoryList = document.getElementById('memory-list');
-        const coreCountSpan = document.getElementById('core-count');
-        const userCountSpan = document.getElementById('user-count');
-
-        // Load Memory
-        let userMemoryBank = JSON.parse(localStorage.getItem('rcwpt_memory')) || [];
-        
-        // Render Initial Stats
-        coreCountSpan.innerText = Object.keys(CORE_KNOWLEDGE).length;
-        renderMemory();
-
-        userInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') handleInput();
-        });
-
-        function handleInput() {
-            const text = userInput.value.trim();
-            if (!text) return;
-
-            addMessage(text, 'user-msg');
-            userInput.value = '';
-            processingIntensity = 1.0; 
-
-            setTimeout(() => {
-                const responseObj = processQuery(text);
-                typeWriterEffect(responseObj.text, responseObj.type);
-            }, 600);
+            document.getElementById('progress-bar').style.width = percent + '%';
+            document.getElementById('progress-percent').textContent = percent + '%';
         }
 
-        // --- INTELLIGENT QUERY PROCESSING ---
-        function processQuery(input) {
-            const lowerInput = input.toLowerCase();
-
-            // 1. Cek Core Knowledge (Fuzzy Search Sederhana)
-            // Mencari apakah ada KEY dalam Core Knowledge yang muncul dalam kalimat user
-            let bestMatch = null;
-            let maxOverlap = 0;
-
-            for (let key in CORE_KNOWLEDGE) {
-                if (lowerInput.includes(key)) {
-                    // Prioritaskan match yang lebih panjang (misal: "ibu kota indonesia" > "indonesia")
-                    if (key.length > maxOverlap) {
-                        maxOverlap = key.length;
-                        bestMatch = CORE_KNOWLEDGE[key];
-                    }
-                }
+        function resetChecklist() {
+            if(confirm('Apakah Anda yakin ingin mereset semua checklist?')) {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => {
+                    cb.checked = false;
+                    const labelSpan = cb.nextElementSibling.nextElementSibling;
+                    labelSpan.classList.remove('strikethrough');
+                });
+                document.getElementById('progress-bar').style.width = '0%';
+                document.getElementById('progress-percent').textContent = '0%';
             }
-
-            if (bestMatch) {
-                return { text: bestMatch, type: 'verified' };
-            }
-
-            // 2. Cek User Memory
-            const userMem = userMemoryBank.find(mem => 
-                lowerInput.includes(mem.trigger) || mem.content.toLowerCase().includes(lowerInput)
-            );
-            
-            if (userMem) {
-                 return { 
-                    text: `[Retrieved from Local Memory]: ${userMem.content}`, 
-                    type: 'learning' 
-                };
-            }
-
-            // 3. Learning Trigger
-            if (input.includes("adalah") || input.includes("artinya") || input.includes("yaitu")) {
-                saveToMemory(input);
-                return {
-                    text: "Data baru diidentifikasi. Menyimpan definisi ke Memori Lokal pengguna...",
-                    type: 'system'
-                };
-            }
-
-            // 4. Fallback (Honest AI)
-            return {
-                text: "Data tidak ditemukan di Database Terverifikasi maupun Memori Lokal Anda. Silakan ajari saya, atau import data neural dari kontributor lain.",
-                type: 'system'
-            };
-        }
-
-        function saveToMemory(input) {
-            let trigger = input.split(/adalah|yaitu|artinya/)[0].trim().toLowerCase();
-            if (trigger.length < 2) trigger = "general knowledge";
-
-            const timestamp = new Date().toLocaleTimeString();
-            const memoryItem = { 
-                trigger: trigger,
-                content: input, 
-                time: timestamp 
-            };
-            
-            userMemoryBank.unshift(memoryItem);
-            saveAndRender();
-        }
-
-        function saveAndRender() {
-            localStorage.setItem('rcwpt_memory', JSON.stringify(userMemoryBank));
-            renderMemory();
-        }
-
-        function renderMemory() {
-            memoryList.innerHTML = '';
-            userCountSpan.innerText = userMemoryBank.length;
-            
-            if (userMemoryBank.length === 0) {
-                memoryList.innerHTML = '<li style="color:#555; text-align:center; padding:20px;">Memory Empty</li>';
-                return;
-            }
-
-            userMemoryBank.forEach(item => {
-                const li = document.createElement('li');
-                li.className = 'memory-item';
-                li.innerHTML = `
-                    <div class="mem-meta">
-                        <span>TRIGGER: ${item.trigger.substring(0,15)}</span>
-                        <span>${item.time}</span>
-                    </div>
-                    <div>${item.content}</div>
-                `;
-                memoryList.appendChild(li);
-            });
-        }
-
-        // --- IMPORT / EXPORT SYSTEM (The "Neural Port") ---
-        function exportMemory() {
-            if (userMemoryBank.length === 0) {
-                alert("Memori kosong. Tidak ada yang bisa disimpan.");
-                return;
-            }
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userMemoryBank));
-            const downloadAnchorNode = document.createElement('a');
-            downloadAnchorNode.setAttribute("href", dataStr);
-            downloadAnchorNode.setAttribute("download", "rcwpt_neural_data.json");
-            document.body.appendChild(downloadAnchorNode); // required for firefox
-            downloadAnchorNode.click();
-            downloadAnchorNode.remove();
-            
-            addMessage("SYSTEM: Neural Data berhasil diekspor. Simpan file .json ini untuk backup atau dibagikan ke device lain.", "ai-msg verified");
-        }
-
-        function importMemory(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedData = JSON.parse(e.target.result);
-                    if (Array.isArray(importedData)) {
-                        // Merge strategies: Combine unique items
-                        const currentDataStr = userMemoryBank.map(d => d.content);
-                        let addedCount = 0;
-
-                        importedData.forEach(item => {
-                            if (!currentDataStr.includes(item.content)) {
-                                userMemoryBank.unshift(item);
-                                addedCount++;
-                            }
-                        });
-                        
-                        saveAndRender();
-                        addMessage(`SYSTEM: Import Berhasil. ${addedCount} node memori baru ditambahkan ke Neural Core.`, "ai-msg verified");
-                    } else {
-                        alert("Format file salah.");
-                    }
-                } catch (err) {
-                    alert("Gagal membaca file neural.");
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function clearMemory() {
-            if(confirm("PERINGATAN: Ini akan menghapus semua data yang ANDA ajarkan. Data inti (Core) tetap aman. Lanjutkan?")) {
-                localStorage.removeItem('rcwpt_memory');
-                userMemoryBank = [];
-                renderMemory();
-                addMessage("SYSTEM: Local Memory diformat ulang.", "ai-msg");
-            }
-        }
-
-        function addMessage(text, className) {
-            const div = document.createElement('div');
-            div.className = `message ${className}`;
-            div.innerHTML = text; // Allow HTML for badges
-            chatContainer.appendChild(div);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        function typeWriterEffect(text, type) {
-            const div = document.createElement('div');
-            let badgeClass = 'badge-system';
-            let badgeText = 'SYSTEM';
-            let msgClass = '';
-
-            if (type === 'verified') {
-                badgeClass = 'badge-verified';
-                badgeText = 'VERIFIED FACT';
-                msgClass = 'verified';
-            } else if (type === 'learning') {
-                badgeClass = 'badge-learning';
-                badgeText = 'LOCAL MEMORY';
-            }
-
-            div.className = `message ai-msg ${msgClass}`;
-            div.innerHTML = `<span class="badge ${badgeClass}">${badgeText}</span><br>`;
-            
-            chatContainer.appendChild(div);
-            
-            let i = 0;
-            const speed = 15;
-
-            function type() {
-                if (i < text.length) {
-                    div.innerHTML += text.charAt(i);
-                    i++;
-                    chatContainer.scrollTop = chatContainer.scrollHeight;
-                    setTimeout(type, speed);
-                }
-            }
-            type();
         }
     </script>
 </body>
