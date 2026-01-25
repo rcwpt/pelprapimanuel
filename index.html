@@ -19,6 +19,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        details summary::-webkit-details-marker { display:none; }
+        details > summary { list-style: none; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -28,10 +30,8 @@
         <div class="max-w-6xl mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">PELPRAP IMANUEL</h1>
             <p class="text-xl md:text-2xl font-light opacity-90">Program Kerja & Kalender Kegiatan 2026</p>
-            <div class="mt-6 flex flex-wrap justify-center gap-4">
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-sm"><i class="fas fa-church mr-2"></i>Iman</span>
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-sm"><i class="fas fa-users mr-2"></i>Kebersamaan</span>
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-sm"><i class="fas fa-hand-holding-heart mr-2"></i>Aksi Nyata</span>
+            <div class="mt-4 bg-white/10 inline-block px-4 py-2 rounded-lg backdrop-blur-md">
+                <i class="fas fa-users mr-2"></i>Komunitas: 12-14 Orang (Small Group Focus)
             </div>
         </div>
     </header>
@@ -39,27 +39,28 @@
     <!-- Strategy Section -->
     <section class="max-w-5xl mx-auto px-4 py-10 -mt-8 relative z-10">
         <div class="bg-white rounded-xl shadow-xl p-6 md:p-8 border-l-8 border-indigo-600">
-            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi: Harmonisasi Jadwal</h2>
+            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi Intimasi (12-14 Anggota)</h2>
             <div class="grid md:grid-cols-2 gap-6 items-center">
                 <div>
                     <p class="text-gray-600 mb-4 text-justify">
-                        Kami menerapkan sistem pertemuan <strong>Bi-weekly (2 Minggu Sekali)</strong>. Ini adalah langkah strategis untuk bersinergi dengan jadwal komisi PELWAP & PELNAP.
+                        Dengan jumlah anggota yang ringkas, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>.
+                        Setiap kegiatan ibadah kreatif dirancang agar setiap individu terlibat aktif, bukan sekadar penonton.
                     </p>
                     <ul class="space-y-2">
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Efisiensi Gedung Gereja</li>
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Kualitas Pertemuan Lebih Padat</li>
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Menghindari Bentrok Acara</li>
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Diskusi Dua Arah (Semua bicara)</li>
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Biaya Logistik Rendah</li>
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Mobilisasi Mudah (3-4 Motor/1 Mobil)</li>
                     </ul>
                 </div>
                 <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mt-4 md:mt-0">
                     <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
-                    <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2 transform transition hover:scale-105">
+                    <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2">
                         <span class="font-semibold text-gray-700">Minggu Genap</span>
-                        <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP</span>
+                        <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (Small Group)</span>
                     </div>
                     <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
                         <span class="font-semibold text-gray-500">Minggu Ganjil</span>
-                        <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">PELWAP/PELNAP</span>
+                        <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Ibadah Kategorial Lain</span>
                     </div>
                 </div>
             </div>
@@ -72,42 +73,32 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <!-- Januari -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-blue-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">JANUARI</h3>
-                    <span class="bg-blue-800 text-blue-100 text-xs px-2 py-1 rounded-full">New Beginning</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-pray text-blue-500 mr-2"></i>Ibadah Awal Tahun</p>
-                        <p class="text-sm text-gray-600 ml-6">Dedikasi Pelayanan</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-gamepad text-purple-500 mr-2"></i>Games Rohani</p>
-                        <p class="text-sm text-gray-600 ml-6">Tema: "Trust & Faith" (Outbound Indoor)</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Februari -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
                 <div class="bg-pink-500 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold text-lg">FEBRUARI</h3>
-                    <span class="bg-pink-700 text-pink-100 text-xs px-2 py-1 rounded-full">Love</span>
+                    <span class="bg-pink-700 text-pink-100 text-xs px-2 py-1 rounded-full">Kick Off</span>
                 </div>
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-heart text-pink-500 mr-2"></i>Ibadah Valentine</p>
-                        <p class="text-sm text-gray-600 ml-6">Makna Kasih Sejati</p>
+                        <p class="font-bold text-gray-800">Ibadah Valentine</p>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-film text-indigo-500 mr-2"></i>Nobar Film</p>
-                        <p class="text-sm text-gray-600 ml-6">Diskusi Hubungan Kristen</p>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II (Kreatif)</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-film text-indigo-500 mr-2"></i>Nobar & Diskusi</p>
+                        
+                        <!-- Detail Teknis -->
+                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
+                                <li><strong>Film:</strong> Film pendek rohani (durasi max 30 menit).</li>
+                                <li><strong>Format:</strong> Duduk melingkar (Round Table).</li>
+                                <li><strong>Interaksi:</strong> Siapkan 14 potongan kertas pertanyaan refleksi. Setiap orang ambil 1 dan jawab bergilir.</li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -116,18 +107,27 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-green-400">
                 <div class="bg-green-600 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold text-lg">MARET</h3>
-                    <span class="bg-green-800 text-green-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-hand-holding-heart mr-1"></i>Peduli Kasih</span>
+                    <span class="bg-green-800 text-green-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-hand-holding-heart mr-1"></i>Aksi</span>
                 </div>
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
                         <p class="font-bold text-gray-800">Ibadah Pendalaman Alkitab</p>
+                        <p class="text-xs text-green-600 mt-1 font-semibold"><i class="fas fa-box mr-1"></i>Mulai Pengumpulan Donasi</p>
                     </div>
                     <div class="bg-green-50 p-3 rounded-lg border border-green-200">
-                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial I</p>
-                        <p class="font-bold text-gray-800 text-sm">Kunjungan Kasih / Panti</p>
-                        <p class="text-xs text-gray-600 mt-1"><i class="fas fa-tshirt mr-1"></i>Donasi Baju Layak Pakai</p>
-                        <p class="text-xs text-gray-600"><i class="fas fa-box-open mr-1"></i>Donasi Sembako</p>
+                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial I (Pertemuan II)</p>
+                        <p class="font-bold text-gray-800 text-sm">Kunjungan Kasih</p>
+                        
+                        <details class="mt-2 text-sm cursor-pointer group">
+                            <summary class="font-semibold text-green-700 flex justify-between items-center text-xs">
+                                Teknis Donasi <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <div class="mt-2 text-gray-600 text-xs">
+                                <p><strong>Mekanisme:</strong> Kotak donasi ditaruh di depan pintu masuk *sejak doa pembukaan* setiap ibadah di bulan ini.</p>
+                                <p class="mt-1"><strong>Target:</strong> 14 Anggota bawa min. 2 potong baju layak pakai.</p>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -142,12 +142,22 @@
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
                         <p class="font-bold text-gray-800"><i class="fas fa-video text-indigo-500 mr-2"></i>Nobar Paskah</p>
-                        <p class="text-sm text-gray-600 ml-6">Refleksi Kebangkitan</p>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
                         <p class="font-bold text-gray-800"><i class="fas fa-egg text-yellow-600 mr-2"></i>Perayaan Paskah</p>
-                        <p class="text-sm text-gray-600 ml-6">Ibadah & Telur Paskah</p>
+                        
+                        <!-- Detail Teknis -->
+                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
+                                <li><strong>Aktivitas:</strong> Mencari Telur (isi ayat hafalan) di halaman gereja.</li>
+                                <li><strong>Logistik:</strong> Cukup 2 Lusin telur plastik. Karena hanya 14 orang, setiap orang harus dapat minimal 1.</li>
+                                <li><strong>Hadiah:</strong> Cokelat sederhana.</li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -162,21 +172,31 @@
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
                         <p class="font-bold text-gray-800">Ibadah Raya</p>
-                        <p class="text-sm text-gray-600 ml-6">Tema: Dewasa dalam Iman</p>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-puzzle-piece text-teal-500 mr-2"></i>Games Alkitab</p>
-                        <p class="text-sm text-gray-600 ml-6">Cerdas Cermat / Bible Hunter</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-puzzle-piece text-teal-500 mr-2"></i>Bible Games</p>
+                        
+                         <!-- Detail Teknis -->
+                         <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
+                                <li><strong>Jenis:</strong> Cerdas Cermat Individu (Kahoot/Kertas).</li>
+                                <li><strong>Kenapa Individu?</strong> Karena peserta hanya 12-14, jangan buat tim besar. Buat kompetisi perorangan agar semua berpikir.</li>
+                                <li><strong>Materi:</strong> Pengetahuan Alkitab Dasar.</li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
             </div>
 
-            <!-- Juni (Worship Night Update) -->
+            <!-- Juni (Worship Night) -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-l-4 border-purple-500">
                 <div class="bg-purple-600 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold text-lg">JUNI</h3>
-                    <span class="bg-purple-800 text-purple-100 text-xs px-2 py-1 rounded-full">Talenta</span>
+                    <span class="bg-purple-800 text-purple-100 text-xs px-2 py-1 rounded-full">Skill</span>
                 </div>
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
@@ -184,28 +204,43 @@
                         <p class="font-bold text-gray-800">Ibadah Raya</p>
                     </div>
                     <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
-                        <p class="text-xs text-purple-700 uppercase font-bold mb-1"><i class="fas fa-music mr-1"></i>Special Event</p>
                         <p class="font-bold text-gray-800 text-sm">WORSHIP NIGHT</p>
-                        <p class="text-xs text-gray-600 mt-1">Upgrade Skill Liturgi & Musik untuk Persiapan KKR</p>
+                        
+                        <details class="mt-2 text-sm cursor-pointer group">
+                            <summary class="font-semibold text-purple-700 flex justify-between items-center text-xs">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <div class="mt-2 text-gray-600 text-xs">
+                                <p><strong>Fokus:</strong> Pelatihan Liturgi untuk 14 orang.</p>
+                                <p class="mt-1">Setiap anggota <strong>WAJIB</strong> mencoba peran pelayanan (WL/Singer/Usher/Kolektan) secara bergantian dalam simulasi ini.</p>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
 
-            <!-- Juli (Revision: Padang Removed) -->
+            <!-- Juli (Fellowship) -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 opacity-90">
                 <div class="bg-gray-600 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold text-lg">JULI</h3>
-                    <span class="bg-gray-800 text-gray-100 text-xs px-2 py-1 rounded-full">Konsolidasi</span>
+                    <span class="bg-gray-800 text-gray-100 text-xs px-2 py-1 rounded-full">Santai</span>
                 </div>
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
                         <p class="font-bold text-gray-800">Evaluasi Tengah Tahun</p>
-                        <p class="text-sm text-gray-600 ml-6">Fellowship Santai di Gereja</p>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-500 italic">-- Libur / Event Gereja Lain --</p>
+                        <p class="font-bold text-gray-800">Makan Bersama</p>
+                         <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-gray-700 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <p class="mt-2 text-gray-600 text-xs">
+                                Karena hanya 14 orang, cukup pesan makanan/potluck di teras gereja. Fokus membangun keakraban tanpa agenda berat.
+                            </p>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -219,13 +254,22 @@
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-flag text-red-500 mr-2"></i>Ibadah Kemerdekaan</p>
-                        <p class="text-sm text-gray-600 ml-6">Doa Bagi Bangsa</p>
+                        <p class="font-bold text-gray-800">Ibadah Kemerdekaan</p>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
                         <p class="font-bold text-gray-800"><i class="fas fa-running text-orange-500 mr-2"></i>Games 17-an</p>
-                        <p class="text-sm text-gray-600 ml-6">Lomba Kekompakan Tim</p>
+                        
+                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
+                                <li><strong>Tim:</strong> Bagi menjadi 2 Tim (7 vs 7) atau 3 Tim (4-5 orang).</li>
+                                <li><strong>Games:</strong> Estafet Sarung atau Tebak Kata Alkitab.</li>
+                                <li><strong>Biaya:</strong> Murah meriah (Hadiah kerupuk/snack).</li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -240,12 +284,21 @@
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
                         <p class="font-bold text-gray-800">Ibadah Misi</p>
-                        <p class="text-sm text-gray-600 ml-6">Tema: Menjadi Terang</p>
+                        <p class="text-xs text-green-600 mt-1 font-semibold"><i class="fas fa-box mr-1"></i>Start Donasi Tahap 2</p>
                     </div>
                     <div class="bg-green-50 p-3 rounded-lg border border-green-200">
-                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial II</p>
-                        <p class="font-bold text-gray-800 text-sm">Bakti Sosial / Lingkungan</p>
-                        <p class="text-xs text-gray-600 mt-1"><i class="fas fa-tshirt mr-1"></i>Donasi Pakaian & Makanan</p>
+                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial II (Pertemuan II)</p>
+                        <p class="font-bold text-gray-800 text-sm">Bakti Sosial Lingkungan</p>
+                        
+                        <details class="mt-2 text-sm cursor-pointer group">
+                            <summary class="font-semibold text-green-700 flex justify-between items-center text-xs">
+                                Teknis Pelaksanaan <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <div class="mt-2 text-gray-600 text-xs">
+                                <p><strong>Lokasi:</strong> Bersih-bersih halaman gereja/selokan warga sekitar.</p>
+                                <p class="mt-1"><strong>Logistik:</strong> Bawa sapu lidi & kantong sampah masing-masing. Karena 14 orang, area kerja bisa diselesaikan dalam 1 jam.</p>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -254,18 +307,25 @@
             <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
                 <div class="bg-indigo-600 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold text-lg">OKTOBER</h3>
-                    <span class="bg-indigo-800 text-indigo-100 text-xs px-2 py-1 rounded-full">Reformasi</span>
+                    <span class="bg-indigo-800 text-indigo-100 text-xs px-2 py-1 rounded-full">Sejarah</span>
                 </div>
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
                         <p class="font-bold text-gray-800"><i class="fas fa-book-open text-indigo-500 mr-2"></i>Nobar Dokumenter</p>
-                        <p class="text-sm text-gray-600 ml-6">Tokoh Iman / Sejarah</p>
+                        
+                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <p class="mt-2 text-gray-600 text-xs">
+                                Nonton video pendek tentang tokoh Reformasi (mis: Martin Luther) di YouTube (15 menit), lalu sharing: "Apa yang perlu direformasi dari diri kita?"
+                            </p>
+                        </details>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
                         <p class="font-bold text-gray-800">Ibadah Raya</p>
-                        <p class="text-sm text-gray-600 ml-6">Integritas Pemuda</p>
                     </div>
                 </div>
             </div>
@@ -284,7 +344,16 @@
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
                         <p class="font-bold text-gray-800"><i class="fas fa-comments text-orange-500 mr-2"></i>Sharing Games</p>
-                        <p class="text-sm text-gray-600 ml-6">"Count Your Blessings"</p>
+                        
+                         <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
+                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
+                                <li><strong>Game:</strong> "Benang Kusut". Lempar gulungan benang ke teman sambil sebut 1 ucapan syukur.</li>
+                                <li><strong>Hasil:</strong> Membentuk jaring laba-laba yang simbolnya "Kita saling terhubung". Sangat pas untuk 14 orang.</li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -303,6 +372,16 @@
                     <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-center">
                         <p class="font-bold text-red-800 text-lg">PERAYAAN NATAL</p>
                         <p class="text-sm text-gray-600">Ibadah & Tukar Kado</p>
+                        
+                        <details class="mt-2 text-sm cursor-pointer group text-left">
+                            <summary class="font-semibold text-red-700 flex justify-between items-center text-xs">
+                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
+                            </summary>
+                            <div class="mt-2 text-gray-600 text-xs">
+                                <p><strong>Kado:</strong> Wajib bawa kado silang min. harga Rp 20.000 dibungkus koran (biar tidak dinilai dari bungkus).</p>
+                                <p class="mt-1">Karena jumlah sedikit, tukar kado dilakukan dengan sistem cabut nomor undian.</p>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
@@ -310,48 +389,13 @@
         </div>
     </main>
 
-    <!-- Detailed Guidelines -->
-    <section class="max-w-4xl mx-auto px-4 py-8 mb-12">
-        <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-indigo-600 pl-4">Panduan Teknis Pelaksanaan</h3>
-        
-        <div class="grid md:grid-cols-2 gap-6">
-            <!-- Worship Night Card -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h4 class="font-bold text-purple-700 text-lg mb-2"><i class="fas fa-music mr-2"></i>Konsep Worship Night (Juni)</h4>
-                <p class="text-sm text-gray-600 mb-3">
-                    Menggantikan konsep Musikal biasa. Fokus utamanya adalah <strong>Workshop & Praise.</strong>
-                </p>
-                <ul class="text-sm text-gray-600 list-disc ml-5">
-                    <li>Pelatihan dasar WL (Worship Leader) & Singers.</li>
-                    <li>Simulasi pelayanan altar yang benar.</li>
-                    <li><strong>Tujuan:</strong> Persiapan kaderisasi untuk Liturgi KKR/Ibadah Besar mendatang.</li>
-                </ul>
-            </div>
-
-            <!-- Peduli Kasih Card -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h4 class="font-bold text-green-700 text-lg mb-2"><i class="fas fa-box-open mr-2"></i>Mekanisme Peduli Kasih</h4>
-                <p class="text-sm text-gray-600 mb-3">
-                    Bukan hanya persembahan uang, tetapi juga aksi nyata pengumpulan barang.
-                </p>
-                <div class="bg-green-50 p-3 rounded text-sm text-green-800 font-semibold mb-2">
-                    <i class="fas fa-info-circle mr-1"></i> Dropbox Donasi dibuka H-2 Minggu sebelum hari H.
-                </div>
-                <ul class="text-sm text-gray-600 list-disc ml-5">
-                    <li><strong>Baju Layak Pakai:</strong> Disortir untuk panti asuhan/jemaat membutuhkan.</li>
-                    <li><strong>Sembako:</strong> Beras, gula, minyak untuk bingkisan kasih.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 text-center">
         <div class="max-w-6xl mx-auto px-4">
             <p class="font-semibold text-lg">PELPRAP IMANUEL 2026</p>
             <p class="text-gray-400 text-sm mt-1">Ketua: Christian Wijaya</p>
             <div class="mt-4 text-xs text-gray-500">
-                Disusun untuk Internal Pengurus & Anggota
+                Disusun Khusus untuk Komunitas 12-14 Anggota
             </div>
         </div>
     </footer>
