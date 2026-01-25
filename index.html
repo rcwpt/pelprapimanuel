@@ -21,47 +21,229 @@
         }
         details summary::-webkit-details-marker { display:none; }
         details > summary { list-style: none; }
+        .member-card { transition: all 0.3s ease; }
+        .member-card:hover { background-color: #e0e7ff; transform: translateX(5px); }
+        
+        /* Tree Connector Lines */
+        .org-connector::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background-color: #cbd5e1;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body class="text-gray-800">
 
     <!-- Header Section -->
-    <header class="hero-pattern text-white py-12 px-4 shadow-lg">
+    <header class="hero-pattern text-white py-12 px-4 shadow-lg mb-8">
         <div class="max-w-6xl mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">PELPRAP IMANUEL</h1>
             <p class="text-xl md:text-2xl font-light opacity-90">Program Kerja & Kalender Kegiatan 2026</p>
             <div class="mt-4 bg-white/10 inline-block px-4 py-2 rounded-lg backdrop-blur-md">
-                <i class="fas fa-users mr-2"></i>Komunitas: 12-14 Orang (Small Group Focus)
+                <i class="fas fa-users mr-2"></i>Komunitas: 16 Anggota Aktif
             </div>
         </div>
     </header>
 
+    <!-- Organization Chart Section -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-xl p-8 border-t-8 border-indigo-600 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-5">
+                <i class="fas fa-sitemap text-9xl text-indigo-900"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 relative z-10">Struktur Organisasi</h2>
+            
+            <div class="flex flex-col items-center relative z-10">
+                
+                <!-- Level 1: Pembina -->
+                <div class="mb-8 text-center">
+                    <div class="bg-indigo-900 text-white px-8 py-3 rounded-lg shadow-lg inline-block relative border-2 border-indigo-700">
+                        <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider mb-1">Pembina</p>
+                        <p class="font-bold text-lg">Ibu Majelis Jemaat Todingbua Krey</p>
+                    </div>
+                    <div class="h-8 w-0.5 bg-gray-300 mx-auto"></div>
+                </div>
+
+                <!-- Level 2: Ketua -->
+                <div class="mb-8 text-center w-full">
+                    <div class="bg-indigo-600 text-white px-10 py-4 rounded-lg shadow-lg inline-block relative z-10">
+                        <p class="text-xs text-indigo-200 font-bold uppercase tracking-wider mb-1">Ketua</p>
+                        <p class="font-bold text-xl">Rezhky Christian</p>
+                    </div>
+                    <div class="h-8 w-0.5 bg-gray-300 mx-auto"></div>
+                    <!-- Horizontal Line for Level 3 -->
+                    <div class="h-0.5 bg-gray-300 w-3/4 mx-auto hidden md:block"></div> 
+                    <div class="h-8 w-0.5 bg-gray-300 mx-auto hidden md:block"></div> 
+                </div>
+
+                <!-- Level 3: Inti (Sekretaris & Bendahara) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mb-8">
+                    <!-- Sekretaris 1 -->
+                    <div class="flex flex-col items-center org-connector relative md:mt-0">
+                        <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-center">
+                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-pen"></i>
+                            </div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 1</p>
+                            <p class="font-bold text-gray-800">Laudya Iroth</p>
+                        </div>
+                    </div>
+
+                    <!-- Bendahara (Center visually in tree) -->
+                    <div class="flex flex-col items-center org-connector relative">
+                        <div class="bg-white border-2 border-green-100 p-4 rounded-lg shadow-md w-full text-center">
+                             <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Bendahara</p>
+                            <p class="font-bold text-gray-800">Delon Tidayoh</p>
+                        </div>
+                    </div>
+
+                    <!-- Sekretaris 2 -->
+                    <div class="flex flex-col items-center org-connector relative">
+                        <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-center">
+                             <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-pen"></i>
+                            </div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 2</p>
+                            <p class="font-bold text-gray-800">Ribka Sumolang</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 4: Seksi (Musik) -->
+                <div class="w-full max-w-2xl mt-4">
+                    <p class="text-center text-sm font-bold text-gray-400 uppercase mb-4 tracking-widest">— Seksi Musik —</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 flex items-center justify-center">
+                            <i class="fas fa-guitar text-purple-500 mr-3"></i>
+                            <div>
+                                <p class="text-xs text-gray-500">Koordinator 1</p>
+                                <p class="font-bold text-gray-800">Rifky Tidayoh</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 flex items-center justify-center">
+                            <i class="fas fa-microphone text-purple-500 mr-3"></i>
+                            <div>
+                                <p class="text-xs text-gray-500">Koordinator 2</p>
+                                <p class="font-bold text-gray-800">Tiara Todingbua</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Strategy Section -->
-    <section class="max-w-5xl mx-auto px-4 py-10 -mt-8 relative z-10">
-        <div class="bg-white rounded-xl shadow-xl p-6 md:p-8 border-l-8 border-indigo-600">
-            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi Intimasi (12-14 Anggota)</h2>
+    <section class="max-w-5xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 border-l-8 border-indigo-600">
+            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi Pelayanan (16 Anggota)</h2>
             <div class="grid md:grid-cols-2 gap-6 items-center">
                 <div>
                     <p class="text-gray-600 mb-4 text-justify">
-                        Dengan jumlah anggota yang ringkas, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>.
+                        Dengan jumlah anggota 16 orang, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>.
                         Setiap kegiatan ibadah kreatif dirancang agar setiap individu terlibat aktif, bukan sekadar penonton.
                     </p>
                     <ul class="space-y-2">
                         <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Diskusi Dua Arah (Semua bicara)</li>
                         <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Biaya Logistik Rendah</li>
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Mobilisasi Mudah (3-4 Motor/1 Mobil)</li>
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Mobilisasi Mudah (4 Mobil/Motor Konvoi)</li>
                     </ul>
                 </div>
                 <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mt-4 md:mt-0">
                     <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
                     <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2">
                         <span class="font-semibold text-gray-700">Minggu Genap</span>
-                        <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (Small Group)</span>
+                        <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (16 Orang)</span>
                     </div>
                     <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
                         <span class="font-semibold text-gray-500">Minggu Ganjil</span>
                         <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Ibadah Kategorial Lain</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members List Section -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Member Items -->
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">1</div>
+                    <span class="font-medium text-gray-700">Rezhky Christian</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">2</div>
+                    <span class="font-medium text-gray-700">Laudya Iroth</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">3</div>
+                    <span class="font-medium text-gray-700">Ribka Sumolang</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">4</div>
+                    <span class="font-medium text-gray-700">Delon Tidayoh</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">5</div>
+                    <span class="font-medium text-gray-700">Rifky Tidayoh</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">6</div>
+                    <span class="font-medium text-gray-700">Tiara Todingbua</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">7</div>
+                    <span class="font-medium text-gray-700">Briando Maki</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">8</div>
+                    <span class="font-medium text-gray-700">Josafat Tidayoh</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">9</div>
+                    <span class="font-medium text-gray-700">Elsya Mokobimbing</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">10</div>
+                    <span class="font-medium text-gray-700">Efraim Sumolang</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">11</div>
+                    <span class="font-medium text-gray-700">Maria Manampiring</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">12</div>
+                    <span class="font-medium text-gray-700">Avrilia Tidayoh</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">13</div>
+                    <span class="font-medium text-gray-700">Citra Tidayoh</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">14</div>
+                    <span class="font-medium text-gray-700">Novita Tidayoh</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">15</div>
+                    <span class="font-medium text-gray-700">Kezia Jacob</span>
+                </div>
+                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">16</div>
+                    <span class="font-medium text-gray-700">Gloria Rembet</span>
                 </div>
             </div>
         </div>
@@ -96,7 +278,7 @@
                             <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
                                 <li><strong>Film:</strong> Film pendek rohani (durasi max 30 menit).</li>
                                 <li><strong>Format:</strong> Duduk melingkar (Round Table).</li>
-                                <li><strong>Interaksi:</strong> Siapkan 14 potongan kertas pertanyaan refleksi. Setiap orang ambil 1 dan jawab bergilir.</li>
+                                <li><strong>Interaksi:</strong> Siapkan 16 potongan kertas pertanyaan refleksi. Setiap orang ambil 1 dan jawab bergilir.</li>
                             </ul>
                         </details>
                     </div>
@@ -125,7 +307,7 @@
                             </summary>
                             <div class="mt-2 text-gray-600 text-xs">
                                 <p><strong>Mekanisme:</strong> Kotak donasi ditaruh di depan pintu masuk *sejak doa pembukaan* setiap ibadah di bulan ini.</p>
-                                <p class="mt-1"><strong>Target:</strong> 14 Anggota bawa min. 2 potong baju layak pakai.</p>
+                                <p class="mt-1"><strong>Target:</strong> 16 Anggota bawa min. 2 potong baju layak pakai.</p>
                             </div>
                         </details>
                     </div>
@@ -154,7 +336,7 @@
                             </summary>
                             <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
                                 <li><strong>Aktivitas:</strong> Mencari Telur (isi ayat hafalan) di halaman gereja.</li>
-                                <li><strong>Logistik:</strong> Cukup 2 Lusin telur plastik. Karena hanya 14 orang, setiap orang harus dapat minimal 1.</li>
+                                <li><strong>Logistik:</strong> Cukup 2 Lusin telur plastik. Pastikan 16 orang dapat semua.</li>
                                 <li><strong>Hadiah:</strong> Cokelat sederhana.</li>
                             </ul>
                         </details>
@@ -184,7 +366,7 @@
                             </summary>
                             <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
                                 <li><strong>Jenis:</strong> Cerdas Cermat Individu (Kahoot/Kertas).</li>
-                                <li><strong>Kenapa Individu?</strong> Karena peserta hanya 12-14, jangan buat tim besar. Buat kompetisi perorangan agar semua berpikir.</li>
+                                <li><strong>Kenapa Individu?</strong> Karena peserta 16 orang, buat kompetisi perorangan agar semua berpikir.</li>
                                 <li><strong>Materi:</strong> Pengetahuan Alkitab Dasar.</li>
                             </ul>
                         </details>
@@ -211,7 +393,7 @@
                                 Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
                             </summary>
                             <div class="mt-2 text-gray-600 text-xs">
-                                <p><strong>Fokus:</strong> Pelatihan Liturgi untuk 14 orang.</p>
+                                <p><strong>Fokus:</strong> Pelatihan Liturgi untuk 16 orang.</p>
                                 <p class="mt-1">Setiap anggota <strong>WAJIB</strong> mencoba peran pelayanan (WL/Singer/Usher/Kolektan) secara bergantian dalam simulasi ini.</p>
                             </div>
                         </details>
@@ -238,7 +420,7 @@
                                 Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
                             </summary>
                             <p class="mt-2 text-gray-600 text-xs">
-                                Karena hanya 14 orang, cukup pesan makanan/potluck di teras gereja. Fokus membangun keakraban tanpa agenda berat.
+                                Untuk 16 orang, cukup pesan makanan/potluck di teras gereja. Fokus membangun keakraban tanpa agenda berat.
                             </p>
                         </details>
                     </div>
@@ -254,7 +436,7 @@
                 <div class="p-5">
                     <div class="mb-4 border-b pb-3">
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Kemerdekaan</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-flag text-red-500 mr-2"></i>Ibadah Kemerdekaan</p>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
@@ -265,7 +447,7 @@
                                 Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
                             </summary>
                             <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
-                                <li><strong>Tim:</strong> Bagi menjadi 2 Tim (7 vs 7) atau 3 Tim (4-5 orang).</li>
+                                <li><strong>Tim:</strong> Bagi menjadi 4 Tim (per tim 4 orang). Pas.</li>
                                 <li><strong>Games:</strong> Estafet Sarung atau Tebak Kata Alkitab.</li>
                                 <li><strong>Biaya:</strong> Murah meriah (Hadiah kerupuk/snack).</li>
                             </ul>
@@ -296,7 +478,7 @@
                             </summary>
                             <div class="mt-2 text-gray-600 text-xs">
                                 <p><strong>Lokasi:</strong> Bersih-bersih halaman gereja/selokan warga sekitar.</p>
-                                <p class="mt-1"><strong>Logistik:</strong> Bawa sapu lidi & kantong sampah masing-masing. Karena 14 orang, area kerja bisa diselesaikan dalam 1 jam.</p>
+                                <p class="mt-1"><strong>Logistik:</strong> Bawa sapu lidi & kantong sampah masing-masing. Dengan 16 orang, area bisa sangat bersih.</p>
                             </div>
                         </details>
                     </div>
@@ -319,7 +501,7 @@
                                 Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
                             </summary>
                             <p class="mt-2 text-gray-600 text-xs">
-                                Nonton video pendek tentang tokoh Reformasi (mis: Martin Luther) di YouTube (15 menit), lalu sharing: "Apa yang perlu direformasi dari diri kita?"
+                                Nonton video pendek tentang tokoh Reformasi di YouTube (15 menit), lalu sharing: "Apa yang perlu direformasi dari diri kita?"
                             </p>
                         </details>
                     </div>
@@ -351,7 +533,7 @@
                             </summary>
                             <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
                                 <li><strong>Game:</strong> "Benang Kusut". Lempar gulungan benang ke teman sambil sebut 1 ucapan syukur.</li>
-                                <li><strong>Hasil:</strong> Membentuk jaring laba-laba yang simbolnya "Kita saling terhubung". Sangat pas untuk 14 orang.</li>
+                                <li><strong>Hasil:</strong> Membentuk jaring laba-laba yang simbolnya "Kita saling terhubung". Sangat pas untuk 16 orang.</li>
                             </ul>
                         </details>
                     </div>
@@ -378,8 +560,8 @@
                                 Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
                             </summary>
                             <div class="mt-2 text-gray-600 text-xs">
-                                <p><strong>Kado:</strong> Wajib bawa kado silang min. harga Rp 20.000 dibungkus koran (biar tidak dinilai dari bungkus).</p>
-                                <p class="mt-1">Karena jumlah sedikit, tukar kado dilakukan dengan sistem cabut nomor undian.</p>
+                                <p><strong>Kado:</strong> Wajib bawa kado silang min. harga Rp 20.000 dibungkus koran.</p>
+                                <p class="mt-1">Karena jumlah 16 orang (genap), tukar kado sistem cabut nomor undian akan berjalan lancar tanpa ada yang tidak dapat pasangan.</p>
                             </div>
                         </details>
                     </div>
@@ -393,9 +575,9 @@
     <footer class="bg-gray-800 text-white py-8 text-center">
         <div class="max-w-6xl mx-auto px-4">
             <p class="font-semibold text-lg">PELPRAP IMANUEL 2026</p>
-            <p class="text-gray-400 text-sm mt-1">Ketua: Christian Wijaya</p>
+            <p class="text-gray-400 text-sm mt-1">Ketua: Rezhky Christian</p>
             <div class="mt-4 text-xs text-gray-500">
-                Disusun Khusus untuk Komunitas 12-14 Anggota
+                Disusun Khusus untuk Komunitas 16 Anggota
             </div>
         </div>
     </footer>
