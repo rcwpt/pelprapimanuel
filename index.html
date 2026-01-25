@@ -3,383 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Pemberkasan DMS-SIASN Kab. Mimika</title>
+    <title>Program Kerja PELPRAP IMANUEL 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .checkbox-wrapper input:checked + div {
-            background-color: #10B981;
-            border-color: #10B981;
+        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; }
+        .hero-pattern {
+            background-color: #4f46e5;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%236366f1' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
         }
-        .checkbox-wrapper input:checked + div svg {
-            display: block;
-        }
-        .item-row:hover {
-            background-color: #F3F4F6;
-        }
-        .strikethrough {
-            text-decoration: line-through;
-            color: #9CA3AF;
-        }
-        @media print {
-            .no-print { display: none; }
-            body { background: white; }
-            .shadow-lg { box-shadow: none; }
-            .border { border: 1px solid #ccc; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .gradient-text {
+            background: linear-gradient(to right, #4f46e5, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="text-gray-800">
 
-    <!-- Navbar / Header -->
-    <div class="bg-blue-800 text-white p-6 shadow-lg sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold"><i class="fas fa-file-archive mr-2"></i>DMS-SIASN Checklist</h1>
-                <p class="text-blue-200 text-sm mt-1">Kabupaten Mimika - Batas Akhir: 20 Januari 2026</p>
-            </div>
-            <div class="text-right hidden md:block">
-                <div class="text-3xl font-bold" id="progress-percent">0%</div>
-                <div class="text-xs text-blue-200">Kelengkapan Berkas</div>
+    <!-- Header Section -->
+    <header class="hero-pattern text-white py-12 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">PELPRAP IMANUEL</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">Program Kerja & Kalender Kegiatan 2026</p>
+            <div class="mt-6 flex flex-wrap justify-center gap-4">
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-sm"><i class="fas fa-church mr-2"></i>Iman</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-sm"><i class="fas fa-users mr-2"></i>Kebersamaan</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-sm"><i class="fas fa-hand-holding-heart mr-2"></i>Aksi Nyata</span>
             </div>
         </div>
-        <!-- Progress Bar -->
-        <div class="w-full bg-blue-900 h-2 mt-4 rounded-full overflow-hidden max-w-5xl mx-auto">
-            <div id="progress-bar" class="bg-green-400 h-full transition-all duration-500 ease-out" style="width: 0%"></div>
-        </div>
-    </div>
+    </header>
 
-    <div class="max-w-5xl mx-auto p-6">
+    <!-- Strategy Section -->
+    <section class="max-w-5xl mx-auto px-4 py-10 -mt-8 relative z-10">
+        <div class="bg-white rounded-xl shadow-xl p-6 md:p-8 border-l-8 border-indigo-600">
+            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi: Harmonisasi Jadwal</h2>
+            <div class="grid md:grid-cols-2 gap-6 items-center">
+                <div>
+                    <p class="text-gray-600 mb-4 text-justify">
+                        Kami menerapkan sistem pertemuan <strong>Bi-weekly (2 Minggu Sekali)</strong>. Ini adalah langkah strategis untuk bersinergi dengan jadwal komisi PELWAP & PELNAP.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Efisiensi Gedung Gereja</li>
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Kualitas Pertemuan Lebih Padat</li>
+                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Menghindari Bentrok Acara</li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mt-4 md:mt-0">
+                    <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
+                    <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2 transform transition hover:scale-105">
+                        <span class="font-semibold text-gray-700">Minggu Genap</span>
+                        <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
+                        <span class="font-semibold text-gray-500">Minggu Ganjil</span>
+                        <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">PELWAP/PELNAP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendar Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Timeline Kegiatan <span class="gradient-text">2026</span></h2>
         
-        <!-- Warning Alert -->
-        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 shadow-sm rounded-r-lg">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-yellow-700 font-bold">
-                        PENTING: Aturan File Kosong
-                    </p>
-                    <p class="text-sm text-yellow-600 mt-1">
-                        Sesuai instruksi: "Dokumen yang tidak ada harap isi dengan <b>dokumen kosong</b> (Blank PDF)."<br>
-                        Jangan biarkan slot kosong saat upload.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <!-- Controls -->
-        <div class="flex justify-between items-center mb-6 no-print">
-            <p class="text-gray-500 text-sm italic">Klik kotak centang jika file sudah siap.</p>
-            <div class="space-x-2">
-                <button onclick="window.print()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">
-                    <i class="fas fa-print mr-2"></i>Cetak
-                </button>
-                <button onclick="resetChecklist()" class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-semibold transition">
-                    <i class="fas fa-redo mr-2"></i>Reset
-                </button>
-            </div>
-        </div>
-
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <!-- Section 1: Identitas & Utama -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-                <div class="bg-blue-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-id-card mr-2"></i> 1. Arsip Utama (Wajib)</h2>
-                    <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded">Prioritas</span>
+            <!-- Januari -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-blue-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">JANUARI</h3>
+                    <span class="bg-blue-800 text-blue-100 text-xs px-2 py-1 rounded-full">New Beginning</span>
                 </div>
-                <div class="p-4 space-y-3">
-                    <!-- Item -->
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-6 h-6 border-2 border-gray-300 rounded flex items-center justify-center mr-3 transition bg-white">
-                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <span class="text-gray-700 font-medium">Daftar Riwayat Hidup (DRH)</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-6 h-6 border-2 border-gray-300 rounded flex items-center justify-center mr-3 transition bg-white">
-                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <span class="text-gray-700 font-medium">SK CPNS / SPMT CPNS</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-6 h-6 border-2 border-gray-300 rounded flex items-center justify-center mr-3 transition bg-white">
-                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
-                        <span class="text-gray-700 font-medium">SK PNS</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-pray text-blue-500 mr-2"></i>Ibadah Awal Tahun</p>
+                        <p class="text-sm text-gray-600 ml-6">Dedikasi Pelayanan</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-gamepad text-purple-500 mr-2"></i>Games Rohani</p>
+                        <p class="text-sm text-gray-600 ml-6">Tema: "Trust & Faith" (Outbound Indoor)</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 2: Pendidikan -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-                <div class="bg-emerald-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-graduation-cap mr-2"></i> 2. Riwayat Pendidikan</h2>
-                    <span class="text-xs bg-emerald-500 text-white px-2 py-1 rounded">Ijazah & Transkrip</span>
+            <!-- Februari -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-pink-500 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">FEBRUARI</h3>
+                    <span class="bg-pink-700 text-pink-100 text-xs px-2 py-1 rounded-full">Love</span>
                 </div>
-                <div class="p-4 space-y-2">
-                    <p class="text-xs text-gray-500 mb-2">*Gunakan file kosong jika tidak memiliki jenjang ini</p>
-                    
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SD</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SMP</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SMA</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">D-III / D-IV / D-IV Profesi</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">S-1 / S-1 Profesi</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">S-2 / S-3</span>
-                    </label>
-                     <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Riwayat Pencantuman Gelar</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-heart text-pink-500 mr-2"></i>Ibadah Valentine</p>
+                        <p class="text-sm text-gray-600 ml-6">Makna Kasih Sejati</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-film text-indigo-500 mr-2"></i>Nobar Film</p>
+                        <p class="text-sm text-gray-600 ml-6">Diskusi Hubungan Kristen</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 3: Kenaikan Pangkat -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-                <div class="bg-indigo-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-layer-group mr-2"></i> 3. Kenaikan Pangkat</h2>
+            <!-- Maret (Charity Update) -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-green-400">
+                <div class="bg-green-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">MARET</h3>
+                    <span class="bg-green-800 text-green-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-hand-holding-heart mr-1"></i>Peduli Kasih</span>
                 </div>
-                <div class="p-4 space-y-2">
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Golongan I (jika ada)</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Golongan II (jika ada)</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Golongan III</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Golongan IV</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Ibadah Pendalaman Alkitab</p>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial I</p>
+                        <p class="font-bold text-gray-800 text-sm">Kunjungan Kasih / Panti</p>
+                        <p class="text-xs text-gray-600 mt-1"><i class="fas fa-tshirt mr-1"></i>Donasi Baju Layak Pakai</p>
+                        <p class="text-xs text-gray-600"><i class="fas fa-box-open mr-1"></i>Donasi Sembako</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 4: Jabatan -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-                <div class="bg-indigo-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-briefcase mr-2"></i> 4. Riwayat Jabatan</h2>
+            <!-- April -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-yellow-500 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">APRIL</h3>
+                    <span class="bg-yellow-700 text-yellow-100 text-xs px-2 py-1 rounded-full">Paskah</span>
                 </div>
-                <div class="p-4 space-y-2">
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Struktural Periode 2006-2013</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Struktural Periode 2014-2019</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Struktural Periode 2020-2025</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Jabatan Fungsional Tertentu</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-video text-indigo-500 mr-2"></i>Nobar Paskah</p>
+                        <p class="text-sm text-gray-600 ml-6">Refleksi Kebangkitan</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-egg text-yellow-600 mr-2"></i>Perayaan Paskah</p>
+                        <p class="text-sm text-gray-600 ml-6">Ibadah & Telur Paskah</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 5: Diklat & Sertifikat -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-                <div class="bg-orange-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-certificate mr-2"></i> 5. Riwayat Diklat</h2>
+            <!-- Mei -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-teal-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">MEI</h3>
+                    <span class="bg-teal-800 text-teal-100 text-xs px-2 py-1 rounded-full">Growth</span>
                 </div>
-                <div class="p-4 space-y-2">
-                     <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Prajabatan</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">PKP (Kepemimpinan Pengawas)</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">PKA (Kepemimpinan Administrator)</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">PKN (Kepemimpinan Nasional)</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Diklat Lainnya</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Ibadah Raya</p>
+                        <p class="text-sm text-gray-600 ml-6">Tema: Dewasa dalam Iman</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-puzzle-piece text-teal-500 mr-2"></i>Games Alkitab</p>
+                        <p class="text-sm text-gray-600 ml-6">Cerdas Cermat / Bible Hunter</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 6: SKP & PAK -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
-                <div class="bg-orange-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-chart-line mr-2"></i> 6. Kinerja (SKP & PAK)</h2>
+            <!-- Juni (Worship Night Update) -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-l-4 border-purple-500">
+                <div class="bg-purple-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">JUNI</h3>
+                    <span class="bg-purple-800 text-purple-100 text-xs px-2 py-1 rounded-full">Talenta</span>
                 </div>
-                <div class="p-4 space-y-2">
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SKP 2023</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SKP 2024</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SKP 2025</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">PAK (Penilaian Akhir Kinerja)</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Ibadah Raya</p>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                        <p class="text-xs text-purple-700 uppercase font-bold mb-1"><i class="fas fa-music mr-1"></i>Special Event</p>
+                        <p class="font-bold text-gray-800 text-sm">WORSHIP NIGHT</p>
+                        <p class="text-xs text-gray-600 mt-1">Upgrade Skill Liturgi & Musik untuk Persiapan KKR</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Section 7: Arsip Kondisional -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 col-span-1 md:col-span-2">
-                <div class="bg-gray-600 p-4 flex items-center justify-between">
-                    <h2 class="text-white font-semibold text-lg"><i class="fas fa-archive mr-2"></i> 7. Arsip Kondisional</h2>
-                    <span class="text-xs bg-gray-500 text-white px-2 py-1 rounded">Isi Kosong Jika Tidak Ada</span>
+            <!-- Juli (Revision: Padang Removed) -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 opacity-90">
+                <div class="bg-gray-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">JULI</h3>
+                    <span class="bg-gray-800 text-gray-100 text-xs px-2 py-1 rounded-full">Konsolidasi</span>
                 </div>
-                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Riwayat Pindah Instansi / Peralihan</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SK Cuti Luar Tanggungan Negara</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">SK Peninjauan Masa Kerja</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Riwayat Pemberhentian Jabatan</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Riwayat PLT</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Riwayat Tugas Belajar</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Riwayat Piagam Penghargaan</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Sertifikat Jabatan Fungsional</span>
-                    </label>
-                    <label class="item-row flex items-center cursor-pointer p-2 rounded transition checkbox-wrapper">
-                        <input type="checkbox" class="hidden" onchange="updateProgress(this)">
-                        <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center mr-3 bg-white"><svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
-                        <span class="text-gray-700 text-sm">Sertifikat Lainnya</span>
-                    </label>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Evaluasi Tengah Tahun</p>
+                        <p class="text-sm text-gray-600 ml-6">Fellowship Santai di Gereja</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-500 italic">-- Libur / Event Gereja Lain --</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agustus -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-red-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">AGUSTUS</h3>
+                    <span class="bg-red-800 text-red-100 text-xs px-2 py-1 rounded-full">HUT RI</span>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-flag text-red-500 mr-2"></i>Ibadah Kemerdekaan</p>
+                        <p class="text-sm text-gray-600 ml-6">Doa Bagi Bangsa</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-running text-orange-500 mr-2"></i>Games 17-an</p>
+                        <p class="text-sm text-gray-600 ml-6">Lomba Kekompakan Tim</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- September (Charity Update) -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-green-400">
+                <div class="bg-green-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">SEPTEMBER</h3>
+                    <span class="bg-green-800 text-green-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-globe-asia mr-1"></i>Misi</span>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Ibadah Misi</p>
+                        <p class="text-sm text-gray-600 ml-6">Tema: Menjadi Terang</p>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial II</p>
+                        <p class="font-bold text-gray-800 text-sm">Bakti Sosial / Lingkungan</p>
+                        <p class="text-xs text-gray-600 mt-1"><i class="fas fa-tshirt mr-1"></i>Donasi Pakaian & Makanan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oktober -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-indigo-600 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">OKTOBER</h3>
+                    <span class="bg-indigo-800 text-indigo-100 text-xs px-2 py-1 rounded-full">Reformasi</span>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-book-open text-indigo-500 mr-2"></i>Nobar Dokumenter</p>
+                        <p class="text-sm text-gray-600 ml-6">Tokoh Iman / Sejarah</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800">Ibadah Raya</p>
+                        <p class="text-sm text-gray-600 ml-6">Integritas Pemuda</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- November -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
+                <div class="bg-orange-500 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">NOVEMBER</h3>
+                    <span class="bg-orange-700 text-orange-100 text-xs px-2 py-1 rounded-full">Syukur</span>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Ibadah Akhir Tahun</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
+                        <p class="font-bold text-gray-800"><i class="fas fa-comments text-orange-500 mr-2"></i>Sharing Games</p>
+                        <p class="text-sm text-gray-600 ml-6">"Count Your Blessings"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desember -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-red-500">
+                <div class="bg-red-700 p-4 flex justify-between items-center">
+                    <h3 class="text-white font-bold text-lg">DESEMBER</h3>
+                    <span class="bg-red-900 text-red-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-star text-yellow-400 mr-1"></i>Natal</span>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4 border-b pb-3">
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
+                        <p class="font-bold text-gray-800">Persiapan / Latihan</p>
+                    </div>
+                    <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-center">
+                        <p class="font-bold text-red-800 text-lg">PERAYAAN NATAL</p>
+                        <p class="text-sm text-gray-600">Ibadah & Tukar Kado</p>
+                    </div>
                 </div>
             </div>
 
         </div>
+    </main>
 
-        <div class="mt-8 text-center text-gray-400 text-xs no-print">
-            <p>Generated for Personal Use | DMS-SIASN Preparation Tool</p>
+    <!-- Detailed Guidelines -->
+    <section class="max-w-4xl mx-auto px-4 py-8 mb-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-indigo-600 pl-4">Panduan Teknis Pelaksanaan</h3>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Worship Night Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="font-bold text-purple-700 text-lg mb-2"><i class="fas fa-music mr-2"></i>Konsep Worship Night (Juni)</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Menggantikan konsep Musikal biasa. Fokus utamanya adalah <strong>Workshop & Praise.</strong>
+                </p>
+                <ul class="text-sm text-gray-600 list-disc ml-5">
+                    <li>Pelatihan dasar WL (Worship Leader) & Singers.</li>
+                    <li>Simulasi pelayanan altar yang benar.</li>
+                    <li><strong>Tujuan:</strong> Persiapan kaderisasi untuk Liturgi KKR/Ibadah Besar mendatang.</li>
+                </ul>
+            </div>
+
+            <!-- Peduli Kasih Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="font-bold text-green-700 text-lg mb-2"><i class="fas fa-box-open mr-2"></i>Mekanisme Peduli Kasih</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                    Bukan hanya persembahan uang, tetapi juga aksi nyata pengumpulan barang.
+                </p>
+                <div class="bg-green-50 p-3 rounded text-sm text-green-800 font-semibold mb-2">
+                    <i class="fas fa-info-circle mr-1"></i> Dropbox Donasi dibuka H-2 Minggu sebelum hari H.
+                </div>
+                <ul class="text-sm text-gray-600 list-disc ml-5">
+                    <li><strong>Baju Layak Pakai:</strong> Disortir untuk panti asuhan/jemaat membutuhkan.</li>
+                    <li><strong>Sembako:</strong> Beras, gula, minyak untuk bingkisan kasih.</li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        function updateProgress(checkbox) {
-            const labelSpan = checkbox.nextElementSibling.nextElementSibling;
-            
-            if (checkbox.checked) {
-                labelSpan.classList.add('strikethrough');
-            } else {
-                labelSpan.classList.remove('strikethrough');
-            }
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="font-semibold text-lg">PELPRAP IMANUEL 2026</p>
+            <p class="text-gray-400 text-sm mt-1">Ketua: Christian Wijaya</p>
+            <div class="mt-4 text-xs text-gray-500">
+                Disusun untuk Internal Pengurus & Anggota
+            </div>
+        </div>
+    </footer>
 
-            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-            const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            
-            const percent = Math.round((checkedCheckboxes.length / allCheckboxes.length) * 100);
-            
-            document.getElementById('progress-bar').style.width = percent + '%';
-            document.getElementById('progress-percent').textContent = percent + '%';
-        }
-
-        function resetChecklist() {
-            if(confirm('Apakah Anda yakin ingin mereset semua checklist?')) {
-                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                checkboxes.forEach(cb => {
-                    cb.checked = false;
-                    const labelSpan = cb.nextElementSibling.nextElementSibling;
-                    labelSpan.classList.remove('strikethrough');
-                });
-                document.getElementById('progress-bar').style.width = '0%';
-                document.getElementById('progress-percent').textContent = '0%';
-            }
-        }
-    </script>
 </body>
 </html>
+
+
