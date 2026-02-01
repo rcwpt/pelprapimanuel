@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 60px; /* Space for ticker */ }
         .hero-pattern {
             background-color: #4f46e5;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%236366f1' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
@@ -23,8 +23,6 @@
         details > summary { list-style: none; }
         .member-card { transition: all 0.3s ease; }
         .member-card:hover { background-color: #e0e7ff; transform: translateX(5px); }
-        
-        /* Tree Connector Lines */
         .org-connector::before {
             content: '';
             position: absolute;
@@ -34,6 +32,42 @@
             height: 20px;
             background-color: #cbd5e1;
             transform: translateX(-50%);
+        }
+
+        /* Ticker / Running Text Styles */
+        .ticker-wrap {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            overflow: hidden;
+            height: 50px;
+            background-color: #dc2626; /* Red for attention */
+            padding-left: 100%; 
+            box-sizing: content-box;
+            z-index: 9999;
+            border-top: 4px solid #fca5a5;
+            display: none; /* Hidden by default, shown via JS */
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+        }
+        .ticker {
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            white-space: nowrap;
+            padding-right: 100%;
+            box-sizing: content-box;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 1.1rem;
+            color: white;
+            font-weight: 600;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
         }
     </style>
 </head>
@@ -45,10 +79,26 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">PELPRAP IMANUEL</h1>
             <p class="text-xl md:text-2xl font-light opacity-90">Program Kerja & Kalender Kegiatan 2026</p>
             <div class="mt-4 bg-white/10 inline-block px-4 py-2 rounded-lg backdrop-blur-md">
-                <i class="fas fa-users mr-2"></i>Komunitas: 16 Anggota Aktif
+                <i class="fas fa-users mr-2"></i>Komunitas: 15 Anggota Aktif
             </div>
         </div>
     </header>
+
+    <!-- Renungan Harian Section (NEW) -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-xl p-1 border-t-8 border-yellow-500 overflow-hidden">
+            <h2 class="text-2xl font-bold text-center my-6 text-gray-800"><i class="fas fa-bible text-yellow-600 mr-2"></i>Renungan Harian</h2>
+            <div class="w-full h-[500px] bg-gray-50 rounded-lg overflow-hidden relative">
+                <!-- Fallback link in case iframe blocked -->
+                <div class="absolute inset-0 flex items-center justify-center z-0">
+                    <a href="https://alkitab.mobi/renungan/rh/" target="_blank" class="text-blue-600 underline">Buka Renungan Hari Ini</a>
+                </div>
+                <!-- Embed Renungan -->
+                <iframe src="https://alkitab.mobi/renungan/rh/" class="w-full h-full border-0 relative z-10 bg-white" title="Renungan Harian"></iframe>
+            </div>
+            <p class="text-center text-xs text-gray-400 mt-2 mb-4">Sumber: alkitab.mobi</p>
+        </div>
+    </section>
 
     <!-- Organization Chart Section -->
     <section class="max-w-6xl mx-auto px-4 py-8">
@@ -59,30 +109,17 @@
             <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 relative z-10">Struktur Organisasi & Tupoksi</h2>
             
             <div class="flex flex-col items-center relative z-10">
-                
-                <!-- Level 1: Pembina -->
-                <div class="mb-8 text-center w-full max-w-lg">
+                 <!-- Level 1: Pembina -->
+                 <div class="mb-8 text-center w-full max-w-lg">
                     <div class="bg-indigo-900 text-white px-6 py-4 rounded-lg shadow-lg inline-block relative border-2 border-indigo-700 w-full">
                         <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider mb-1">Pembina</p>
                         <p class="font-bold text-lg mb-2">Ibu Majelis Jemaat Todingbua Krey</p>
-                        
-                        <!-- Tupoksi Dropdown -->
                         <details class="group text-left mt-2 border-t border-indigo-700 pt-2">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-indigo-200 text-sm hover:text-white transition">
                                 <span>Lihat Tupoksi</span>
-                                <span class="transition group-open:rotate-180">
-                                    <i class="fas fa-chevron-down"></i>
-                                </span>
+                                <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                             </summary>
-                            <div class="text-indigo-100 mt-3 group-open:animate-fadeIn text-sm text-left">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Memberikan bimbingan rohani, nasihat, dan arahan.</li>
-                                    <li>Menjadi pendamping dan figur orang tua rohani.</li>
-                                    <li>Mengawasi jalannya program agar sesuai visi misi.</li>
-                                    <li>Menjembatani komunikasi dengan Gembala & Majelis.</li>
-                                    <li>Memberikan masukan strategis.</li>
-                                </ul>
-                            </div>
+                            <div class="text-indigo-100 mt-3 group-open:animate-fadeIn text-sm text-left"><ul class="list-disc pl-4 space-y-1"><li>Memberikan bimbingan rohani.</li><li>Menjadi pendamping.</li><li>Mengawasi jalannya program.</li></ul></div>
                         </details>
                     </div>
                     <div class="h-8 w-0.5 bg-gray-300 mx-auto"></div>
@@ -93,141 +130,53 @@
                     <div class="bg-indigo-600 text-white px-6 py-4 rounded-lg shadow-lg inline-block relative z-10 w-full">
                         <p class="text-xs text-indigo-200 font-bold uppercase tracking-wider mb-1">Ketua</p>
                         <p class="font-bold text-xl mb-2">Rezhky Christian</p>
-                        
-                        <!-- Tupoksi Dropdown -->
                         <details class="group text-left mt-2 border-t border-indigo-500 pt-2">
                             <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-indigo-100 text-sm hover:text-white transition">
                                 <span>Lihat Tupoksi</span>
-                                <span class="transition group-open:rotate-180">
-                                    <i class="fas fa-chevron-down"></i>
-                                </span>
+                                <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                             </summary>
-                            <div class="text-indigo-50 mt-3 group-open:animate-fadeIn text-sm text-left">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Memimpin dan mengoordinasi seluruh kegiatan.</li>
-                                    <li>Memimpin rapat & mengambil keputusan akhir.</li>
-                                    <li>Mengawasi & mengevaluasi kinerja seksi.</li>
-                                    <li>Menjaga keharmonisan tim pengurus.</li>
-                                </ul>
-                            </div>
+                            <div class="text-indigo-50 mt-3 group-open:animate-fadeIn text-sm text-left"><ul class="list-disc pl-4 space-y-1"><li>Memimpin kegiatan.</li><li>Memimpin rapat.</li><li>Evaluasi kinerja.</li></ul></div>
                         </details>
                     </div>
                     <div class="h-8 w-0.5 bg-gray-300 mx-auto"></div>
-                    <!-- Horizontal Line for Level 3 -->
                     <div class="h-0.5 bg-gray-300 w-3/4 mx-auto hidden md:block"></div> 
                     <div class="h-8 w-0.5 bg-gray-300 mx-auto hidden md:block"></div> 
                 </div>
 
-                <!-- Level 3: Inti (Sekretaris & Bendahara) -->
+                <!-- Level 3: Inti -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-8">
-                    <!-- Sekretaris 1 -->
                     <div class="flex flex-col items-center org-connector relative md:mt-0">
                         <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-left">
-                            <div class="flex items-center mb-2">
-                                <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-2">
-                                    <i class="fas fa-pen text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 1</p>
-                                    <p class="font-bold text-gray-800 text-sm">Laudya Iroth</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Tupoksi Dropdown -->
-                            <details class="group mt-2 border-t border-gray-100 pt-2">
-                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs hover:text-blue-800 transition">
-                                    <span>Tupoksi: Humas</span>
-                                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                                </summary>
-                                <div class="text-gray-600 mt-2 text-xs">
-                                    <ul class="list-disc pl-4 space-y-1">
-                                        <li>Humas ke pihak eksternal/Gembala.</li>
-                                        <li>Menyusun surat & proposal.</li>
-                                        <li>Menyampaikan info eksternal.</li>
-                                        <li><strong>Bersama Sek 2:</strong> Mengatur teknis ibadah.</li>
-                                    </ul>
-                                </div>
-                            </details>
+                            <div class="flex items-center mb-2"><div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-2"><i class="fas fa-pen text-sm"></i></div><div><p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 1</p><p class="font-bold text-gray-800 text-sm">Laudya Iroth</p></div></div>
+                            <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs hover:text-blue-800 transition"><span>Tupoksi: Humas</span><span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4 space-y-1"><li>Humas Eksternal.</li><li>Surat menyurat.</li></ul></div></details>
                         </div>
                     </div>
-
-                    <!-- Bendahara (Center visually in tree) -->
                     <div class="flex flex-col items-center org-connector relative">
                         <div class="bg-white border-2 border-green-100 p-4 rounded-lg shadow-md w-full text-left">
-                             <div class="flex items-center mb-2">
-                                <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-2">
-                                    <i class="fas fa-wallet text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-bold uppercase">Bendahara</p>
-                                    <p class="font-bold text-gray-800 text-sm">Delon Tidayoh</p>
-                                </div>
-                            </div>
-
-                            <!-- Tupoksi Dropdown -->
-                            <details class="group mt-2 border-t border-gray-100 pt-2">
-                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-green-600 text-xs hover:text-green-800 transition">
-                                    <span>Tupoksi: Keuangan</span>
-                                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                                </summary>
-                                <div class="text-gray-600 mt-2 text-xs">
-                                    <ul class="list-disc pl-4 space-y-1">
-                                        <li>Kelola keuangan masuk/keluar.</li>
-                                        <li>Buat laporan transparan rutin.</li>
-                                        <li>Simpan bukti transaksi.</li>
-                                        <li>Siapkan Tanggu (Kantong Kolekte).</li>
-                                    </ul>
-                                </div>
-                            </details>
+                             <div class="flex items-center mb-2"><div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-2"><i class="fas fa-wallet text-sm"></i></div><div><p class="text-xs text-gray-500 font-bold uppercase">Bendahara</p><p class="font-bold text-gray-800 text-sm">Delon Tidayoh</p></div></div>
+                            <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-green-600 text-xs hover:text-green-800 transition"><span>Tupoksi: Keuangan</span><span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4 space-y-1"><li>Kelola Keuangan.</li><li>Laporan rutin.</li></ul></div></details>
                         </div>
                     </div>
-
-                    <!-- Sekretaris 2 -->
                     <div class="flex flex-col items-center org-connector relative">
                         <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-left">
-                             <div class="flex items-center mb-2">
-                                <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-2">
-                                    <i class="fas fa-pen text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 2</p>
-                                    <p class="font-bold text-gray-800 text-sm">Ribka Sumolang</p>
-                                </div>
-                            </div>
-
-                            <!-- Tupoksi Dropdown -->
-                            <details class="group mt-2 border-t border-gray-100 pt-2">
-                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs hover:text-blue-800 transition">
-                                    <span>Tupoksi: Admin</span>
-                                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                                </summary>
-                                <div class="text-gray-600 mt-2 text-xs">
-                                    <ul class="list-disc pl-4 space-y-1">
-                                        <li>Kelola data & absensi.</li>
-                                        <li>Notulensi rapat.</li>
-                                        <li>Rekap & arsip laporan.</li>
-                                        <li><strong>Bersama Sek 1:</strong> Mengatur teknis ibadah.</li>
-                                    </ul>
-                                </div>
-                            </details>
+                             <div class="flex items-center mb-2"><div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-2"><i class="fas fa-pen text-sm"></i></div><div><p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 2</p><p class="font-bold text-gray-800 text-sm">Ribka Sumolang</p></div></div>
+                            <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs hover:text-blue-800 transition"><span>Tupoksi: Admin</span><span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4 space-y-1"><li>Absensi.</li><li>Notulensi.</li></ul></div></details>
                         </div>
                     </div>
                 </div>
 
-                <!-- Level 4: Seksi (Musik) -->
+                <!-- Level 4: Musik -->
                 <div class="w-full max-w-3xl mt-4">
-                    <p class="text-center text-sm font-bold text-gray-400 uppercase mb-4 tracking-widest">— Seksi Musik & Pujian —</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Musik 1 -->
-                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                     <p class="text-center text-sm font-bold text-gray-400 uppercase mb-4 tracking-widest">— Seksi Musik —</p>
+                    <div class="flex justify-center">
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200 w-full md:w-1/2">
                             <div class="flex items-center mb-2">
                                 <i class="fas fa-guitar text-purple-500 mr-3 text-lg"></i>
                                 <div>
-                                    <p class="text-xs text-gray-500 font-bold">Koordinator Musik (Musik 1)</p>
+                                    <p class="text-xs text-gray-500 font-bold">Koordinator Musik</p>
                                     <p class="font-bold text-gray-800 text-sm">Rifky Tidayoh</p>
                                 </div>
                             </div>
-                            <!-- Tupoksi Dropdown -->
                             <details class="group mt-2 border-t border-purple-200 pt-2">
                                 <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-purple-600 text-xs hover:text-purple-800 transition">
                                     <span>Tupoksi</span>
@@ -238,31 +187,7 @@
                                         <li>Penanggung jawab alat & player.</li>
                                         <li>Menyusun jadwal latihan/pelayanan.</li>
                                         <li>Mengiringi ibadah dengan musik.</li>
-                                    </ul>
-                                </div>
-                            </details>
-                        </div>
-
-                        <!-- Musik 2 -->
-                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-microphone text-purple-500 mr-3 text-lg"></i>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-bold">Koordinator Pujian (Musik 2)</p>
-                                    <p class="font-bold text-gray-800 text-sm">Tiara Todingbua</p>
-                                </div>
-                            </div>
-                             <!-- Tupoksi Dropdown -->
-                             <details class="group mt-2 border-t border-purple-200 pt-2">
-                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-purple-600 text-xs hover:text-purple-800 transition">
-                                    <span>Tupoksi</span>
-                                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                                </summary>
-                                <div class="text-gray-600 mt-2 text-xs">
-                                    <ul class="list-disc pl-4 space-y-1">
-                                        <li>Penanggung jawab Lagu & WL.</li>
-                                        <li>Menyusun daftar lagu ibadah.</li>
-                                        <li>Menyiapkan lirik lagu (slide).</li>
+                                        <li>Penanggung jawab WL & List Lagu.</li>
                                     </ul>
                                 </div>
                             </details>
@@ -279,504 +204,220 @@
         </div>
     </section>
 
+    <!-- SCHEDULE SECTION (CORRECTED) -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-emerald-600">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-calendar-alt text-emerald-600 mr-3"></i>Jadwal Ibadah Kunjungan 2026
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white text-sm">
+                    <thead class="bg-emerald-50 text-emerald-900">
+                        <tr>
+                            <th class="py-3 px-4 text-left rounded-tl-lg">No</th>
+                            <th class="py-3 px-4 text-left">Tanggal</th>
+                            <th class="py-3 px-4 text-left">Penerima Kunjungan (Host)</th>
+                            <th class="py-3 px-4 text-left rounded-tr-lg">Alamat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100" id="schedule-body">
+                        <tr class="hover:bg-gray-50"><td>1</td><td class="font-semibold text-emerald-600">07 Februari</td><td>Pastori</td><td>G. Gereja Km.9</td></tr>
+                        <tr class="hover:bg-gray-50"><td>2</td><td class="font-semibold text-emerald-600">21 Februari</td><td>Laudya Iroth</td><td>Kilo 7</td></tr>
+                        <tr class="hover:bg-gray-50"><td>3</td><td class="font-semibold text-emerald-600">07 Maret</td><td>Ribka Sumolang</td><td>Nawaripi</td></tr>
+                        <tr class="hover:bg-gray-50"><td>4</td><td class="font-semibold text-emerald-600">21 Maret</td><td>Elsya Mokobimbing</td><td>Pastori</td></tr>
+                        <tr class="hover:bg-gray-50"><td>5</td><td class="font-semibold text-emerald-600">04 April</td><td>Efraim Sumolang</td><td>Nawaripi</td></tr>
+                        <tr class="hover:bg-gray-50"><td>6</td><td class="font-semibold text-emerald-600">18 April</td><td>Avrilia Tidayoh</td><td>Busiri ujung</td></tr>
+                        <tr class="hover:bg-gray-50"><td>7</td><td class="font-semibold text-emerald-600">09 Mei</td><td>Gloria Rembet</td><td>Pastori</td></tr>
+                        <tr class="hover:bg-gray-50 bg-yellow-50"><td>8</td><td class="font-semibold text-orange-600">14-23 Mei</td><td colspan="2" class="font-bold text-center">DOA 10 MALAM (PENTAKOSTA)</td></tr>
+                        <tr class="hover:bg-gray-50"><td>9</td><td class="font-semibold text-emerald-600">06 Juni</td><td>Josafat Tidayoh</td><td>Busiri ujung</td></tr>
+                        <tr class="hover:bg-gray-50"><td>10</td><td class="font-semibold text-emerald-600">20 Juni</td><td>Briando Maki</td><td>Nawaripi</td></tr>
+                        <!-- Distributed Schedule (July - Sept) -->
+                        <tr class="hover:bg-gray-50"><td>11</td><td class="font-semibold text-emerald-600">04 Juli</td><td>Novita Tidayoh</td><td>Nawaripi</td></tr>
+                        <tr class="hover:bg-gray-50"><td>12</td><td class="font-semibold text-emerald-600">18 Juli</td><td>Rifky Tidayoh</td><td>Busiri ujung</td></tr>
+                        <tr class="hover:bg-gray-50"><td>13</td><td class="font-semibold text-emerald-600">08 Agustus</td><td>Ribka Sumolang</td><td>Nawaripi</td></tr>
+                        <tr class="hover:bg-gray-50"><td>14</td><td class="font-semibold text-emerald-600">22 Agustus</td><td>Kezia Jacob</td><td>Pastori</td></tr>
+                        <tr class="hover:bg-gray-50"><td>15</td><td class="font-semibold text-emerald-600">05 September</td><td>Citra Tidayoh</td><td>Busiri ujung</td></tr>
+                        <tr class="hover:bg-gray-50"><td>16</td><td class="font-semibold text-emerald-600">19 September</td><td>Gloria Rembet</td><td>Pastori</td></tr>
+                        <tr class="hover:bg-gray-50"><td>17</td><td class="font-semibold text-emerald-600">10 Oktober</td><td>Maria Manampiring</td><td>Busiri ujung</td></tr>
+                        <tr class="hover:bg-gray-50"><td>18</td><td class="font-semibold text-emerald-600">24 Oktober</td><td>Ketua Pelprap</td><td>Sp 4/ Yos Sudarso</td></tr>
+                        <tr class="hover:bg-gray-50"><td>19</td><td class="font-semibold text-emerald-600">07 November</td><td>Delon Tidayoh</td><td>Busiri ujung</td></tr>
+                        <tr class="hover:bg-gray-50"><td>20</td><td class="font-semibold text-emerald-600">21 November</td><td>Pastori</td><td>G.Gereja km 9</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
     <!-- Strategy Section -->
     <section class="max-w-5xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md p-6 md:p-8 border-l-8 border-indigo-600">
-            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi Pelayanan (16 Anggota)</h2>
-            <div class="grid md:grid-cols-2 gap-6 items-center">
-                <div>
-                    <p class="text-gray-600 mb-4 text-justify">
-                        Dengan jumlah anggota 16 orang, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>.
-                        Setiap kegiatan ibadah kreatif dirancang agar setiap individu terlibat aktif, bukan sekadar penonton.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Diskusi Dua Arah (Semua bicara)</li>
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Biaya Logistik Rendah</li>
-                        <li class="flex items-center text-sm text-gray-600"><i class="fas fa-check-circle text-green-500 mr-2"></i> Mobilisasi Mudah (4 Mobil/Motor Konvoi)</li>
-                    </ul>
+            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi Pelayanan</h2>
+             <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mt-4 md:mt-0 mb-4">
+                <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
+                <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2">
+                    <span class="font-semibold text-gray-700">Minggu Genap</span>
+                    <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (15 Orang)</span>
                 </div>
-                <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mt-4 md:mt-0">
-                    <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
-                    <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2">
-                        <span class="font-semibold text-gray-700">Minggu Genap</span>
-                        <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (16 Orang)</span>
-                    </div>
-                    <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
-                        <span class="font-semibold text-gray-500">Minggu Ganjil</span>
-                        <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Ibadah Kategorial Lain</span>
-                    </div>
+                <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
+                    <span class="font-semibold text-gray-500">Minggu Ganjil</span>
+                    <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Ibadah Kategorial Lain</span>
                 </div>
             </div>
+            <p class="text-gray-600 text-sm">Dengan jumlah anggota 15 orang, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>. Diskusi dua arah, logistik rendah, mobilisasi mudah.</p>
         </div>
     </section>
 
     <!-- Members List Section -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Member Items -->
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">1</div>
-                    <span class="font-medium text-gray-700">Rezhky Christian</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">2</div>
-                    <span class="font-medium text-gray-700">Laudya Iroth</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">3</div>
-                    <span class="font-medium text-gray-700">Ribka Sumolang</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">4</div>
-                    <span class="font-medium text-gray-700">Delon Tidayoh</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">5</div>
-                    <span class="font-medium text-gray-700">Rifky Tidayoh</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">6</div>
-                    <span class="font-medium text-gray-700">Tiara Todingbua</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">7</div>
-                    <span class="font-medium text-gray-700">Briando Maki</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">8</div>
-                    <span class="font-medium text-gray-700">Josafat Tidayoh</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">9</div>
-                    <span class="font-medium text-gray-700">Elsya Mokobimbing</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">10</div>
-                    <span class="font-medium text-gray-700">Efraim Sumolang</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">11</div>
-                    <span class="font-medium text-gray-700">Maria Manampiring</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">12</div>
-                    <span class="font-medium text-gray-700">Avrilia Tidayoh</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">13</div>
-                    <span class="font-medium text-gray-700">Citra Tidayoh</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">14</div>
-                    <span class="font-medium text-gray-700">Novita Tidayoh</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">15</div>
-                    <span class="font-medium text-gray-700">Kezia Jacob</span>
-                </div>
-                <div class="member-card p-3 rounded bg-gray-50 border border-gray-100 flex items-center">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mr-3">16</div>
-                    <span class="font-medium text-gray-700">Gloria Rembet</span>
-                </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                <div class="p-2 bg-gray-50 rounded">1. Rezhky Christian</div>
+                <div class="p-2 bg-gray-50 rounded">2. Laudya Iroth</div>
+                <div class="p-2 bg-gray-50 rounded">3. Ribka Sumolang</div>
+                <div class="p-2 bg-gray-50 rounded">4. Delon Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">5. Rifky Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">6. Briando Maki</div>
+                <div class="p-2 bg-gray-50 rounded">7. Josafat Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">8. Elsya Mokobimbing</div>
+                <div class="p-2 bg-gray-50 rounded">9. Efraim Sumolang</div>
+                <div class="p-2 bg-gray-50 rounded">10. Maria Manampiring</div>
+                <div class="p-2 bg-gray-50 rounded">11. Avrilia Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">12. Citra Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">13. Novita Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">14. Kezia Jacob</div>
+                <div class="p-2 bg-gray-50 rounded">15. Gloria Rembet</div>
             </div>
         </div>
     </section>
 
-    <!-- Cleaning Group Section (NEW) -->
+    <!-- Cleaning Group Section -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan Gereja
+                <i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
                 <!-- Kelompok 1 -->
                 <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200">
-                    <div class="flex items-center mb-4">
-                        <span class="w-8 h-8 rounded-full bg-cyan-600 text-white flex items-center justify-center font-bold text-sm mr-3">1</span>
-                        <h3 class="font-bold text-lg text-cyan-900">Kelompok 1</h3>
-                    </div>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-check text-cyan-500 mr-2 text-xs"></i> Laudya Iroth</li>
-                        <li class="flex items-center"><i class="fas fa-check text-cyan-500 mr-2 text-xs"></i> Briando Maki</li>
-                        <li class="flex items-center"><i class="fas fa-check text-cyan-500 mr-2 text-xs"></i> Gloria Rembet</li>
-                        <li class="flex items-center"><i class="fas fa-check text-cyan-500 mr-2 text-xs"></i> Rifky Tidayoh</li>
-                        <li class="flex items-center"><i class="fas fa-check text-cyan-500 mr-2 text-xs"></i> Josafat Tidayoh</li>
+                    <h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3>
+                    <ul class="space-y-1 text-sm text-gray-700">
+                        <li>Laudya, Briando, Gloria, Rifky, Josafat</li>
                     </ul>
                 </div>
-
                 <!-- Kelompok 2 -->
                 <div class="bg-teal-50 rounded-lg p-5 border border-teal-200">
-                    <div class="flex items-center mb-4">
-                        <span class="w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-sm mr-3">2</span>
-                        <h3 class="font-bold text-lg text-teal-900">Kelompok 2</h3>
-                    </div>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-check text-teal-500 mr-2 text-xs"></i> Ribka Sumolang</li>
-                        <li class="flex items-center"><i class="fas fa-check text-teal-500 mr-2 text-xs"></i> Delon Tidayoh</li>
-                        <li class="flex items-center"><i class="fas fa-check text-teal-500 mr-2 text-xs"></i> Kezia Jacob</li>
-                        <li class="flex items-center"><i class="fas fa-check text-teal-500 mr-2 text-xs"></i> Elsa Mokobimbing</li>
-                        <li class="flex items-center"><i class="fas fa-check text-teal-500 mr-2 text-xs"></i> Novita Sumolang</li>
+                    <h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3>
+                    <ul class="space-y-1 text-sm text-gray-700">
+                        <li>Ribka, Delon, Kezia, Elsa, Novita</li>
                     </ul>
                 </div>
-
                 <!-- Kelompok 3 -->
                 <div class="bg-blue-50 rounded-lg p-5 border border-blue-200">
-                    <div class="flex items-center mb-4">
-                        <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm mr-3">3</span>
-                        <h3 class="font-bold text-lg text-blue-900">Kelompok 3</h3>
-                    </div>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-xs"></i> Tiara Todingbua</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-xs"></i> Efraim Sumolang</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-xs"></i> Avril Tidayoh</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-xs"></i> Samuel</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-xs"></i> Maria Manampiring</li>
-                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-xs"></i> Citra Tidayoh</li>
+                    <h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3>
+                    <ul class="space-y-1 text-sm text-gray-700">
+                        <li>Efraim, Avril, Samuel, Maria, Citra</li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Calendar Grid -->
+    <!-- Calendar Grid (Abbreviated) -->
     <main class="max-w-6xl mx-auto px-4 py-10">
         <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Timeline Kegiatan <span class="gradient-text">2026</span></h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <!-- Februari -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-pink-500 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">FEBRUARI</h3>
-                    <span class="bg-pink-700 text-pink-100 text-xs px-2 py-1 rounded-full">Kick Off</span>
-                </div>
+        <div class="text-center text-gray-500 italic mb-8">
+            (Lihat Jadwal Ibadah Kunjungan di atas untuk tanggal spesifik)
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+             <div class="bg-white rounded-xl shadow-md overflow-hidden border-2 border-red-500">
+                <div class="bg-red-700 p-4 flex justify-between items-center"><h3 class="text-white font-bold text-lg">DESEMBER</h3><span class="bg-red-900 text-red-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-star text-yellow-400 mr-1"></i>Natal</span></div>
                 <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Valentine</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II (Kreatif)</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-film text-indigo-500 mr-2"></i>Nobar & Diskusi</p>
-                        
-                        <!-- Detail Teknis -->
-                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
-                                <li><strong>Film:</strong> Film pendek rohani (durasi max 30 menit).</li>
-                                <li><strong>Format:</strong> Duduk melingkar (Round Table).</li>
-                                <li><strong>Interaksi:</strong> Siapkan 16 potongan kertas pertanyaan refleksi. Setiap orang ambil 1 dan jawab bergilir.</li>
-                            </ul>
-                        </details>
-                    </div>
+                    <div class="mb-4 border-b pb-3"><p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p><p class="font-bold text-gray-800">Persiapan / Latihan</p></div>
+                    <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-center"><p class="font-bold text-red-800 text-lg">PERAYAAN NATAL</p><details class="mt-2 text-sm cursor-pointer group text-left"><summary class="font-semibold text-red-700 flex justify-between items-center text-xs">Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i></summary><div class="mt-2 text-gray-600 text-xs"><p><strong>Kado:</strong> Kado Silang (min Rp 20.000, bungkus koran).</p></div></details></div>
                 </div>
             </div>
-
-            <!-- Maret (Charity Update) -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-green-400">
-                <div class="bg-green-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">MARET</h3>
-                    <span class="bg-green-800 text-green-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-hand-holding-heart mr-1"></i>Aksi</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Pendalaman Alkitab</p>
-                        <p class="text-xs text-green-600 mt-1 font-semibold"><i class="fas fa-box mr-1"></i>Mulai Pengumpulan Donasi</p>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-lg border border-green-200">
-                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial I (Pertemuan II)</p>
-                        <p class="font-bold text-gray-800 text-sm">Kunjungan Kasih</p>
-                        
-                        <details class="mt-2 text-sm cursor-pointer group">
-                            <summary class="font-semibold text-green-700 flex justify-between items-center text-xs">
-                                Teknis Donasi <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <div class="mt-2 text-gray-600 text-xs">
-                                <p><strong>Mekanisme:</strong> Kotak donasi ditaruh di depan pintu masuk *sejak doa pembukaan* setiap ibadah di bulan ini.</p>
-                                <p class="mt-1"><strong>Target:</strong> 16 Anggota bawa min. 2 potong baju layak pakai.</p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- April -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-yellow-500 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">APRIL</h3>
-                    <span class="bg-yellow-700 text-yellow-100 text-xs px-2 py-1 rounded-full">Paskah</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-video text-indigo-500 mr-2"></i>Nobar Paskah</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-egg text-yellow-600 mr-2"></i>Perayaan Paskah</p>
-                        
-                        <!-- Detail Teknis -->
-                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
-                                <li><strong>Aktivitas:</strong> Mencari Telur di area gereja.</li>
-                                <li><strong>Logistik:</strong> Cukup 2 Lusin telur plastik. Pastikan 16 orang dapat semua.</li>
-                                <li><strong>Hadiah:</strong> Cokelat sederhana.</li>
-                            </ul>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mei -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-teal-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">MEI</h3>
-                    <span class="bg-teal-800 text-teal-100 text-xs px-2 py-1 rounded-full">Growth</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Raya</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-puzzle-piece text-teal-500 mr-2"></i>Bible Games</p>
-                        
-                         <!-- Detail Teknis -->
-                         <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
-                                <li><strong>Tujuan:</strong> Mengasah pengetahuan Alkitab dengan cara yang menyenangkan.</li>
-                                <li><strong>Format:</strong> Bebas (bisa tim/individu) menyesuaikan situasi dan persiapan panitia.</li>
-                            </ul>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Juni (Worship Night) -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-l-4 border-purple-500">
-                <div class="bg-purple-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">JUNI</h3>
-                    <span class="bg-purple-800 text-purple-100 text-xs px-2 py-1 rounded-full">Skill</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Raya</p>
-                    </div>
-                    <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
-                        <p class="font-bold text-gray-800 text-sm">WORSHIP NIGHT</p>
-                        
-                        <details class="mt-2 text-sm cursor-pointer group">
-                            <summary class="font-semibold text-purple-700 flex justify-between items-center text-xs">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <div class="mt-2 text-gray-600 text-xs">
-                                <p><strong>Fokus:</strong> Pelatihan Liturgi untuk 16 orang.</p>
-                                <p class="mt-1">Setiap anggota <strong>WAJIB</strong> mencoba peran pelayanan (WL/Singer/Usher/Kolektan) secara bergantian dalam simulasi ini.</p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Juli (Fellowship) -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 opacity-90">
-                <div class="bg-gray-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">JULI</h3>
-                    <span class="bg-gray-800 text-gray-100 text-xs px-2 py-1 rounded-full">Santai</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Evaluasi Tengah Tahun</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800">Makan Bersama</p>
-                         <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-gray-700 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <p class="mt-2 text-gray-600 text-xs">
-                                Untuk 16 orang, cukup pesan makanan/potluck di teras gereja. Fokus membangun keakraban tanpa agenda berat.
-                            </p>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Agustus -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-red-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">AGUSTUS</h3>
-                    <span class="bg-red-800 text-red-100 text-xs px-2 py-1 rounded-full">HUT RI</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-flag text-red-500 mr-2"></i>Ibadah Kemerdekaan</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-running text-orange-500 mr-2"></i>Games 17-an</p>
-                        
-                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
-                                <li><strong>Tujuan:</strong> Membangun kekompakan tim dan semangat nasionalisme.</li>
-                                <li><strong>Jenis Permainan:</strong> Bebas (Indoor/Outdoor) menyesuaikan kondisi dan kreativitas panitia.</li>
-                                <li><strong>Biaya:</strong> Murah meriah (Hadiah kerupuk/snack).</li>
-                            </ul>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- September (Charity Update) -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-green-400">
-                <div class="bg-green-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">SEPTEMBER</h3>
-                    <span class="bg-green-800 text-green-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-globe-asia mr-1"></i>Misi</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Misi</p>
-                        <p class="text-xs text-green-600 mt-1 font-semibold"><i class="fas fa-box mr-1"></i>Start Donasi Tahap 2</p>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-lg border border-green-200">
-                        <p class="text-xs text-green-700 uppercase font-bold mb-1">Aksi Sosial II (Pertemuan II)</p>
-                        <p class="font-bold text-gray-800 text-sm">Bakti Sosial Lingkungan</p>
-                        
-                        <details class="mt-2 text-sm cursor-pointer group">
-                            <summary class="font-semibold text-green-700 flex justify-between items-center text-xs">
-                                Teknis Pelaksanaan <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <div class="mt-2 text-gray-600 text-xs">
-                                <p><strong>Lokasi:</strong> Bersih-bersih halaman gereja/selokan warga sekitar.</p>
-                                <p class="mt-1"><strong>Logistik:</strong> Bawa sapu lidi & kantong sampah masing-masing. Dengan 16 orang, area bisa sangat bersih.</p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Oktober -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-indigo-600 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">OKTOBER</h3>
-                    <span class="bg-indigo-800 text-indigo-100 text-xs px-2 py-1 rounded-full">Sejarah</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-book-open text-indigo-500 mr-2"></i>Nobar Dokumenter</p>
-                        
-                        <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <p class="mt-2 text-gray-600 text-xs">
-                                Nonton video pendek tentang tokoh Reformasi di YouTube (15 menit), lalu sharing: "Apa yang perlu direformasi dari diri kita?"
-                            </p>
-                        </details>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800">Ibadah Raya</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- November -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300">
-                <div class="bg-orange-500 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">NOVEMBER</h3>
-                    <span class="bg-orange-700 text-orange-100 text-xs px-2 py-1 rounded-full">Syukur</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Ibadah Akhir Tahun</p>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan II</p>
-                        <p class="font-bold text-gray-800"><i class="fas fa-comments text-orange-500 mr-2"></i>Sharing Games</p>
-                        
-                         <details class="mt-2 bg-gray-50 p-2 rounded border text-sm cursor-pointer group">
-                            <summary class="font-semibold text-indigo-600 flex justify-between items-center">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <ul class="mt-2 text-gray-600 space-y-1 list-disc ml-4 text-xs">
-                                <li><strong>Fokus:</strong> Aktivitas ringan yang memancing setiap anggota untuk saling terbuka dan mengucap syukur.</li>
-                                <li><strong>Format:</strong> Menyesuaikan kreativitas pemimpin acara.</li>
-                            </ul>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Desember -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover transition-all duration-300 border-2 border-red-500">
-                <div class="bg-red-700 p-4 flex justify-between items-center">
-                    <h3 class="text-white font-bold text-lg">DESEMBER</h3>
-                    <span class="bg-red-900 text-red-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-star text-yellow-400 mr-1"></i>Natal</span>
-                </div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3">
-                        <p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p>
-                        <p class="font-bold text-gray-800">Persiapan / Latihan</p>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-center">
-                        <p class="font-bold text-red-800 text-lg">PERAYAAN NATAL</p>
-                        <p class="text-sm text-gray-600">Ibadah & Tukar Kado</p>
-                        
-                        <details class="mt-2 text-sm cursor-pointer group text-left">
-                            <summary class="font-semibold text-red-700 flex justify-between items-center text-xs">
-                                Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i>
-                            </summary>
-                            <div class="mt-2 text-gray-600 text-xs">
-                                <p><strong>Kado:</strong> Wajib bawa kado silang min. harga Rp 20.000 dibungkus koran.</p>
-                                <p class="mt-1">Karena jumlah 16 orang (genap), tukar kado sistem cabut nomor undian akan berjalan lancar tanpa ada yang tidak dapat pasangan.</p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </main>
 
+    <!-- Running Text Container -->
+    <div class="ticker-wrap" id="ticker-container">
+        <div class="ticker">
+            <div class="ticker-item" id="ticker-text">
+                <!-- Text will be injected here via Javascript -->
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 text-center">
+    <footer class="bg-gray-800 text-white py-8 text-center mt-8">
         <div class="max-w-6xl mx-auto px-4">
             <p class="font-semibold text-lg">PELPRAP IMANUEL 2026</p>
             <p class="text-gray-400 text-sm mt-1">Ketua: Rezhky Christian</p>
-            <div class="mt-4 text-xs text-gray-500">
-                Disusun Khusus untuk Komunitas 16 Anggota
-            </div>
         </div>
     </footer>
 
+    <!-- JAVASCRIPT FOR RUNNING TEXT LOGIC -->
+    <script>
+        // Updated Data Schedule (Distributed)
+        const scheduleData = [
+            { date: '2026-02-07', host: 'Pastori', loc: 'G. Gereja Km.9' },
+            { date: '2026-02-21', host: 'Laudya Iroth', loc: 'Kilo 7' },
+            { date: '2026-03-07', host: 'Ribka Sumolang', loc: 'Nawaripi' },
+            { date: '2026-03-21', host: 'Elsya Mokobimbing', loc: 'Pastori' },
+            { date: '2026-04-04', host: 'Efraim Sumolang', loc: 'Nawaripi' },
+            { date: '2026-04-18', host: 'Avrilia Tidayoh', loc: 'Busiri ujung' },
+            { date: '2026-05-09', host: 'Gloria Rembet', loc: 'Pastori' },
+            { date: '2026-05-14', host: 'Doa 10 Malam', loc: 'Pentakosta' }, 
+            { date: '2026-06-06', host: 'Josafat Tidayoh', loc: 'Busiri ujung' },
+            { date: '2026-06-20', host: 'Briando Maki', loc: 'Nawaripi' },
+            { date: '2026-07-04', host: 'Novita Tidayoh', loc: 'Nawaripi' },
+            { date: '2026-07-18', host: 'Rifky Tidayoh', loc: 'Busiri ujung' },
+            { date: '2026-08-08', host: 'Ribka Sumolang', loc: 'Nawaripi' },
+            { date: '2026-08-22', host: 'Kezia Jacob', loc: 'Pastori' },
+            { date: '2026-09-05', host: 'Citra Tidayoh', loc: 'Busiri ujung' },
+            { date: '2026-09-19', host: 'Gloria Rembet', loc: 'Pastori' },
+            { date: '2026-10-10', host: 'Maria Manampiring', loc: 'Busiri ujung' },
+            { date: '2026-10-24', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' },
+            { date: '2026-11-07', host: 'Delon Tidayoh', loc: 'Busiri ujung' },
+            { date: '2026-11-21', host: 'Pastori', loc: 'G.Gereja km 9' }
+        ];
+
+        function checkSchedule() {
+            const today = new Date();
+            let upcomingEvent = null;
+
+            for (let event of scheduleData) {
+                const eventDate = new Date(event.date);
+                if (eventDate >= today) {
+                    upcomingEvent = { ...event, eventDateObj: eventDate };
+                    break; 
+                }
+            }
+
+            if (upcomingEvent) {
+                const timeDiff = upcomingEvent.eventDateObj.getTime() - today.getTime();
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                if (daysDiff <= 7 && daysDiff >= 0) {
+                    const tickerContainer = document.getElementById('ticker-container');
+                    const tickerText = document.getElementById('ticker-text');
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const dateString = upcomingEvent.eventDateObj.toLocaleDateString('id-ID', options);
+
+                    let message = `🔔 PENGUMUMAN: Ibadah PELPRAP selanjutnya: ${dateString}. Tempat: ${upcomingEvent.loc} (Host: ${upcomingEvent.host}). Siapkan diri! 🔔`;
+                    if(daysDiff === 0) {
+                         message = `🔥 HARI INI! Ibadah PELPRAP di ${upcomingEvent.loc} (Host: ${upcomingEvent.host}). 🔥`;
+                    }
+                    tickerText.innerText = message;
+                    tickerContainer.style.display = 'block'; 
+                }
+            }
+        }
+        document.addEventListener('DOMContentLoaded', checkSchedule);
+    </script>
 </body>
 </html>
+
 
 
