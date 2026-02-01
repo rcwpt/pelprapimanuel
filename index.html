@@ -51,12 +51,19 @@
         /* Schedule Card Specific */
         .schedule-card { transition: all 0.3s ease; border-left-width: 6px; }
         .schedule-card:hover { transform: scale(1.02); }
+
+        /* Countdown Styles */
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body class="text-gray-800">
 
     <!-- Header Section -->
-    <header class="hero-pattern text-white py-12 px-4 shadow-lg mb-8">
+    <header class="hero-pattern text-white py-12 px-4 shadow-lg mb-8 relative">
         <div class="max-w-6xl mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">PELPRAP IMANUEL</h1>
             <p class="text-xl md:text-2xl font-light opacity-90">Program Kerja & Kalender Kegiatan 2026</p>
@@ -65,6 +72,46 @@
             </div>
         </div>
     </header>
+
+    <!-- COUNTDOWN SECTION (NEW) -->
+    <section id="countdown-section" class="max-w-4xl mx-auto px-4 -mt-12 mb-12 relative z-20 hidden">
+        <div class="bg-indigo-600 rounded-xl shadow-2xl p-6 text-white text-center border-4 border-indigo-400">
+            <h3 class="text-sm uppercase tracking-widest font-bold text-indigo-200 mb-2">Menuju Ibadah Selanjutnya</h3>
+            <div id="countdown-info" class="mb-4">
+                <h2 class="text-2xl md:text-3xl font-bold" id="next-event-host">Host: ...</h2>
+                <p class="text-indigo-200" id="next-event-loc"><i class="fas fa-map-marker-alt mr-2"></i>...</p>
+                <p class="text-sm mt-1 text-white font-semibold" id="next-event-date">...</p>
+            </div>
+            
+            <!-- Timer Grid -->
+            <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-lg mx-auto" id="timer-grid">
+                <div class="countdown-box rounded-lg p-2 md:p-3">
+                    <span class="block text-2xl md:text-4xl font-bold" id="cd-days">00</span>
+                    <span class="text-xs uppercase">Hari</span>
+                </div>
+                <div class="countdown-box rounded-lg p-2 md:p-3">
+                    <span class="block text-2xl md:text-4xl font-bold" id="cd-hours">00</span>
+                    <span class="text-xs uppercase">Jam</span>
+                </div>
+                <div class="countdown-box rounded-lg p-2 md:p-3">
+                    <span class="block text-2xl md:text-4xl font-bold" id="cd-minutes">00</span>
+                    <span class="text-xs uppercase">Menit</span>
+                </div>
+                <div class="countdown-box rounded-lg p-2 md:p-3">
+                    <span class="block text-2xl md:text-4xl font-bold" id="cd-seconds">00</span>
+                    <span class="text-xs uppercase">Detik</span>
+                </div>
+            </div>
+
+            <!-- Pesan Hari H (Hidden by default) -->
+            <div id="today-message" class="hidden py-4">
+                <h2 class="text-3xl md:text-4xl font-extrabold animate-pulse text-yellow-300">
+                    <i class="fas fa-bell mr-2"></i>HARI INI!
+                </h2>
+                <p class="text-lg mt-2">Jangan lupa hadir tepat waktu.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Renungan Harian Section -->
     <section class="max-w-6xl mx-auto px-4 py-8">
@@ -509,7 +556,7 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT FOR RUNNING TEXT LOGIC -->
+    <!-- JAVASCRIPT FOR RUNNING TEXT & COUNTDOWN LOGIC -->
     <script>
         const scheduleData = [
             { date: '2026-02-07', host: 'Pastori', loc: 'G. Gereja Km.9' },
@@ -534,12 +581,17 @@
             { date: '2026-11-21', host: 'Pastori', loc: 'G.Gereja km 9' }
         ];
 
-        function checkSchedule() {
+        function updateCountdown() {
             const today = new Date();
             let upcomingEvent = null;
 
+            // Find next event
             for (let event of scheduleData) {
-                const eventDate = new Date(event.date);
+                // Ensure correct date parsing by replacing spaces or using standardized format if needed
+                const eventDate = new Date(event.date); 
+                // Set event time to 17:00 (5 PM) by default for calculation accuracy
+                eventDate.setHours(17, 0, 0, 0); 
+
                 if (eventDate >= today) {
                     upcomingEvent = { ...event, eventDateObj: eventDate };
                     break; 
@@ -547,27 +599,80 @@
             }
 
             if (upcomingEvent) {
-                const timeDiff = upcomingEvent.eventDateObj.getTime() - today.getTime();
-                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                // UPDATE COUNTDOWN SECTION
+                const countdownSection = document.getElementById('countdown-section');
+                const nextHost = document.getElementById('next-event-host');
+                const nextLoc = document.getElementById('next-event-loc');
+                const nextDate = document.getElementById('next-event-date');
+                const timerGrid = document.getElementById('timer-grid');
+                const todayMessage = document.getElementById('today-message');
 
+                // Fill Info
+                if(countdownSection.classList.contains('hidden')) {
+                    countdownSection.classList.remove('hidden');
+                }
+                nextHost.innerText = `Host: ${upcomingEvent.host}`;
+                nextLoc.innerHTML = `<i class="fas fa-map-marker-alt mr-2"></i>${upcomingEvent.loc}`;
+                
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                nextDate.innerText = upcomingEvent.eventDateObj.toLocaleDateString('id-ID', options);
+
+                // Calculate Time
+                const timeDiff = upcomingEvent.eventDateObj.getTime() - today.getTime();
+                
+                if (timeDiff > 0) {
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                    // Update DOM
+                    document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                    document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                    document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+                    document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+
+                    // Logic: If event is TODAY (less than 24h but same day check)
+                    // Simple check: is it same date?
+                    const isToday = today.toDateString() === upcomingEvent.eventDateObj.toDateString();
+                    if(isToday) {
+                        timerGrid.classList.add('hidden');
+                        todayMessage.classList.remove('hidden');
+                    } else {
+                        timerGrid.classList.remove('hidden');
+                        todayMessage.classList.add('hidden');
+                    }
+
+                } else {
+                    // Event Passed just now
+                    timerGrid.classList.add('hidden');
+                    todayMessage.classList.remove('hidden');
+                }
+
+                // UPDATE TICKER (Running Text)
+                // Logic: Show only if 7 days or less remaining
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
                 if (daysDiff <= 7 && daysDiff >= 0) {
                     const tickerContainer = document.getElementById('ticker-container');
                     const tickerText = document.getElementById('ticker-text');
-                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    const dateString = upcomingEvent.eventDateObj.toLocaleDateString('id-ID', options);
-
-                    let message = `🔔 PENGUMUMAN: Ibadah PELPRAP selanjutnya: ${dateString}. Tempat: ${upcomingEvent.loc} (Host: ${upcomingEvent.host}). Siapkan diri! 🔔`;
-                    if(daysDiff === 0) {
-                         message = `🔥 HARI INI! Ibadah PELPRAP di ${upcomingEvent.loc} (Host: ${upcomingEvent.host}). 🔥`;
+                    
+                    let message = `🔔 PENGUMUMAN PENTING: Ibadah PELPRAP selanjutnya akan diadakan pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Host: ${upcomingEvent.host}). Persiapkan diri rekan-rekan! 🔔`;
+                    
+                    if(daysDiff === 0 || today.toDateString() === upcomingEvent.eventDateObj.toDateString()) {
+                         message = `🔥 HARI INI! Ibadah PELPRAP di ${upcomingEvent.loc} (Host: ${upcomingEvent.host}). Jangan sampai terlambat! 🔥`;
                     }
+
                     tickerText.innerText = message;
                     tickerContainer.style.display = 'block'; 
                 }
             }
         }
-        document.addEventListener('DOMContentLoaded', checkSchedule);
+
+        // Run initially and then every second
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
     </script>
 </body>
 </html>
-
-
