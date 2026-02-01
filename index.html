@@ -9,10 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 60px; /* Space for ticker */ }
+        
+        /* Updated Hero Background with Higher Transparency & Fixed Attachment */
         .hero-pattern {
-            background-color: #4f46e5;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%236366f1' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
+            /* Alpha values reduced to 0.4 and 0.6 to make image clearer */
+            background-image: linear-gradient(to bottom, rgba(79, 70, 229, 0.4), rgba(49, 46, 129, 0.6)), url('https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
         }
+
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .gradient-text {
             background: linear-gradient(to right, #4f46e5, #9333ea);
@@ -62,20 +68,27 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Header Section -->
-    <header class="hero-pattern text-white py-12 px-4 shadow-lg mb-8 relative">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">PELPRAP IMANUEL</h1>
-            <p class="text-xl md:text-2xl font-light opacity-90">Program Kerja & Kalender Kegiatan 2026</p>
-            <div class="mt-4 bg-white/10 inline-block px-4 py-2 rounded-lg backdrop-blur-md">
-                <i class="fas fa-users mr-2"></i>Komunitas: 15 Anggota Aktif
+    <!-- Header Section with Expanded Height and Clearer Image -->
+    <header class="hero-pattern text-white min-h-[80vh] flex flex-col justify-center items-center px-4 shadow-xl mb-8 relative transition-all duration-500">
+        <div class="max-w-6xl mx-auto text-center relative z-10 p-6 rounded-xl bg-black/20 backdrop-blur-sm">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">PELPRAP IMANUEL</h1>
+            <p class="text-xl md:text-3xl font-light opacity-100 mb-8 drop-shadow-md">Program Kerja & Kalender Kegiatan 2026</p>
+            
+            <div class="inline-flex items-center bg-indigo-600/80 px-8 py-3 rounded-full backdrop-blur-md border border-white/20 shadow-2xl hover:bg-indigo-600 transition duration-300">
+                <i class="fas fa-users mr-3 text-yellow-300 text-xl"></i>
+                <span class="font-bold tracking-wide text-lg">Komunitas: 15 Anggota Aktif</span>
             </div>
+        </div>
+        
+        <!-- Decorative arrow to encourage scrolling -->
+        <div class="absolute bottom-8 animate-bounce text-white/70">
+            <i class="fas fa-chevron-down text-3xl"></i>
         </div>
     </header>
 
-    <!-- COUNTDOWN SECTION (NEW) -->
-    <section id="countdown-section" class="max-w-4xl mx-auto px-4 -mt-12 mb-12 relative z-20 hidden">
-        <div class="bg-indigo-600 rounded-xl shadow-2xl p-6 text-white text-center border-4 border-indigo-400">
+    <!-- COUNTDOWN SECTION -->
+    <section id="countdown-section" class="max-w-4xl mx-auto px-4 -mt-20 mb-16 relative z-20 hidden">
+        <div class="bg-indigo-600/95 backdrop-blur rounded-xl shadow-2xl p-6 text-white text-center border-4 border-indigo-400/50">
             <h3 class="text-sm uppercase tracking-widest font-bold text-indigo-200 mb-2">Menuju Ibadah Selanjutnya</h3>
             <div id="countdown-info" class="mb-4">
                 <h2 class="text-2xl md:text-3xl font-bold" id="next-event-host">Host: ...</h2>
@@ -83,7 +96,6 @@
                 <p class="text-sm mt-1 text-white font-semibold" id="next-event-date">...</p>
             </div>
             
-            <!-- Timer Grid -->
             <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-lg mx-auto" id="timer-grid">
                 <div class="countdown-box rounded-lg p-2 md:p-3">
                     <span class="block text-2xl md:text-4xl font-bold" id="cd-days">00</span>
@@ -103,7 +115,6 @@
                 </div>
             </div>
 
-            <!-- Pesan Hari H (Hidden by default) -->
             <div id="today-message" class="hidden py-4">
                 <h2 class="text-3xl md:text-4xl font-extrabold animate-pulse text-yellow-300">
                     <i class="fas fa-bell mr-2"></i>HARI INI!
@@ -211,7 +222,7 @@
         </div>
     </section>
 
-    <!-- SCHEDULE SECTION (CARDS LAYOUT - NEW DESIGN) -->
+    <!-- SCHEDULE SECTION (CARDS LAYOUT) -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
@@ -300,7 +311,7 @@
                 </div>
             </div>
             
-            <!-- SPECIAL CARD: DOA 10 MALAM (FIXED) -->
+            <!-- SPECIAL CARD: DOA 10 MALAM -->
             <div class="bg-orange-50 rounded-xl shadow-lg overflow-hidden schedule-card border-orange-500 flex flex-col">
                 <div class="bg-orange-500 text-white p-3 flex justify-between items-center">
                     <span class="font-bold text-lg">14-23 Mei</span>
@@ -447,22 +458,48 @@
         </div>
     </section>
 
-    <!-- Strategy Section -->
+    <!-- Strategy Section (With New Image Gallery) -->
     <section class="max-w-5xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md p-6 md:p-8 border-l-8 border-indigo-600">
-            <h2 class="text-2xl font-bold text-indigo-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Strategi Pelayanan</h2>
-             <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mt-4 md:mt-0 mb-4">
-                <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
-                <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2">
-                    <span class="font-semibold text-gray-700">Minggu Genap</span>
-                    <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (15 Orang)</span>
+            <h2 class="text-2xl font-bold text-indigo-900 mb-6"><i class="fas fa-bullseye mr-2"></i>Strategi Pelayanan & Momen Kebersamaan</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-start mb-8">
+                <!-- Text Content -->
+                <div>
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mb-4">
+                        <h3 class="font-bold text-indigo-800 mb-2">Pola Rotasi Bulanan</h3>
+                        <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-2">
+                            <span class="font-semibold text-gray-700">Minggu Genap</span>
+                            <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">PELPRAP (15 Orang)</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
+                            <span class="font-semibold text-gray-500">Minggu Ganjil</span>
+                            <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Ibadah Kategorial Lain</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm text-justify">
+                        Dengan jumlah anggota 15 orang, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>. Kita fokus pada diskusi dua arah, interaksi yang hangat, dan mobilisasi yang mudah untuk menjangkau setiap anggota.
+                    </p>
                 </div>
-                <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm opacity-60">
-                    <span class="font-semibold text-gray-500">Minggu Ganjil</span>
-                    <span class="bg-gray-400 text-white text-xs px-2 py-1 rounded">Ibadah Kategorial Lain</span>
+
+                <!-- Image Gallery (New Addition) -->
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="relative overflow-hidden rounded-lg shadow-md group h-48">
+                        <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(1).jpeg" alt="Kebersamaan Pelprap" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                        <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black/70 to-transparent w-full p-2">
+                            <p class="text-white text-xs font-semibold">Kebersamaan & Ibadah</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative overflow-hidden rounded-lg shadow-md group h-32">
+                            <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg" alt="Momen Seru" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="relative overflow-hidden rounded-lg shadow-md group h-32">
+                            <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg" alt="Pelayanan" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p class="text-gray-600 text-sm">Dengan jumlah anggota 15 orang, strategi kita bergeser dari "Mass Event" menjadi <strong>"Deep Connection"</strong>. Diskusi dua arah, logistik rendah, mobilisasi mudah.</p>
         </div>
     </section>
 
@@ -471,21 +508,21 @@
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                <div class="p-2 bg-gray-50 rounded">1. Rezhky Christian</div>
-                <div class="p-2 bg-gray-50 rounded">2. Laudya Iroth</div>
-                <div class="p-2 bg-gray-50 rounded">3. Ribka Sumolang</div>
-                <div class="p-2 bg-gray-50 rounded">4. Delon Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">5. Rifky Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">6. Briando Maki</div>
-                <div class="p-2 bg-gray-50 rounded">7. Josafat Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">8. Elsya Mokobimbing</div>
-                <div class="p-2 bg-gray-50 rounded">9. Efraim Sumolang</div>
-                <div class="p-2 bg-gray-50 rounded">10. Maria Manampiring</div>
-                <div class="p-2 bg-gray-50 rounded">11. Avrilia Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">12. Citra Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">13. Novita Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">14. Kezia Jacob</div>
-                <div class="p-2 bg-gray-50 rounded">15. Gloria Rembet</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">1. Rezhky Christian</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">2. Laudya Iroth</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">3. Ribka Sumolang</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">4. Delon Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">5. Rifky Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">6. Briando Maki</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">7. Josafat Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">8. Elsya Mokobimbing</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">9. Efraim Sumolang</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">10. Maria Manampiring</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">11. Avrilia Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">12. Citra Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">13. Novita Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">14. Kezia Jacob</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">15. Gloria Rembet</div>
             </div>
         </div>
     </section>
@@ -498,24 +535,36 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Kelompok 1 -->
-                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200">
-                    <h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3>
-                    <ul class="space-y-1 text-sm text-gray-700">
-                        <li>Laudya, Briando, Gloria, Rifky, Josafat</li>
+                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200 hover:shadow-lg transition">
+                    <h3 class="font-bold text-lg text-cyan-900 mb-2 border-b border-cyan-200 pb-2">Kelompok 1</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Laudya Iroth</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Briando Maki</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Gloria Rembet</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Rifky Tidayoh</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Josafat Tidayoh</li>
                     </ul>
                 </div>
                 <!-- Kelompok 2 -->
-                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200">
-                    <h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3>
-                    <ul class="space-y-1 text-sm text-gray-700">
-                        <li>Ribka, Delon, Kezia, Elsa, Novita</li>
+                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200 hover:shadow-lg transition">
+                    <h3 class="font-bold text-lg text-teal-900 mb-2 border-b border-teal-200 pb-2">Kelompok 2</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Ribka Sumolang</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Delon Tidayoh</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Kezia Jacob</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Elsya Mokobimbing</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Novita Tidayoh</li>
                     </ul>
                 </div>
                 <!-- Kelompok 3 -->
-                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200">
-                    <h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3>
-                    <ul class="space-y-1 text-sm text-gray-700">
-                        <li>Efraim, Avril, Samuel, Maria, Citra</li>
+                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200 hover:shadow-lg transition">
+                    <h3 class="font-bold text-lg text-blue-900 mb-2 border-b border-blue-200 pb-2">Kelompok 3</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Efraim Sumolang</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Avrilia Tidayoh</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Samuel</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Maria Manampiring</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Citra Tidayoh</li>
                     </ul>
                 </div>
             </div>
