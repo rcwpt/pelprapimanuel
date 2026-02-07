@@ -42,13 +42,11 @@
             pointer-events: none;
             position: relative;
         }
-        /* Coret teks pada event yang sudah lewat */
         .past-event h3, .past-event span, .past-event p, .past-event div {
             text-decoration: line-through;
             text-decoration-color: #ef4444;
             text-decoration-thickness: 2px;
         }
-        /* Label "Selesai" */
         .past-event::after {
             content: "SELESAI";
             position: absolute;
@@ -65,19 +63,19 @@
             text-decoration: none !important;
         }
 
-        /* NEWS TICKER STYLE (Headline Berita) */
+        /* NEWS TICKER STYLE */
         .ticker-wrap {
             position: fixed;
             bottom: 0;
             width: 100%;
             overflow: hidden;
             height: 40px;
-            background-color: #1e293b; /* Dark Slate Blue */
+            background-color: #1e293b;
             padding-left: 100%;
             box-sizing: content-box;
             z-index: 9999;
-            border-top: 2px solid #fbbf24; /* Amber border */
-            display: block; /* Always show */
+            border-top: 2px solid #fbbf24;
+            display: block;
             box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
         }
         .ticker {
@@ -169,7 +167,7 @@
         </div>
     </section>
 
-    <!-- KABAR PELPRAP (AUTO CAROUSEL - FIXED IMAGE SIZE) -->
+    <!-- KABAR PELPRAP (AUTO CAROUSEL - FIXED IMAGE SIZE & LAYOUT) -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
@@ -202,28 +200,35 @@
                     </div>
                 </div>
 
-                <!-- SLIDE 2: KEBERSAMAAN -->
+                <!-- SLIDE 2: KEBERSAMAAN (Updated Layout) -->
                 <div class="kabar-slide relative w-full h-full bg-gray-900">
-                    <div class="flex flex-col h-full">
-                        <div class="h-2/3 grid grid-cols-2 bg-black">
-                            <div class="relative border-r border-gray-800 overflow-hidden">
+                    <div class="flex flex-col md:flex-row h-full">
+                        <!-- Image Area: Grid 2x2 for desktop to look cleaner -->
+                        <div class="h-2/3 md:h-full md:w-3/5 bg-black grid grid-cols-2 grid-rows-2">
+                            <!-- Image 1 (Big Left) -->
+                            <div class="row-span-2 relative border-r border-gray-800 overflow-hidden">
                                 <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(1).jpeg" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm">
                                 <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(1).jpeg" class="relative z-10 w-full h-full object-contain p-1">
                             </div>
-                            <div class="grid grid-rows-2">
-                                <div class="relative border-b border-gray-800 overflow-hidden">
-                                    <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm">
-                                    <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg" class="relative z-10 w-full h-full object-contain p-1">
-                                </div>
-                                <div class="relative overflow-hidden">
-                                    <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm">
-                                    <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg" class="relative z-10 w-full h-full object-contain p-1">
-                                </div>
+                            <!-- Image 2 (Top Right) -->
+                            <div class="relative border-b border-gray-800 overflow-hidden">
+                                <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm">
+                                <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg" class="relative z-10 w-full h-full object-contain p-1">
+                            </div>
+                            <!-- Image 3 (Bottom Right) -->
+                            <div class="relative overflow-hidden">
+                                <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm">
+                                <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg" class="relative z-10 w-full h-full object-contain p-1">
                             </div>
                         </div>
-                        <div class="h-1/3 bg-indigo-900 p-6 flex flex-col justify-center text-center">
-                            <h3 class="text-xl font-bold text-white mb-1">Momen Kebersamaan</h3>
-                            <p class="text-indigo-200 text-sm">Sukacita dalam persekutuan dan pelayanan bersama.</p>
+                        
+                        <!-- Text Area -->
+                        <div class="h-1/3 md:h-full md:w-2/5 bg-indigo-900 p-6 flex flex-col justify-center text-center md:text-left bg-gradient-to-b from-indigo-800 to-indigo-900 md:bg-gradient-to-l">
+                            <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3 mx-auto md:mx-0 uppercase tracking-wider">Dokumentasi</span>
+                            <h3 class="text-xl md:text-3xl font-bold text-white mb-2">Momen Kebersamaan</h3>
+                            <p class="text-indigo-200 text-sm leading-relaxed">
+                                Potret sukacita dalam setiap persekutuan dan pelayanan yang kita lakukan bersama sebagai satu tubuh Kristus.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -289,7 +294,7 @@
         </div>
     </section>
 
-    <!-- SCHEDULE SECTION (CARDS LAYOUT - FIXED DATE STRIKE) -->
+    <!-- SCHEDULE SECTION -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
@@ -332,70 +337,23 @@
         </div>
     </section>
 
-    <!-- Members List Section -->
+    <!-- Members & Cleaning -->
     <section class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500">
+        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500 mb-8">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">1. Rezhky Christian</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">2. Laudya Iroth</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">3. Ribka Sumolang</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">4. Delon Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">5. Rifky Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">6. Briando Maki</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">7. Josafat Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">8. Elsya Mokobimbing</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">9. Efraim Sumolang</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">10. Maria Manampiring</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">11. Avrilia Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">12. Citra Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">13. Novita Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">14. Kezia Jacob</div>
-                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">15. Gloria Rembet</div>
+                <div class="p-2 bg-gray-50 rounded">1. Rezhky Christian</div><div class="p-2 bg-gray-50 rounded">2. Laudya Iroth</div><div class="p-2 bg-gray-50 rounded">3. Ribka Sumolang</div><div class="p-2 bg-gray-50 rounded">4. Delon Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">5. Rifky Tidayoh</div><div class="p-2 bg-gray-50 rounded">6. Briando Maki</div><div class="p-2 bg-gray-50 rounded">7. Josafat Tidayoh</div><div class="p-2 bg-gray-50 rounded">8. Elsya Mokobimbing</div>
+                <div class="p-2 bg-gray-50 rounded">9. Efraim Sumolang</div><div class="p-2 bg-gray-50 rounded">10. Maria Manampiring</div><div class="p-2 bg-gray-50 rounded">11. Avrilia Tidayoh</div><div class="p-2 bg-gray-50 rounded">12. Citra Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded">13. Novita Tidayoh</div><div class="p-2 bg-gray-50 rounded">14. Kezia Jacob</div><div class="p-2 bg-gray-50 rounded">15. Gloria Rembet</div>
             </div>
         </div>
-    </section>
-
-    <!-- Cleaning Group Section -->
-    <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan
-            </h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Kelompok 1 -->
-                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200 hover:shadow-lg transition">
-                    <h3 class="font-bold text-lg text-cyan-900 mb-2 border-b border-cyan-200 pb-2">Kelompok 1</h3>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Laudya Iroth</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Briando Maki</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Gloria Rembet</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Rifky Tidayoh</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>Josafat Tidayoh</li>
-                    </ul>
-                </div>
-                <!-- Kelompok 2 -->
-                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200 hover:shadow-lg transition">
-                    <h3 class="font-bold text-lg text-teal-900 mb-2 border-b border-teal-200 pb-2">Kelompok 2</h3>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Ribka Sumolang</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Delon Tidayoh</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Kezia Jacob</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Elsya Mokobimbing</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-teal-400 rounded-full mr-2"></span>Novita Tidayoh</li>
-                    </ul>
-                </div>
-                <!-- Kelompok 3 -->
-                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200 hover:shadow-lg transition">
-                    <h3 class="font-bold text-lg text-blue-900 mb-2 border-b border-blue-200 pb-2">Kelompok 3</h3>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Efraim Sumolang</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Avrilia Tidayoh</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Samuel</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Maria Manampiring</li>
-                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Citra Tidayoh</li>
-                    </ul>
-                </div>
+                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200"><h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3><ul class="space-y-1 text-sm text-gray-700"><li>Laudya, Briando, Gloria, Rifky, Josafat</li></ul></div>
+                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200"><h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3><ul class="space-y-1 text-sm text-gray-700"><li>Ribka, Delon, Kezia, Elsa, Novita</li></ul></div>
+                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200"><h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3><ul class="space-y-1 text-sm text-gray-700"><li>Efraim, Avril, Samuel, Maria, Citra</li></ul></div>
             </div>
         </div>
     </section>
@@ -418,12 +376,8 @@
     </main>
 
     <!-- Headline Ticker -->
-    <div class="ticker-label">BREAKING NEWS</div>
-    <div class="ticker-wrap" id="ticker-container">
-        <div class="ticker">
-            <div class="ticker-item" id="ticker-text"></div>
-        </div>
-    </div>
+    <div class="ticker-label">INFO PELPRAP</div>
+    <div class="ticker-wrap" id="ticker-container"><div class="ticker"><div class="ticker-item" id="ticker-text"></div></div></div>
 
     <footer class="bg-gray-800 text-white py-8 text-center mt-8"><div class="max-w-6xl mx-auto px-4"><p class="font-semibold text-lg">PELPRAP IMANUEL 2026</p><p class="text-gray-400 text-sm mt-1">Ketua: Rezhky Christian</p></div></footer>
 
@@ -453,12 +407,9 @@
         ];
 
         function initPage() {
-            // SIMULASI WAKTU: Seolah-olah hari ini adalah 10 Februari 2026
-            const today = new Date('2026-02-10'); 
-            
+            const today = new Date('2026-02-10'); // Simulated Today for Demo
             let upcomingEvent = null;
 
-            // 1. COUNTDOWN & TICKER LOGIC
             for (let event of scheduleData) {
                 const eventDate = new Date(event.date); 
                 eventDate.setHours(17, 0, 0, 0); 
@@ -482,7 +433,6 @@
                 nextDate.innerText = upcomingEvent.eventDateObj.toLocaleDateString('id-ID', options);
 
                 const timeDiff = upcomingEvent.eventDateObj.getTime() - today.getTime();
-                
                 if (timeDiff > 0) {
                     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -495,21 +445,18 @@
                 }
 
                 // Ticker Always Shows Next Event
-                const tickerContainer = document.getElementById('ticker-container');
                 const tickerText = document.getElementById('ticker-text');
-                let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText} bertempat di ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}). Tuhan Yesus Memberkati.`;
+                let message = `INFO IBADAH: Ibadah selanjutnya akan diadakan pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}). Mari kita persiapkan hati untuk beribadah. Tuhan Yesus Memberkati.`;
                 tickerText.innerText = message;
-                tickerContainer.style.display = 'block'; 
             }
 
-            // 2. GRAY OUT PAST EVENTS LOGIC
+            // GRAY OUT PAST EVENTS LOGIC
             const cards = document.querySelectorAll('.schedule-card');
             cards.forEach(card => {
                 const dateStr = card.getAttribute('data-date');
                 if (dateStr) {
                     const cardDate = new Date(dateStr);
                     cardDate.setHours(23, 59, 59); 
-                    
                     if (cardDate < today) {
                         card.classList.add('past-event');
                     }
@@ -517,7 +464,6 @@
             });
         }
 
-        // KABAR SLIDER LOGIC
         let currentSlide = 0;
         const slides = document.querySelectorAll('.kabar-slide');
         const dots = document.getElementById('slider-dots').children;
