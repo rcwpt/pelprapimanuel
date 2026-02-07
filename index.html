@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 60px; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 50px; }
         
         .hero-pattern {
             background-image: linear-gradient(to bottom, rgba(79, 70, 229, 0.4), rgba(49, 46, 129, 0.6)), url('https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap.jpeg');
@@ -36,22 +36,81 @@
 
         /* PAST EVENT STYLING */
         .past-event {
-            filter: grayscale(100%); /* Jadi Hitam Putih */
-            opacity: 0.7;
-            background-color: #e5e7eb; /* Abu-abu muda */
-            pointer-events: none; 
+            filter: grayscale(100%); 
+            opacity: 0.6;
+            background-color: #e5e7eb;
+            pointer-events: none;
+            position: relative;
         }
-        /* Coret semua teks di dalam kartu yang lewat */
-        .past-event * {
+        /* Coret teks pada event yang sudah lewat */
+        .past-event h3, .past-event span, .past-event p, .past-event div {
             text-decoration: line-through;
-            text-decoration-color: #ef4444; /* Coretan Merah */
+            text-decoration-color: #ef4444;
             text-decoration-thickness: 2px;
         }
-        /* Kecuali ikon tertentu jika perlu, tapi coret semua lebih jelas */
+        /* Label "Selesai" */
+        .past-event::after {
+            content: "SELESAI";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(239, 68, 68, 0.3);
+            border: 4px solid rgba(239, 68, 68, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            z-index: 10;
+            text-decoration: none !important;
+        }
 
-        .ticker-wrap { position: fixed; bottom: 0; width: 100%; overflow: hidden; height: 50px; background-color: #dc2626; padding-left: 100%; box-sizing: content-box; z-index: 9999; border-top: 4px solid #fca5a5; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.2); }
-        .ticker { display: inline-block; height: 50px; line-height: 50px; white-space: nowrap; padding-right: 100%; animation: ticker 30s linear infinite; }
-        .ticker-item { display: inline-block; padding: 0 2rem; font-size: 1.1rem; color: white; font-weight: 600; }
+        /* NEWS TICKER STYLE (Headline Berita) */
+        .ticker-wrap {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            overflow: hidden;
+            height: 40px;
+            background-color: #1e293b; /* Dark Slate Blue */
+            padding-left: 100%;
+            box-sizing: content-box;
+            z-index: 9999;
+            border-top: 2px solid #fbbf24; /* Amber border */
+            display: block; /* Always show */
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+        }
+        .ticker {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            white-space: nowrap;
+            padding-right: 100%;
+            box-sizing: content-box;
+            animation: ticker 35s linear infinite;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .ticker-label {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 40px;
+            line-height: 40px;
+            background-color: #dc2626;
+            color: white;
+            padding: 0 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            z-index: 10000;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
         .kabar-slider {
@@ -125,19 +184,13 @@
         <div class="relative overflow-hidden rounded-2xl shadow-xl border border-gray-200 bg-gray-900 h-[500px] md:h-[450px]">
             <div class="kabar-slider h-full" id="kabar-slider">
                 
-                <!-- SLIDE 1: HUT KE-2 (Images Fitted) -->
+                <!-- SLIDE 1: HUT KE-2 -->
                 <div class="kabar-slide relative w-full h-full bg-gray-900">
                     <div class="flex flex-col md:flex-row h-full">
-                        <!-- Image Container: Using object-contain to prevent cropping -->
                         <div class="h-1/2 md:h-full md:w-1/2 bg-black flex items-center justify-center relative overflow-hidden">
-                            <!-- Background blurred for aesthetic fill -->
                             <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm" alt="Blur BG">
-                            
-                            <!-- Main Image Fitted -->
                             <img src="https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg" class="relative z-10 w-full h-full object-contain p-2" alt="HUT Pelprap">
                         </div>
-                        
-                        <!-- Text Content -->
                         <div class="h-1/2 md:h-full md:w-1/2 flex flex-col justify-center p-6 md:p-12 text-white bg-gradient-to-b from-gray-800 to-gray-900 md:bg-gradient-to-l">
                             <span class="bg-yellow-500 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full w-fit mb-3 uppercase tracking-wider">Momen Spesial</span>
                             <h3 class="text-2xl md:text-4xl font-bold mb-3">HUT ke-2 PELPRAP</h3>
@@ -149,7 +202,7 @@
                     </div>
                 </div>
 
-                <!-- SLIDE 2: KEBERSAMAAN (Images Fitted) -->
+                <!-- SLIDE 2: KEBERSAMAAN -->
                 <div class="kabar-slide relative w-full h-full bg-gray-900">
                     <div class="flex flex-col h-full">
                         <div class="h-2/3 grid grid-cols-2 bg-black">
@@ -279,6 +332,30 @@
         </div>
     </section>
 
+    <!-- Members List Section -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">1. Rezhky Christian</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">2. Laudya Iroth</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">3. Ribka Sumolang</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">4. Delon Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">5. Rifky Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">6. Briando Maki</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">7. Josafat Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">8. Elsya Mokobimbing</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">9. Efraim Sumolang</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">10. Maria Manampiring</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">11. Avrilia Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">12. Citra Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">13. Novita Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">14. Kezia Jacob</div>
+                <div class="p-2 bg-gray-50 rounded hover:bg-indigo-50 transition cursor-default">15. Gloria Rembet</div>
+            </div>
+        </div>
+    </section>
+
     <!-- Cleaning Group Section -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
@@ -340,8 +417,13 @@
         </div>
     </main>
 
-    <!-- Running Text Container -->
-    <div class="ticker-wrap" id="ticker-container"><div class="ticker"><div class="ticker-item" id="ticker-text"></div></div></div>
+    <!-- Headline Ticker -->
+    <div class="ticker-label">BREAKING NEWS</div>
+    <div class="ticker-wrap" id="ticker-container">
+        <div class="ticker">
+            <div class="ticker-item" id="ticker-text"></div>
+        </div>
+    </div>
 
     <footer class="bg-gray-800 text-white py-8 text-center mt-8"><div class="max-w-6xl mx-auto px-4"><p class="font-semibold text-lg">PELPRAP IMANUEL 2026</p><p class="text-gray-400 text-sm mt-1">Ketua: Rezhky Christian</p></div></footer>
 
@@ -371,10 +453,9 @@
         ];
 
         function initPage() {
-            const today = new Date();
-            // UNCOMMENT LINE BELOW TO TEST "TIME TRAVEL" (Simulate date like June 2026)
-            // const today = new Date('2026-06-01');
-
+            // SIMULASI WAKTU: Seolah-olah hari ini adalah 10 Februari 2026
+            const today = new Date('2026-02-10'); 
+            
             let upcomingEvent = null;
 
             // 1. COUNTDOWN & TICKER LOGIC
@@ -401,8 +482,7 @@
                 nextDate.innerText = upcomingEvent.eventDateObj.toLocaleDateString('id-ID', options);
 
                 const timeDiff = upcomingEvent.eventDateObj.getTime() - today.getTime();
-                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
+                
                 if (timeDiff > 0) {
                     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -414,14 +494,12 @@
                     document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
                 }
 
-                if (daysDiff <= 7 && daysDiff >= 0) {
-                    const tickerContainer = document.getElementById('ticker-container');
-                    const tickerText = document.getElementById('ticker-text');
-                    let message = `🔔 PENGUMUMAN PENTING: Ibadah PELPRAP selanjutnya akan diadakan pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}). Persiapkan diri rekan-rekan! 🔔`;
-                    if(daysDiff === 0) message = `🔥 HARI INI! Ibadah PELPRAP di ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}). Jangan sampai terlambat! 🔥`;
-                    tickerText.innerText = message;
-                    tickerContainer.style.display = 'block'; 
-                }
+                // Ticker Always Shows Next Event
+                const tickerContainer = document.getElementById('ticker-container');
+                const tickerText = document.getElementById('ticker-text');
+                let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText} bertempat di ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}). Tuhan Yesus Memberkati.`;
+                tickerText.innerText = message;
+                tickerContainer.style.display = 'block'; 
             }
 
             // 2. GRAY OUT PAST EVENTS LOGIC
@@ -430,7 +508,6 @@
                 const dateStr = card.getAttribute('data-date');
                 if (dateStr) {
                     const cardDate = new Date(dateStr);
-                    // Add 24 hours padding so today's event isn't crossed out until tomorrow
                     cardDate.setHours(23, 59, 59); 
                     
                     if (cardDate < today) {
@@ -449,8 +526,6 @@
         function moveSlider() {
             currentSlide = (currentSlide + 1) % slides.length;
             sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Update dots
             Array.from(dots).forEach((dot, index) => {
                 if (index === currentSlide) {
                     dot.classList.remove('bg-gray-300');
@@ -464,8 +539,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initPage();
-            setInterval(initPage, 1000); // Keep countdown alive
-            setInterval(moveSlider, 5000); // Rotate news every 5 seconds
+            setInterval(moveSlider, 5000); 
         });
     </script>
 </body>
