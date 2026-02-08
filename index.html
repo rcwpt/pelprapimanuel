@@ -85,7 +85,7 @@
             white-space: nowrap;
             padding-right: 100%;
             box-sizing: content-box;
-            animation: ticker 35s linear infinite;
+            animation: ticker 45s linear infinite; /* Diperlambat sedikit karena teks lebih panjang */
         }
         .ticker-item {
             display: inline-block;
@@ -118,15 +118,6 @@
         .kabar-slide {
             min-width: 100%;
             flex-shrink: 0;
-        }
-        
-        /* Org Chart Line Helpers */
-        .org-line-vertical {
-            width: 2px;
-            background-color: #cbd5e1;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
         }
     </style>
 </head>
@@ -267,7 +258,7 @@
         </div>
     </section>
 
-    <!-- Organization Chart Section (IMPROVED LAYOUT) -->
+    <!-- Organization Chart Section -->
     <section class="max-w-6xl mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-xl p-8 border-t-8 border-indigo-600 relative overflow-hidden">
             <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Struktur Organisasi</h2>
@@ -280,7 +271,6 @@
                         <p class="font-bold text-lg mb-2">Ibu Majelis Jemaat Todingbua Krey</p>
                         <details class="group text-left mt-2 border-t border-indigo-700 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-indigo-200 text-xs hover:text-white transition"><span>Lihat Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180 transition"></i></summary><div class="text-indigo-100 mt-2 text-xs text-left"><ul class="list-disc pl-4"><li>Bimbingan rohani & nasihat.</li><li>Komunikasi dengan Gembala.</li></ul></div></details>
                     </div>
-                    <!-- Line Down -->
                     <div class="h-8 w-0.5 bg-gray-300"></div>
                 </div>
 
@@ -291,48 +281,38 @@
                         <p class="font-bold text-xl mb-2">Rezhky Christian</p>
                         <details class="group text-left mt-2 border-t border-indigo-500 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-indigo-100 text-xs hover:text-white transition"><span>Lihat Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180 transition"></i></summary><div class="text-indigo-50 mt-2 text-xs text-left"><ul class="list-disc pl-4"><li>Memimpin seluruh kegiatan.</li><li>Keputusan akhir rapat.</li></ul></div></details>
                     </div>
-                    <!-- Line Down -->
                     <div class="h-8 w-0.5 bg-gray-300"></div>
                 </div>
 
                 <!-- TREE BRANCHING FOR INTI (Desktop & Mobile) -->
                 <div class="w-full max-w-5xl relative">
-                    <!-- Horizontal Line (Connects Sek 1 and Sek 2) -->
-                    <!-- Desktop: Wide line for 3 cols -->
                     <div class="hidden md:block absolute top-0 left-[16.66%] right-[16.66%] h-0.5 bg-gray-300"></div>
-                    <!-- Mobile: Line for Sek 1 & Sek 2 only -->
                     <div class="md:hidden absolute top-0 left-[25%] right-[25%] h-0.5 bg-gray-300"></div>
 
-                    <!-- Grid Layout -->
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 pt-0">
                         
-                        <!-- Sekretaris 1 (Left) -->
+                        <!-- Sekretaris 1 -->
                         <div class="relative flex flex-col items-center order-1">
-                            <div class="h-8 w-0.5 bg-gray-300"></div> <!-- Vertical Connector -->
+                            <div class="h-8 w-0.5 bg-gray-300"></div> 
                             <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-left">
                                 <div class="flex items-center mb-2"><div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-2"><i class="fas fa-pen text-sm"></i></div><div><p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 1</p><p class="font-bold text-gray-800 text-xs md:text-sm">Laudya Iroth</p></div></div>
                                 <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs transition"><span>Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180"></i></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4"><li>Humas Eksternal.</li><li>Surat menyurat.</li></ul></div></details>
                             </div>
                         </div>
 
-                        <!-- Sekretaris 2 (Right on Mobile, Right on Desktop) -->
+                        <!-- Sekretaris 2 -->
                         <div class="relative flex flex-col items-center order-2 md:order-3">
-                            <div class="h-8 w-0.5 bg-gray-300"></div> <!-- Vertical Connector -->
+                            <div class="h-8 w-0.5 bg-gray-300"></div> 
                             <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-left">
                                 <div class="flex items-center mb-2"><div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-2"><i class="fas fa-pen text-sm"></i></div><div><p class="text-xs text-gray-500 font-bold uppercase">Sekretaris 2</p><p class="font-bold text-gray-800 text-xs md:text-sm">Ribka Sumolang</p></div></div>
                                 <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs transition"><span>Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180"></i></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4"><li>Absensi.</li><li>Notulensi.</li></ul></div></details>
                             </div>
                         </div>
 
-                        <!-- Bendahara (Center Bottom on Mobile, Center Top on Desktop) -->
-                        <!-- Mobile: Order 3 (Bottom), Span 2 (Center) -->
-                        <!-- Desktop: Order 2 (Middle), Span 1 -->
+                        <!-- Bendahara -->
                         <div class="relative flex flex-col items-center order-3 md:order-2 col-span-2 md:col-span-1">
-                            <!-- Line for Mobile (Coming from center gap) -->
                             <div class="md:hidden absolute -top-4 left-1/2 -translate-x-1/2 h-4 w-0.5 bg-gray-300"></div>
-                            <!-- Line for Desktop (Coming from top line) -->
                             <div class="hidden md:block h-8 w-0.5 bg-gray-300"></div> 
-                            
                             <div class="bg-white border-2 border-green-100 p-4 rounded-lg shadow-md w-full text-left md:w-full w-2/3 mx-auto">
                                 <div class="flex items-center mb-2"><div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-2"><i class="fas fa-wallet text-sm"></i></div><div><p class="text-xs text-gray-500 font-bold uppercase">Bendahara</p><p class="font-bold text-gray-800 text-xs md:text-sm">Delon Tidayoh</p></div></div>
                                 <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-green-600 text-xs transition"><span>Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180"></i></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4"><li>Kelola Keuangan.</li><li>Laporan rutin.</li></ul></div></details>
@@ -346,7 +326,6 @@
                 <div class="w-full max-w-3xl mt-8 pt-4 border-t border-gray-200">
                     <p class="text-center text-sm font-bold text-gray-400 uppercase mb-4 tracking-widest">— Seksi Musik —</p>
                     <div class="grid grid-cols-2 gap-4">
-                        <!-- Indented/Centered on Mobile too by using col-span-2 or nice grid -->
                         <div class="col-span-2 md:col-span-2 flex justify-center">
                             <div class="bg-purple-50 p-4 rounded-lg border border-purple-200 w-full md:w-1/2 shadow-sm">
                                 <div class="flex items-center mb-2">
@@ -475,8 +454,42 @@
             { date: '2026-11-21', host: 'Pastori', loc: 'G.Gereja km 9' }
         ];
 
+        // LOGIKA JADWAL KEBERSIHAN
+        function getCleaningGroup() {
+            // Reference: Feb 8, 2026 = Group 2
+            const startDate = new Date('2026-02-08T00:00:00');
+            const today = new Date('2026-02-08T09:00:00'); // SIMULASI HARI INI (Minggu, 8 Feb 2026)
+
+            const diffTime = today - startDate;
+            // Hitung selisih minggu (Math.floor memastikan berubah pas hari Minggu)
+            const weeksPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+
+            // Pola: 2 -> 3 -> 1
+            // Index 0: Group 2
+            // Index 1: Group 3
+            // Index 2: Group 1
+            const groupSequence = [2, 3, 1];
+            
+            // Gunakan modulo 3 untuk rotasi
+            // Jika weeksPassed negatif (sebelum tgl mulai), handle agar tidak error
+            const safeWeeks = weeksPassed >= 0 ? weeksPassed : 0;
+            const groupIndex = safeWeeks % 3;
+            const currentGroup = groupSequence[groupIndex];
+
+            const groupNames = {
+                1: "Laudya, Briando, Gloria, Rifky, Josafat",
+                2: "Ribka, Delon, Kezia, Elsa, Novita",
+                3: "Efraim, Avril, Samuel, Maria, Citra"
+            };
+
+            return {
+                groupNumber: currentGroup,
+                members: groupNames[currentGroup]
+            };
+        }
+
         function initPage() {
-            const today = new Date('2026-02-10'); // Simulated Today for Demo
+            const today = new Date('2026-02-08T09:00:00'); // SIMULASI HARI INI
             let upcomingEvent = null;
 
             for (let event of scheduleData) {
@@ -513,10 +526,14 @@
                     document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
                 }
 
-                // Ticker Always Shows Next Event
+                // UPDATE TICKER DENGAN JADWAL KEBERSIHAN
+                const cleaningInfo = getCleaningGroup();
                 const tickerText = document.getElementById('ticker-text');
-                let message = `INFO IBADAH: Ibadah selanjutnya akan diadakan pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}). Mari kita persiapkan hati untuk beribadah. Tuhan Yesus Memberkati.`;
+                
+                let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}).  *** 🧹 JADWAL KEBERSIHAN MINGGU INI: Kelompok ${cleaningInfo.groupNumber} (${cleaningInfo.members}). Semangat Melayani!  *** Tuhan Yesus Memberkati.`;
+                
                 tickerText.innerText = message;
+                document.getElementById('ticker-container').style.display = 'block';
             }
 
             // GRAY OUT PAST EVENTS LOGIC
