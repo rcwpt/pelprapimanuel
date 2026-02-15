@@ -85,7 +85,7 @@
             white-space: nowrap;
             padding-right: 100%;
             box-sizing: content-box;
-            animation: ticker 20s linear infinite; 
+            animation: ticker 25s linear infinite; 
         }
         .ticker-item {
             display: inline-block;
@@ -119,7 +119,7 @@
         
         .active-cleaning-group {
             animation: border-blink 2s infinite;
-            border: 4px solid #fbbf24 !important; /* Force amber border */
+            border: 4px solid #fbbf24 !important; 
             position: relative;
             z-index: 10;
         }
@@ -314,6 +314,7 @@
                     </div>
                     <div class="h-8 w-0.5 bg-gray-300"></div>
                 </div>
+                <!-- Tree Branching -->
                 <div class="w-full max-w-5xl relative">
                     <div class="hidden md:block absolute top-0 left-[16.66%] right-[16.66%] h-0.5 bg-gray-300"></div>
                     <div class="md:hidden absolute top-0 left-[25%] right-[25%] h-0.5 bg-gray-300"></div>
@@ -360,8 +361,17 @@
         </div>
     </section>
 
-    <!-- SCHEDULE SECTION -->
+    <!-- SCHEDULE SECTION (DYNAMIC JS GENERATED) -->
     <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded shadow-sm">
+            <div class="flex items-center">
+                <i class="fas fa-info-circle text-blue-500 mr-3 text-xl"></i>
+                <div>
+                    <p class="font-bold text-blue-800">Informasi Perubahan Jadwal</p>
+                    <p class="text-sm text-blue-700">Mulai 21 Februari 2026, jadwal petugas ibadah bergeser ke pertemuan berikutnya (selisih 2 minggu) karena adanya Ibadah Gabungan Wilayah.</p>
+                </div>
+            </div>
+        </div>
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
                 <i class="fas fa-calendar-alt text-indigo-600 mr-3"></i>Jadwal Ibadah Kunjungan
@@ -369,37 +379,9 @@
             <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full font-bold">Tahun 2026</span>
         </div>
         
+        <!-- Grid Container - Content populated by JS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="schedule-grid">
-            <!-- FEBRUARI -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-pink-500" data-date="2026-02-07"><div class="bg-pink-500 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">07 Feb</span><i class="far fa-heart opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-pink-500 w-6"></i><span class="font-semibold text-gray-700">Pastori</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">G. Gereja Km.9</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-pink-500" data-date="2026-02-21"><div class="bg-pink-500 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">21 Feb</span><i class="far fa-heart opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-pink-500 w-6"></i><span class="font-semibold text-gray-700">Laudya Iroth</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Kilo 7</span></div></div></div>
-            <!-- MARET -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-emerald-500" data-date="2026-03-07"><div class="bg-emerald-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">07 Mar</span><i class="fas fa-leaf opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-emerald-600 w-6"></i><span class="font-semibold text-gray-700">Ribka Sumolang</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Nawaripi</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-emerald-500" data-date="2026-03-21"><div class="bg-emerald-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">21 Mar</span><i class="fas fa-leaf opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-emerald-600 w-6"></i><span class="font-semibold text-gray-700">Elsya Mokobimbing</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Pastori</span></div></div></div>
-            <!-- APRIL -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-yellow-500" data-date="2026-04-04"><div class="bg-yellow-500 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">04 Apr</span><i class="fas fa-dove opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-yellow-600 w-6"></i><span class="font-semibold text-gray-700">Efraim Sumolang</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Nawaripi</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-yellow-500" data-date="2026-04-18"><div class="bg-yellow-500 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">18 Apr</span><i class="fas fa-dove opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-yellow-600 w-6"></i><span class="font-semibold text-gray-700">Avrilia Tidayoh</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Busiri ujung</span></div></div></div>
-            <!-- MEI -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-cyan-500" data-date="2026-05-09"><div class="bg-cyan-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">09 Mei</span><i class="fas fa-cloud-sun opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-cyan-600 w-6"></i><span class="font-semibold text-gray-700">Gloria Rembet</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Pastori</span></div></div></div>
-            <div class="bg-orange-50 rounded-xl shadow-lg overflow-hidden schedule-card border-orange-500 flex flex-col" data-date="2026-05-23"><div class="bg-orange-500 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">14-23 Mei</span><i class="fas fa-fire opacity-70 animate-pulse"></i></div><div class="p-4 flex flex-col items-center justify-center flex-grow text-center"><h3 class="font-bold text-orange-900 text-xl mb-2 leading-tight">DOA 10 MALAM</h3><span class="bg-orange-200 text-orange-800 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">Pentakosta</span></div></div>
-            <!-- JUNI -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-violet-500" data-date="2026-06-06"><div class="bg-violet-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">06 Jun</span><i class="fas fa-music opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-violet-600 w-6"></i><span class="font-semibold text-gray-700">Josafat Tidayoh</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Busiri ujung</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-violet-500" data-date="2026-06-20"><div class="bg-violet-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">20 Jun</span><i class="fas fa-music opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-violet-600 w-6"></i><span class="font-semibold text-gray-700">Briando Maki</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Nawaripi</span></div></div></div>
-            <!-- JULI -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-indigo-500" data-date="2026-07-04"><div class="bg-indigo-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">04 Jul</span><i class="fas fa-users opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-indigo-600 w-6"></i><span class="font-semibold text-gray-700">Novita Tidayoh</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Nawaripi</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-indigo-500" data-date="2026-07-18"><div class="bg-indigo-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">18 Jul</span><i class="fas fa-users opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-indigo-600 w-6"></i><span class="font-semibold text-gray-700">Rifky Tidayoh</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Busiri ujung</span></div></div></div>
-            <!-- AGUSTUS -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-red-600" data-date="2026-08-08"><div class="bg-red-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">08 Agu</span><i class="fas fa-flag opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-red-600 w-6"></i><span class="font-semibold text-gray-700">Ribka Sumolang</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Nawaripi</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-red-600" data-date="2026-08-22"><div class="bg-red-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">22 Agu</span><i class="fas fa-flag opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-red-600 w-6"></i><span class="font-semibold text-gray-700">Kezia Jacob</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Pastori</span></div></div></div>
-            <!-- SEPTEMBER -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-teal-500" data-date="2026-09-05"><div class="bg-teal-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">05 Sep</span><i class="fas fa-globe-asia opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-teal-600 w-6"></i><span class="font-semibold text-gray-700">Citra Tidayoh</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Busiri ujung</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-teal-500" data-date="2026-09-19"><div class="bg-teal-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">19 Sep</span><i class="fas fa-globe-asia opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-teal-600 w-6"></i><span class="font-semibold text-gray-700">Gloria Rembet</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Pastori</span></div></div></div>
-            <!-- OKTOBER -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-orange-500" data-date="2026-10-10"><div class="bg-orange-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">10 Okt</span><i class="fas fa-book-open opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-orange-600 w-6"></i><span class="font-semibold text-gray-700">Maria Manampiring</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Busiri ujung</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-orange-500" data-date="2026-10-24"><div class="bg-orange-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">24 Okt</span><i class="fas fa-book-open opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user-tie text-orange-600 w-6"></i><span class="font-semibold text-gray-700">Ketua Pelprap</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Sp 4/ Yos Sudarso</span></div></div></div>
-            <!-- NOVEMBER -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-sky-500" data-date="2026-11-07"><div class="bg-sky-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">07 Nov</span><i class="fas fa-hand-holding-heart opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-sky-600 w-6"></i><span class="font-semibold text-gray-700">Delon Tidayoh</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">Busiri ujung</span></div></div></div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card border-sky-500" data-date="2026-11-21"><div class="bg-sky-600 text-white p-3 flex justify-between items-center"><span class="font-bold text-lg">21 Nov</span><i class="fas fa-hand-holding-heart opacity-50"></i></div><div class="p-4"><div class="flex items-center mb-2"><i class="fas fa-user text-sky-600 w-6"></i><span class="font-semibold text-gray-700">Pastori</span></div><div class="flex items-center"><i class="fas fa-map-marker-alt text-gray-400 w-6"></i><span class="text-sm text-gray-500">G.Gereja km 9</span></div></div></div>
+            <!-- Loading placeholder if needed, otherwise empty -->
         </div>
     </section>
 
@@ -424,23 +406,6 @@
         </div>
     </section>
 
-    <!-- Calendar Grid (Abbreviated) -->
-    <main class="max-w-6xl mx-auto px-4 py-10">
-        <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Timeline Kegiatan <span class="gradient-text">2026</span></h2>
-        <div class="text-center text-gray-500 italic mb-8">
-            (Lihat Kartu Jadwal Ibadah Kunjungan di atas untuk tanggal spesifik)
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-             <div class="bg-white rounded-xl shadow-md overflow-hidden border-2 border-red-500">
-                <div class="bg-red-700 p-4 flex justify-between items-center"><h3 class="text-white font-bold text-lg">DESEMBER</h3><span class="bg-red-900 text-red-100 text-xs px-2 py-1 rounded-full"><i class="fas fa-star text-yellow-400 mr-1"></i>Natal</span></div>
-                <div class="p-5">
-                    <div class="mb-4 border-b pb-3"><p class="text-xs text-gray-500 uppercase font-semibold">Pertemuan I</p><p class="font-bold text-gray-800">Persiapan / Latihan</p></div>
-                    <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-center"><p class="font-bold text-red-800 text-lg">PERAYAAN NATAL</p><details class="mt-2 text-sm cursor-pointer group text-left"><summary class="font-semibold text-red-700 flex justify-between items-center text-xs">Detail Teknis <i class="fas fa-chevron-down transform group-open:rotate-180 transition"></i></summary><div class="mt-2 text-gray-600 text-xs"><p><strong>Kado:</strong> Kado Silang (min Rp 20.000, bungkus koran).</p></div></details></div>
-                </div>
-            </div>
-        </div>
-    </main>
-
     <!-- Headline Ticker -->
     <div class="ticker-label">INFO PELPRAP</div>
     <div class="ticker-wrap" id="ticker-container"><div class="ticker"><div class="ticker-item" id="ticker-text"></div></div></div>
@@ -451,84 +416,156 @@
     <script>
         const scheduleData = [
             { date: '2026-02-07', host: 'Pastori', loc: 'G. Gereja Km.9' },
-            { date: '2026-02-21', host: 'Laudya Iroth', loc: 'Kilo 7' },
-            { date: '2026-03-07', host: 'Ribka Sumolang', loc: 'Nawaripi' },
-            { date: '2026-03-21', host: 'Elsya Mokobimbing', loc: 'Pastori' },
-            { date: '2026-04-04', host: 'Efraim Sumolang', loc: 'Nawaripi' },
-            { date: '2026-04-18', host: 'Avrilia Tidayoh', loc: 'Busiri ujung' },
-            { date: '2026-05-09', host: 'Gloria Rembet', loc: 'Pastori' },
-            { date: '2026-05-14', host: 'Doa 10 Malam', loc: 'Pentakosta' }, 
-            { date: '2026-06-06', host: 'Josafat Tidayoh', loc: 'Busiri ujung' },
-            { date: '2026-06-20', host: 'Briando Maki', loc: 'Nawaripi' },
-            { date: '2026-07-04', host: 'Novita Tidayoh', loc: 'Nawaripi' },
-            { date: '2026-07-18', host: 'Rifky Tidayoh', loc: 'Busiri ujung' },
-            { date: '2026-08-08', host: 'Ribka Sumolang', loc: 'Nawaripi' },
-            { date: '2026-08-22', host: 'Kezia Jacob', loc: 'Pastori' },
-            { date: '2026-09-05', host: 'Citra Tidayoh', loc: 'Busiri ujung' },
-            { date: '2026-09-19', host: 'Gloria Rembet', loc: 'Pastori' },
-            { date: '2026-10-10', host: 'Maria Manampiring', loc: 'Busiri ujung' },
-            { date: '2026-10-24', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' },
-            { date: '2026-11-07', host: 'Delon Tidayoh', loc: 'Busiri ujung' },
-            { date: '2026-11-21', host: 'Pastori', loc: 'G.Gereja km 9' }
+            { date: '2026-02-22', host: 'GABUNGAN WILAYAH', loc: 'GPDI Efata', time: '16.00 WIT', type: 'special' }, 
+            { date: '2026-03-07', host: 'Laudya Iroth', loc: 'Kilo 7' }, 
+            { date: '2026-03-21', host: 'Ribka Sumolang', loc: 'Nawaripi' }, 
+            { date: '2026-04-04', host: 'Elsya Mokobimbing', loc: 'Pastori' }, 
+            { date: '2026-04-18', host: 'Efraim Sumolang', loc: 'Nawaripi' }, 
+            { date: '2026-05-09', host: 'Avrilia Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-05-14', host: 'DOA 10 MALAM', loc: 'Pentakosta', sub: '14-23 Mei 2026', type: 'doa' }, 
+            { date: '2026-06-06', host: 'Gloria Rembet', loc: 'Pastori' }, 
+            { date: '2026-06-20', host: 'Josafat Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-07-04', host: 'Briando Maki', loc: 'Nawaripi' }, 
+            { date: '2026-07-18', host: 'Novita Tidayoh', loc: 'Nawaripi' }, 
+            { date: '2026-08-08', host: 'Rifky Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-08-22', host: 'Kezia Jacob', loc: 'Pastori' }, 
+            { date: '2026-09-05', host: 'Citra Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-09-19', host: 'Gloria Rembet', loc: 'Pastori' }, 
+            { date: '2026-10-10', host: 'Maria Manampiring', loc: 'Busiri ujung' }, 
+            { date: '2026-10-24', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' }, 
+            { date: '2026-11-07', host: 'Delon Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-11-21', host: 'Pastori', loc: 'G.Gereja km 9' } 
         ];
 
-        // LOGIKA JADWAL KEBERSIHAN
-        function getCleaningGroup(now) {
-            // Reference Start Date for cleaning rotation: Feb 8, 2026
-            const startDate = new Date('2026-02-08T00:00:00').getTime();
-            
-            // Calculate weeks passed since start date
-            const diffTime = now.getTime() - startDate;
-            // A week is 7 days * 24 hours * 60 min * 60 sec * 1000 ms
-            const weeksPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+        // Month Colors Map
+        const monthColors = {
+            1: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-500', icon: 'far fa-heart' },    // Feb
+            2: { border: 'border-emerald-500', bg: 'bg-emerald-600', text: 'text-emerald-600', icon: 'fas fa-leaf' }, // Mar
+            3: { border: 'border-yellow-500', bg: 'bg-yellow-500', text: 'text-yellow-600', icon: 'fas fa-dove' },   // Apr
+            4: { border: 'border-cyan-500', bg: 'bg-cyan-600', text: 'text-cyan-600', icon: 'fas fa-cloud-sun' },    // May
+            5: { border: 'border-violet-500', bg: 'bg-violet-600', text: 'text-violet-600', icon: 'fas fa-music' },  // Jun
+            6: { border: 'border-indigo-500', bg: 'bg-indigo-600', text: 'text-indigo-600', icon: 'fas fa-users' },  // Jul
+            7: { border: 'border-red-600', bg: 'bg-red-600', text: 'text-red-600', icon: 'fas fa-flag' },           // Aug
+            8: { border: 'border-teal-500', bg: 'bg-teal-600', text: 'text-teal-600', icon: 'fas fa-globe-asia' },   // Sep
+            9: { border: 'border-orange-500', bg: 'bg-orange-600', text: 'text-orange-600', icon: 'fas fa-book-open' }, // Oct
+            10: { border: 'border-sky-500', bg: 'bg-sky-600', text: 'text-sky-600', icon: 'fas fa-hand-holding-heart' } // Nov
+        };
 
-            // Rotation Logic: Group 2 -> 3 -> 1
+        function renderSchedule() {
+            const container = document.getElementById('schedule-grid');
+            container.innerHTML = '';
+            const today = new Date();
+
+            scheduleData.forEach(event => {
+                const dateObj = new Date(event.date);
+                // Set default formatting options
+                const dateStr = dateObj.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' });
+                const monthIdx = dateObj.getMonth();
+                const colors = monthColors[monthIdx] || monthColors[1]; // Default to Feb if not found
+
+                let cardHTML = '';
+
+                // Add past-event class if needed
+                const isPast = new Date(event.date);
+                isPast.setHours(23, 59, 59);
+                const pastClass = isPast < today ? 'past-event' : '';
+
+                if (event.type === 'special') {
+                    // Special Card (Gabungan)
+                    cardHTML = `
+                        <div class="bg-fuchsia-50 rounded-xl shadow-lg overflow-hidden schedule-card border-fuchsia-600 flex flex-col ${pastClass}" data-date="${event.date}">
+                            <div class="bg-fuchsia-600 text-white p-3 flex justify-between items-center">
+                                <span class="font-bold text-sm sm:text-base">${dateStr}</span>
+                                <i class="fas fa-church opacity-70"></i>
+                            </div>
+                            <div class="p-3 flex flex-col justify-center flex-grow pb-4">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-users text-fuchsia-600 w-6 flex-shrink-0"></i>
+                                    <span class="font-bold text-fuchsia-800 text-xs sm:text-sm uppercase">${event.host}</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-map-marker-alt text-gray-400 w-6 flex-shrink-0"></i>
+                                    <span class="text-xs sm:text-sm text-gray-500">${event.loc}</span>
+                                </div>
+                                <div class="mt-auto pt-2 text-center bg-fuchsia-200 text-fuchsia-800 text-xs font-bold py-1 rounded">
+                                    PUKUL ${event.time}
+                                </div>
+                            </div>
+                        </div>`;
+                } else if (event.type === 'doa') {
+                    // Doa 10 Malam
+                     cardHTML = `
+                        <div class="bg-orange-50 rounded-xl shadow-lg overflow-hidden schedule-card border-orange-500 flex flex-col ${pastClass}" data-date="${event.date}">
+                            <div class="bg-orange-500 text-white p-3 flex justify-between items-center">
+                                <span class="font-bold text-sm sm:text-base">${event.sub}</span>
+                                <i class="fas fa-fire opacity-70 animate-pulse"></i>
+                            </div>
+                            <div class="p-4 flex flex-col items-center justify-center flex-grow text-center">
+                                <h3 class="font-bold text-orange-900 text-xl mb-2 leading-tight">${event.host}</h3>
+                                <span class="bg-orange-200 text-orange-800 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">${event.loc}</span>
+                            </div>
+                        </div>`;
+                } else {
+                    // Standard Card
+                    cardHTML = `
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card ${colors.border} ${pastClass}" data-date="${event.date}">
+                            <div class="${colors.bg} text-white p-3 flex justify-between items-center">
+                                <span class="font-bold text-sm sm:text-base">${dateStr}</span>
+                                <i class="${colors.icon} opacity-50"></i>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-user ${colors.text} w-6"></i>
+                                    <span class="font-semibold text-gray-700 text-sm">${event.host}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-gray-400 w-6"></i>
+                                    <span class="text-xs text-gray-500">${event.loc}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // --- Logic from previous blocks ---
+        function getCleaningGroup(now) {
+            const startDate = new Date('2026-02-08T00:00:00').getTime();
+            const diffTime = now.getTime() - startDate;
+            const weeksPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
             const groupSequence = [2, 3, 1];
-            
             const safeWeeks = weeksPassed >= 0 ? weeksPassed : 0;
             const groupIndex = safeWeeks % 3;
             const currentGroup = groupSequence[groupIndex];
-
             const groupNames = {
                 1: "Laudya, Briando, Gloria, Rifky, Josafat",
                 2: "Ribka, Delon, Kezia, Elsa, Novita",
                 3: "Efraim, Avril, Samuel, Maria, Citra"
             };
-
-            return {
-                groupNumber: currentGroup,
-                members: groupNames[currentGroup]
-            };
+            return { groupNumber: currentGroup, members: groupNames[currentGroup] };
         }
 
         function updateCleaningDOM(cleaningInfo) {
-            // Reset all cards
             [1, 2, 3].forEach(id => {
                 const el = document.getElementById(`group-${id}`);
                 if (el) el.classList.remove('active-cleaning-group');
             });
-
-            // Activate current group card
             const activeCard = document.getElementById(`group-${cleaningInfo.groupNumber}`);
-            if (activeCard) {
-                activeCard.classList.add('active-cleaning-group');
-            }
+            if (activeCard) activeCard.classList.add('active-cleaning-group');
         }
 
         function updateDashboard() {
-            // Use real browser time
             const now = new Date();
-
             let upcomingEvent = null;
 
-            // Find next event based on real time
             for (let event of scheduleData) {
-                const eventDate = new Date(event.date); 
-                // Set event time to 17:00 local time
-                eventDate.setHours(17, 0, 0, 0); 
+                const eventDate = new Date(event.date);
+                let hour = event.time ? parseInt(event.time.split('.')[0]) : 17;
+                eventDate.setHours(hour, 0, 0, 0);
                 if (eventDate >= now) {
                     upcomingEvent = { ...event, eventDateObj: eventDate };
-                    break; 
+                    break;
                 }
             }
 
@@ -537,7 +574,7 @@
                 const nextHost = document.getElementById('next-event-host');
                 const nextLoc = document.getElementById('next-event-loc');
                 const nextDate = document.getElementById('next-event-date');
-                
+
                 if(countdownSection.classList.contains('hidden')) countdownSection.classList.remove('hidden');
                 nextHost.innerText = `Tuan Rumah: ${upcomingEvent.host}`;
                 nextLoc.innerHTML = `<i class="fas fa-map-marker-alt mr-2"></i>${upcomingEvent.loc}`;
@@ -559,11 +596,9 @@
                     document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
                 }
 
-                // Update Cleaning Schedule Logic every tick
                 const cleaningInfo = getCleaningGroup(now);
                 updateCleaningDOM(cleaningInfo);
 
-                // Update Ticker Text
                 const tickerText = document.getElementById('ticker-text');
                 let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}).  *** 🧹 JADWAL KEBERSIHAN MINGGU INI: Kelompok ${cleaningInfo.groupNumber} (${cleaningInfo.members}). Semangat Melayani!  *** Tuhan Yesus Memberkati.`;
                 if (tickerText.innerText !== message) {
@@ -571,21 +606,6 @@
                     document.getElementById('ticker-container').style.display = 'block';
                 }
             }
-
-            // Gray out logic (Checking real time)
-            const cards = document.querySelectorAll('.schedule-card');
-            cards.forEach(card => {
-                const dateStr = card.getAttribute('data-date');
-                if (dateStr) {
-                    const cardDate = new Date(dateStr);
-                    cardDate.setHours(23, 59, 59); 
-                    if (cardDate < now) {
-                        card.classList.add('past-event');
-                    } else {
-                        card.classList.remove('past-event');
-                    }
-                }
-            });
         }
 
         let currentSlide = 0;
@@ -608,9 +628,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Update immediately
+            renderSchedule(); // Render first!
             updateDashboard();
-            // Update every second
             setInterval(updateDashboard, 1000); 
             setInterval(moveSlider, 5000); 
         });
