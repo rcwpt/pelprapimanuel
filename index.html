@@ -85,7 +85,7 @@
             white-space: nowrap;
             padding-right: 100%;
             box-sizing: content-box;
-            animation: ticker 45s linear infinite; /* Diperlambat sedikit karena teks lebih panjang */
+            animation: ticker 20s linear infinite; 
         }
         .ticker-item {
             display: inline-block;
@@ -111,6 +111,32 @@
         }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
+        /* ACTIVE CLEANING GROUP BLINKING EFFECT */
+        @keyframes border-blink {
+            0%, 100% { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); transform: scale(1.02); }
+            50% { border-color: transparent; box-shadow: none; transform: scale(1); }
+        }
+        
+        .active-cleaning-group {
+            animation: border-blink 2s infinite;
+            border: 4px solid #fbbf24 !important; /* Force amber border */
+            position: relative;
+            z-index: 10;
+        }
+        .active-cleaning-group::before {
+            content: "TUGAS MINGGU INI";
+            position: absolute;
+            top: -12px;
+            right: 10px;
+            background-color: #dc2626;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 999px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
         .kabar-slider {
             display: flex;
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
@@ -118,6 +144,14 @@
         .kabar-slide {
             min-width: 100%;
             flex-shrink: 0;
+        }
+        
+        .org-line-vertical {
+            width: 2px;
+            background-color: #cbd5e1;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
@@ -263,8 +297,7 @@
         <div class="bg-white rounded-xl shadow-xl p-8 border-t-8 border-indigo-600 relative overflow-hidden">
             <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Struktur Organisasi</h2>
             <div class="flex flex-col items-center relative z-10 w-full">
-                
-                <!-- Pembina -->
+                <!-- Pembina & Ketua (Same structure) -->
                 <div class="w-full max-w-md relative mb-8 flex flex-col items-center">
                     <div class="bg-indigo-900 text-white px-6 py-4 rounded-lg shadow-lg border-2 border-indigo-700 w-full text-center relative z-10">
                         <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider mb-1">Pembina</p>
@@ -273,8 +306,6 @@
                     </div>
                     <div class="h-8 w-0.5 bg-gray-300"></div>
                 </div>
-
-                <!-- Ketua -->
                 <div class="w-full max-w-md relative mb-8 flex flex-col items-center">
                     <div class="bg-indigo-600 text-white px-6 py-4 rounded-lg shadow-lg border-2 border-indigo-500 w-full text-center relative z-10">
                         <p class="text-xs text-indigo-200 font-bold uppercase tracking-wider mb-1">Ketua</p>
@@ -283,15 +314,10 @@
                     </div>
                     <div class="h-8 w-0.5 bg-gray-300"></div>
                 </div>
-
-                <!-- TREE BRANCHING FOR INTI (Desktop & Mobile) -->
                 <div class="w-full max-w-5xl relative">
                     <div class="hidden md:block absolute top-0 left-[16.66%] right-[16.66%] h-0.5 bg-gray-300"></div>
                     <div class="md:hidden absolute top-0 left-[25%] right-[25%] h-0.5 bg-gray-300"></div>
-
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 pt-0">
-                        
-                        <!-- Sekretaris 1 -->
                         <div class="relative flex flex-col items-center order-1">
                             <div class="h-8 w-0.5 bg-gray-300"></div> 
                             <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-left">
@@ -299,8 +325,6 @@
                                 <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs transition"><span>Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180"></i></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4"><li>Humas Eksternal.</li><li>Surat menyurat.</li></ul></div></details>
                             </div>
                         </div>
-
-                        <!-- Sekretaris 2 -->
                         <div class="relative flex flex-col items-center order-2 md:order-3">
                             <div class="h-8 w-0.5 bg-gray-300"></div> 
                             <div class="bg-white border-2 border-blue-100 p-4 rounded-lg shadow-md w-full text-left">
@@ -308,8 +332,6 @@
                                 <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-blue-600 text-xs transition"><span>Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180"></i></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4"><li>Absensi.</li><li>Notulensi.</li></ul></div></details>
                             </div>
                         </div>
-
-                        <!-- Bendahara -->
                         <div class="relative flex flex-col items-center order-3 md:order-2 col-span-2 md:col-span-1">
                             <div class="md:hidden absolute -top-4 left-1/2 -translate-x-1/2 h-4 w-0.5 bg-gray-300"></div>
                             <div class="hidden md:block h-8 w-0.5 bg-gray-300"></div> 
@@ -318,11 +340,8 @@
                                 <details class="group mt-2 border-t border-gray-100 pt-2"><summary class="flex justify-between items-center font-medium cursor-pointer list-none text-green-600 text-xs transition"><span>Tupoksi</span><i class="fas fa-chevron-down group-open:rotate-180"></i></summary><div class="text-gray-600 mt-2 text-xs"><ul class="list-disc pl-4"><li>Kelola Keuangan.</li><li>Laporan rutin.</li></ul></div></details>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-                <!-- Musik Section -->
                 <div class="w-full max-w-3xl mt-8 pt-4 border-t border-gray-200">
                     <p class="text-center text-sm font-bold text-gray-400 uppercase mb-4 tracking-widest">— Seksi Musik —</p>
                     <div class="grid grid-cols-2 gap-4">
@@ -337,7 +356,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -399,9 +417,9 @@
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200"><h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3><ul class="space-y-1 text-sm text-gray-700"><li>Laudya, Briando, Gloria, Rifky, Josafat</li></ul></div>
-                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200"><h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3><ul class="space-y-1 text-sm text-gray-700"><li>Ribka, Delon, Kezia, Elsa, Novita</li></ul></div>
-                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200"><h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3><ul class="space-y-1 text-sm text-gray-700"><li>Efraim, Avril, Samuel, Maria, Citra</li></ul></div>
+                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200" id="group-1"><h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3><ul class="space-y-1 text-sm text-gray-700"><li>Laudya, Briando, Gloria, Rifky, Josafat</li></ul></div>
+                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200" id="group-2"><h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3><ul class="space-y-1 text-sm text-gray-700"><li>Ribka, Delon, Kezia, Elsa, Novita</li></ul></div>
+                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200" id="group-3"><h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3><ul class="space-y-1 text-sm text-gray-700"><li>Efraim, Avril, Samuel, Maria, Citra</li></ul></div>
             </div>
         </div>
     </section>
@@ -455,23 +473,18 @@
         ];
 
         // LOGIKA JADWAL KEBERSIHAN
-        function getCleaningGroup() {
-            // Reference: Feb 8, 2026 = Group 2
-            const startDate = new Date('2026-02-08T00:00:00');
-            const today = new Date('2026-02-08T09:00:00'); // SIMULASI HARI INI (Minggu, 8 Feb 2026)
-
-            const diffTime = today - startDate;
-            // Hitung selisih minggu (Math.floor memastikan berubah pas hari Minggu)
+        function getCleaningGroup(now) {
+            // Reference Start Date for cleaning rotation: Feb 8, 2026
+            const startDate = new Date('2026-02-08T00:00:00').getTime();
+            
+            // Calculate weeks passed since start date
+            const diffTime = now.getTime() - startDate;
+            // A week is 7 days * 24 hours * 60 min * 60 sec * 1000 ms
             const weeksPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
 
-            // Pola: 2 -> 3 -> 1
-            // Index 0: Group 2
-            // Index 1: Group 3
-            // Index 2: Group 1
+            // Rotation Logic: Group 2 -> 3 -> 1
             const groupSequence = [2, 3, 1];
             
-            // Gunakan modulo 3 untuk rotasi
-            // Jika weeksPassed negatif (sebelum tgl mulai), handle agar tidak error
             const safeWeeks = weeksPassed >= 0 ? weeksPassed : 0;
             const groupIndex = safeWeeks % 3;
             const currentGroup = groupSequence[groupIndex];
@@ -488,14 +501,32 @@
             };
         }
 
-        function initPage() {
-            const today = new Date('2026-02-08T09:00:00'); // SIMULASI HARI INI
+        function updateCleaningDOM(cleaningInfo) {
+            // Reset all cards
+            [1, 2, 3].forEach(id => {
+                const el = document.getElementById(`group-${id}`);
+                if (el) el.classList.remove('active-cleaning-group');
+            });
+
+            // Activate current group card
+            const activeCard = document.getElementById(`group-${cleaningInfo.groupNumber}`);
+            if (activeCard) {
+                activeCard.classList.add('active-cleaning-group');
+            }
+        }
+
+        function updateDashboard() {
+            // Use real browser time
+            const now = new Date();
+
             let upcomingEvent = null;
 
+            // Find next event based on real time
             for (let event of scheduleData) {
                 const eventDate = new Date(event.date); 
+                // Set event time to 17:00 local time
                 eventDate.setHours(17, 0, 0, 0); 
-                if (eventDate >= today) {
+                if (eventDate >= now) {
                     upcomingEvent = { ...event, eventDateObj: eventDate };
                     break; 
                 }
@@ -514,37 +545,44 @@
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 nextDate.innerText = upcomingEvent.eventDateObj.toLocaleDateString('id-ID', options);
 
-                const timeDiff = upcomingEvent.eventDateObj.getTime() - today.getTime();
+                const timeDiff = upcomingEvent.eventDateObj.getTime() - now.getTime();
+                
                 if (timeDiff > 0) {
                     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    
                     document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
                     document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
                     document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
                     document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
                 }
 
-                // UPDATE TICKER DENGAN JADWAL KEBERSIHAN
-                const cleaningInfo = getCleaningGroup();
+                // Update Cleaning Schedule Logic every tick
+                const cleaningInfo = getCleaningGroup(now);
+                updateCleaningDOM(cleaningInfo);
+
+                // Update Ticker Text
                 const tickerText = document.getElementById('ticker-text');
-                
                 let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}).  *** 🧹 JADWAL KEBERSIHAN MINGGU INI: Kelompok ${cleaningInfo.groupNumber} (${cleaningInfo.members}). Semangat Melayani!  *** Tuhan Yesus Memberkati.`;
-                
-                tickerText.innerText = message;
-                document.getElementById('ticker-container').style.display = 'block';
+                if (tickerText.innerText !== message) {
+                    tickerText.innerText = message;
+                    document.getElementById('ticker-container').style.display = 'block';
+                }
             }
 
-            // GRAY OUT PAST EVENTS LOGIC
+            // Gray out logic (Checking real time)
             const cards = document.querySelectorAll('.schedule-card');
             cards.forEach(card => {
                 const dateStr = card.getAttribute('data-date');
                 if (dateStr) {
                     const cardDate = new Date(dateStr);
                     cardDate.setHours(23, 59, 59); 
-                    if (cardDate < today) {
+                    if (cardDate < now) {
                         card.classList.add('past-event');
+                    } else {
+                        card.classList.remove('past-event');
                     }
                 }
             });
@@ -570,7 +608,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            initPage();
+            // Update immediately
+            updateDashboard();
+            // Update every second
+            setInterval(updateDashboard, 1000); 
             setInterval(moveSlider, 5000); 
         });
     </script>
