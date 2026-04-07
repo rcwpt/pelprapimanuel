@@ -39,9 +39,37 @@
             60% { transform: scale(1.1); }
             100% { opacity: 1; transform: scale(1); }
         }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            70% { transform: scale(1.15) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes autoShrink {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        @keyframes instagramShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         .fade-in { animation: fadeInUp 0.5s ease forwards; }
         .screen { animation: fadeIn 0.4s ease; }
+        .shake { animation: shake 0.45s ease; }
+        .pop-in { animation: popIn 0.35s cubic-bezier(.36,.07,.19,.97) both; }
+        .slide-in { animation: slideInLeft 0.35s ease forwards; }
 
         .opt-btn {
             transition: all 0.2s ease;
@@ -124,6 +152,23 @@
             font-size: 2.5rem; font-weight: 800;
             animation: bounceIn 0.6s ease 0.3s both;
         }
+
+        /* AUTO-ADVANCE PROGRESS BAR */
+        #auto-bar-wrap { height: 4px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        #auto-bar { height: 4px; border-radius: 4px; background: linear-gradient(90deg,#4f46e5,#7c3aed); }
+
+        /* INSTAGRAM CTA */
+        .instagram-cta {
+            background: linear-gradient(135deg, #f09433, #e6683c 30%, #dc2743 50%, #cc2366 70%, #bc1888);
+            background-size: 200% 200%;
+            animation: instagramShine 3s ease infinite;
+        }
+
+        /* ANSWER OPTION STAGGER */
+        .opt-btn:nth-child(1) { animation: slideInLeft 0.25s ease 0.0s both; }
+        .opt-btn:nth-child(2) { animation: slideInLeft 0.25s ease 0.07s both; }
+        .opt-btn:nth-child(3) { animation: slideInLeft 0.25s ease 0.14s both; }
+        .opt-btn:nth-child(4) { animation: slideInLeft 0.25s ease 0.21s both; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -155,7 +200,7 @@
             <div class="mode-card text-white shadow-2xl" style="background: linear-gradient(135deg, #1d4ed8, #4f46e5);" onclick="startGame('quiz')">
                 <div class="text-5xl mb-4">📖</div>
                 <h3 class="text-2xl font-bold mb-2">Kuis Alkitab</h3>
-                <p class="text-blue-200 text-sm mb-4">15 pertanyaan pilihan ganda dari 200+ soal seputar Alkitab Perjanjian Lama & Baru.</p>
+                <p class="text-blue-200 text-sm mb-4">15 pertanyaan pilihan ganda dari 135+ soal seputar Alkitab Perjanjian Lama & Baru.</p>
                 <div class="flex gap-3 text-xs">
                     <span class="bg-white/20 px-3 py-1 rounded-full">⏱️ 30 detik/soal</span>
                     <span class="bg-white/20 px-3 py-1 rounded-full">📝 15 soal</span>
@@ -173,7 +218,7 @@
                 <p class="text-purple-200 text-sm mb-4">Tebak nama tokoh Alkitab dari petunjuk emoji dan clue yang diberikan. Siapakah dia?</p>
                 <div class="flex gap-3 text-xs">
                     <span class="bg-white/20 px-3 py-1 rounded-full">⏱️ 30 detik</span>
-                    <span class="bg-white/20 px-3 py-1 rounded-full">🎭 30+ tokoh</span>
+                    <span class="bg-white/20 px-3 py-1 rounded-full">🎭 50+ tokoh</span>
                     <span class="bg-white/20 px-3 py-1 rounded-full">🏆 Skor</span>
                 </div>
                 <div class="mt-6 flex justify-end">
@@ -235,7 +280,10 @@
 
         <!-- Next Button -->
         <div class="text-center">
-            <button id="next-btn" onclick="nextQuestion()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-full shadow-lg transition transform hover:scale-105">
+            <div id="auto-bar-wrap" class="hidden max-w-xs mx-auto mb-3">
+                <div id="auto-bar" style="width:100%;"></div>
+            </div>
+            <button id="next-btn" onclick="skipToNext()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-full shadow-lg transition transform hover:scale-105">
                 Soal Berikutnya <i class="fas fa-arrow-right ml-2"></i>
             </button>
         </div>
@@ -272,7 +320,18 @@
                 </div>
             </div>
 
-            <p id="result-message" class="text-gray-600 italic mb-8 text-sm leading-relaxed"></p>
+            <p id="result-message" class="text-gray-600 italic mb-6 text-sm leading-relaxed"></p>
+
+            <!-- INSTAGRAM CTA -->
+            <div id="congrats-cta" class="instagram-cta rounded-2xl p-5 text-white text-center mb-6">
+                <div class="text-4xl mb-2" id="cta-emoji">🎉</div>
+                <p class="font-bold text-lg leading-snug" id="cta-title">Selamat telah menyelesaikan permainan!</p>
+                <p class="text-sm mt-2 opacity-90">📸 Screenshot hasil ini dan tag kami di Instagram!</p>
+                <div class="mt-3 bg-white/30 hover:bg-white/40 transition rounded-xl px-5 py-2 inline-block cursor-pointer" onclick="window.open('https://www.instagram.com/c.wijaya.t/','_blank')">
+                    <span class="font-extrabold text-xl tracking-tight">@c.wijaya.t</span>
+                </div>
+                <p class="text-xs mt-2 opacity-75">Tunjukkan kehebatanmu kepada dunia! 🌟✨</p>
+            </div>
 
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
                 <button id="play-again-btn" onclick="playAgain()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-full shadow-lg transition transform hover:scale-105">
@@ -444,6 +503,28 @@
         { q: "Gereja pertama berkumpul di kota?", opts: ["Antiokhia", "Roma", "Yerusalem", "Efesus"], ans: 2 },
         { q: "Paulus dan Silas dipenjara di kota mana dan berdoa hingga gempa terjadi?", opts: ["Tesalonika", "Filipi", "Korintus", "Efesus"], ans: 1 },
         { q: "Siapakah wanita penjual kain ungu yang percaya kepada Paulus di Filipi?", opts: ["Priskila", "Lidia", "Febe", "Dorkas"], ans: 1 },
+
+        // TAMBAHAN SOAL BARU
+        { q: "Siapakah nabi yang dilemparkan ke dalam sumur oleh saudara-saudaranya sebelum dijual ke Mesir?", opts: ["Yusuf", "Benjamin", "Ruben", "Yehuda"], ans: 0 },
+        { q: "Berapa anak laki-laki yang lahir dari Yakub (Israel)?", opts: ["10", "11", "12", "13"], ans: 2 },
+        { q: "Siapakah yang memimpin orang Israel kembali dari pembuangan Babel pertama kali?", opts: ["Ezra", "Nehemia", "Zerubabel", "Daniel"], ans: 2 },
+        { q: "Di manakah Yesus dibesarkan setelah keluarga-Nya kembali dari Mesir?", opts: ["Betlehem", "Kapernaum", "Nazaret", "Yerusalem"], ans: 2 },
+        { q: "Siapakah yang bertanya kepada Yesus 'apakah aku harus mengampuni saudaraku 7 kali?'", opts: ["Yohanes", "Yakobus", "Petrus", "Tomas"], ans: 2 },
+        { q: "Berapa roti dan berapa ikan yang Yesus gunakan untuk memberi makan 4000 orang?", opts: ["5 roti 2 ikan", "7 roti 3 ikan", "7 roti 7 ikan", "2 roti 7 ikan"], ans: 1 },
+        { q: "Siapakah perempuan yang menyentuh jubah Yesus dan sembuh dari penyakitnya?", opts: ["Maria Magdalena", "Marta", "Perempuan yang sakit pendarahan", "Dorkas"], ans: 2 },
+        { q: "Yesus mengusir berapa roh jahat dari seorang pria di Gerasa yang masuk ke kawanan babi?", opts: ["Satu", "Tujuh", "Satu legion", "Dua belas"], ans: 2 },
+        { q: "Siapakah yang membakar gulungan surat nubuat Yeremia?", opts: ["Nebukadnezar", "Yoyakim", "Zedekia", "Yosia"], ans: 1 },
+        { q: "Imam besar manakah yang memimpin saat Yesus diadili?", opts: ["Zakaria", "Hanas dan Kayafas", "Eli", "Ezra"], ans: 1 },
+        { q: "Hukum terbesar menurut Yesus adalah mengasihi Tuhan dan mengasihi?", opts: ["Musuh", "Sesamamu manusia", "Tuhan saja", "Keluarga"], ans: 1 },
+        { q: "Siapakah yang menulis Mazmur 91 tentang perlindungan Tuhan?", opts: ["Daud", "Asaf", "Tidak diketahui penulisnya", "Musa"], ans: 2 },
+        { q: "Berapa hari Yesus berada di bumi setelah kebangkitan sebelum naik ke surga?", opts: ["3 hari", "7 hari", "40 hari", "50 hari"], ans: 2 },
+        { q: "Siapakah diaken pertama yang dipilih gereja mula-mula?", opts: ["Petrus", "Yohanes", "Stefanus", "Filipus"], ans: 2 },
+        { q: "Filipus menginjili sida-sida (kasim) dari negeri mana?", opts: ["Etiopia", "Roma", "Persia", "Mesir"], ans: 0 },
+        { q: "Paulus lahir di kota?", opts: ["Yerusalem", "Antiokhia", "Tarsus", "Roma"], ans: 2 },
+        { q: "Siapakah wanita yang menyebutkan Yesus 'Anak Allah' saat mengandung dan dikunjungi Maria?", opts: ["Hana", "Elisabet", "Marta", "Maria Magdalena"], ans: 1 },
+        { q: "Kitab apakah yang berada persis di tengah Alkitab?", opts: ["Mazmur", "Ayub", "Amsal", "Pengkhotbah"], ans: 0 },
+        { q: "Siapakah yang menyumbang seluruh hartanya kepada gereja lalu jatuh mati karena berbohong?", opts: ["Barnabas", "Ananias dan Safira", "Yudas", "Simon Magus"], ans: 1 },
+        { q: "Dalam mimpi Firaun, berapa sapi gemuk dan sapi kurus yang dilihatnya?", opts: ["5 dan 5", "7 dan 7", "10 dan 10", "12 dan 12"], ans: 1 },
     ];
 
     // ============================================================
@@ -482,6 +563,28 @@
         { icons: "🌙⭐🌌", clue: "Orang Majus dari Timur yang mengikuti bintang mencari Yesus", name: "Orang Majus", opts: ["Orang Majus", "Gembala-gembala", "Simeon", "Yohanes Pembabtis"] },
         { icons: "🌳🧍💰", clue: "Pemungut cukai yang kecil tubuhnya, memanjat pohon ara untuk melihat Yesus", name: "Zakheus", opts: ["Zakheus", "Matius", "Lewi", "Simon"] },
         { icons: "🗿⛵😴", clue: "Tidur di kapal di tengah badai laut", name: "Yunus", opts: ["Yunus", "Petrus", "Paulus", "Yohanes"] },
+
+        // TOKOH TAMBAHAN BARU
+        { icons: "⛺🌟🙏🗺️", clue: "Bapak orang beriman, meninggalkan tanah airnya karena percaya kepada Tuhan", name: "Abraham", opts: ["Abraham", "Nuh", "Lot", "Yakub"] },
+        { icons: "😭⛓️👑🌾", clue: "Dijual oleh saudaranya, dipenjara, lalu menjadi penguasa Mesir", name: "Yusuf", opts: ["Yusuf", "Benjamin", "Ruben", "Yehuda"] },
+        { icons: "🤱🙏💛🕍", clue: "Ibu yang menangis berdoa kepada Tuhan agar dikaruniai seorang anak", name: "Hana", opts: ["Hana", "Naomi", "Maria", "Ester"] },
+        { icons: "🧴💧🌊👐", clue: "Menggantikan Elia, membuat kapak besi mengapung dan menyembuhkan orang kusta", name: "Elisa", opts: ["Elisa", "Elia", "Yesaya", "Yeremia"] },
+        { icons: "💔😭📖🙏", clue: "Nabi yang menangis, menulis surat Ratapan tentang kehancuran Yerusalem", name: "Yeremia", opts: ["Yeremia", "Yesaya", "Yehezkiel", "Hosea"] },
+        { icons: "👁️🌅✝️❤️", clue: "Rasul yang dikasihi Yesus, menulis injil, surat-surat, dan Wahyu", name: "Yohanes", opts: ["Yohanes", "Petrus", "Yakobus", "Andreas"] },
+        { icons: "👼✨🌸🙌", clue: "Ibu Yesus yang menerima kabar dari malaikat Gabriel bahwa ia akan mengandung", name: "Maria", opts: ["Maria", "Elisabet", "Marta", "Hana"] },
+        { icons: "⚰️🔓😱🎊", clue: "Saudara Maria dan Marta yang dibangkitkan Yesus setelah 4 hari meninggal", name: "Lazarus", opts: ["Lazarus", "Yairus", "Stefanus", "Nikodemus"] },
+        { icons: "🌋😩📜👑", clue: "Menderita kehilangan harta, anak, dan kesehatan namun tetap setia kepada Tuhan", name: "Ayub", opts: ["Ayub", "Abraham", "Daud", "Paulus"] },
+        { icons: "🏛️⚔️🦁🛡️", clue: "Pahlawan yang mati bersama ribuan orang Filistin dengan menghancurkan pilar kuil", name: "Simson", opts: ["Simson", "Gideon", "Daud", "Yosua"] },
+        { icons: "🎺📯🏰🎶", clue: "Pemimpin yang memimpin bangsa Israel mengelilingi tembok Yerikho hingga runtuh", name: "Yosua", opts: ["Yosua", "Kaleb", "Harun", "Gideon"] },
+        { icons: "🐏🔪⛰️🙅", clue: "Anak Abraham yang nyaris dikorbankan di gunung tapi diselamatkan Tuhan", name: "Ishak", opts: ["Ishak", "Ismael", "Yakub", "Esau"] },
+        { icons: "🤼‍♂️👼🌅🏷️", clue: "Bergulat dengan malaikat semalam suntuk dan namanya diubah menjadi Israel", name: "Yakub", opts: ["Yakub", "Esau", "Abraham", "Yusuf"] },
+        { icons: "🐍🗣️👩🍎", clue: "Wanita pertama yang diciptakan Allah dari tulang rusuk manusia pertama", name: "Hawa", opts: ["Hawa", "Sara", "Ribka", "Lea"] },
+        { icons: "🌈☔🕊️🫙", clue: "Orang pertama yang membuat perjanjian dengan Tuhan dengan tanda busur pelangi", name: "Nuh", opts: ["Nuh", "Abraham", "Musa", "Adam"] },
+        { icons: "🏃🌊💪🙏", clue: "Nelayan yang berjalan di atas air laut menuju Yesus", name: "Petrus", opts: ["Petrus", "Yohanes", "Andreas", "Yakobus"] },
+        { icons: "🧐📖✍️🕊️", clue: "Menulis lebih dari separuh kitab Perjanjian Baru termasuk surat Roma dan Galatia", name: "Paulus", opts: ["Paulus", "Yohanes", "Petrus", "Yakobus"] },
+        { icons: "🌺👑🎭🤫", clue: "Wanita cantik yang menjadi ratu, berani menghadap raja untuk menyelamatkan bangsanya", name: "Ester", opts: ["Ester", "Rut", "Maria", "Debora"] },
+        { icons: "🔭👁️🏔️🌅", clue: "Nabi yang bernubuat tentang kelahiran Yesus dari seorang perawan ('Imanuel')", name: "Yesaya", opts: ["Yesaya", "Yeremia", "Mikha", "Amos"] },
+        { icons: "🐕🌟💡🎆", clue: "Pemuda yang diurapi menjadi raja saat masih menggembalakan domba di Betlehem", name: "Daud", opts: ["Daud", "Saul", "Salomo", "Gideon"] },
     ];
 
     // ============================================================
@@ -495,6 +598,8 @@
     let timerInterval = null;
     let timeLeft = 30;
     let answered = false;
+    let currentCorrectIdx = 0;
+    let autoAdvanceTimer = null;
 
     // ============================================================
     // UTILITY
@@ -588,15 +693,20 @@
             clueText.classList.add('hidden');
         }
 
-        // Render options
+        // Render options (shuffled to avoid answer always being A)
         const container = document.getElementById('options-container');
         container.innerHTML = '';
-        const opts = q.opts;
-        opts.forEach((opt, i) => {
+        const originalOpts = q.opts;
+        const correctOrigIdx = q.ans !== undefined ? q.ans : originalOpts.indexOf(q.name);
+        let optsWithIdx = originalOpts.map((opt, i) => ({ opt, origIdx: i }));
+        optsWithIdx = shuffle(optsWithIdx);
+        currentCorrectIdx = optsWithIdx.findIndex(o => o.origIdx === correctOrigIdx);
+
+        optsWithIdx.forEach(({ opt }, i) => {
             const btn = document.createElement('button');
             btn.className = 'opt-btn';
             btn.innerHTML = `<span class="inline-block w-7 h-7 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold text-center leading-7 mr-3">${['A','B','C','D'][i]}</span>${opt}`;
-            btn.onclick = () => checkAnswer(i, q.ans !== undefined ? q.ans : opts.indexOf(q.name));
+            btn.onclick = () => checkAnswer(i, currentCorrectIdx);
             container.appendChild(btn);
         });
 
@@ -642,10 +752,11 @@
         document.getElementById('score-wrong').textContent = `❌ ${wrong}`;
         disableOptions();
         const q = questions[currentQ];
-        const correctIdx = q.ans !== undefined ? q.ans : q.opts.indexOf(q.name);
-        highlightAnswer(correctIdx, -1);
-        showFeedback(false, q.opts[correctIdx], true);
+        const correctAnswer = q.opts[q.ans !== undefined ? q.ans : q.opts.indexOf(q.name)];
+        highlightAnswer(currentCorrectIdx, -1);
+        showFeedback(false, correctAnswer, true);
         show('next-btn');
+        startAutoAdvance(2500);
     }
 
     // ============================================================
@@ -662,10 +773,20 @@
         document.getElementById('score-correct').textContent = `✅ ${correct}`;
         document.getElementById('score-wrong').textContent = `❌ ${wrong}`;
 
+        // Animate the selected button
+        const btns = document.querySelectorAll('.opt-btn');
+        if (btns[selected]) {
+            const animClass = isCorrect ? 'pop-in' : 'shake';
+            btns[selected].classList.add(animClass);
+            btns[selected].addEventListener('animationend', () => btns[selected].classList.remove(animClass), { once: true });
+        }
+
         highlightAnswer(correctIdx, selected);
         const q = questions[currentQ];
-        showFeedback(isCorrect, q.opts[correctIdx], false);
+        const correctAnswer = q.opts[q.ans !== undefined ? q.ans : q.opts.indexOf(q.name)];
+        showFeedback(isCorrect, correctAnswer, false);
         show('next-btn');
+        startAutoAdvance(isCorrect ? 1500 : 2500);
     }
 
     function disableOptions() {
@@ -709,9 +830,36 @@
     }
 
     // ============================================================
+    // AUTO-ADVANCE
+    // ============================================================
+    function startAutoAdvance(delayMs) {
+        const bar = document.getElementById('auto-bar');
+        const wrap = document.getElementById('auto-bar-wrap');
+        wrap.classList.remove('hidden');
+        bar.style.transition = 'none';
+        bar.style.width = '100%';
+        bar.offsetWidth; // Force reflow so CSS transition restarts correctly
+        bar.style.transition = `width ${delayMs}ms linear`;
+        bar.style.width = '0%';
+        clearAutoAdvance();
+        autoAdvanceTimer = setTimeout(() => nextQuestion(), delayMs);
+    }
+
+    function clearAutoAdvance() {
+        if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+    }
+
+    function skipToNext() {
+        clearAutoAdvance();
+        nextQuestion();
+    }
+
+    // ============================================================
     // NEXT QUESTION
     // ============================================================
     function nextQuestion() {
+        clearAutoAdvance();
+        document.getElementById('auto-bar-wrap').classList.add('hidden');
         currentQ++;
         if (currentQ >= questions.length) {
             showResults();
@@ -760,6 +908,17 @@
         document.getElementById('grade-circle').style.cssText = gradeColor;
         document.getElementById('result-message').textContent = message;
 
+        // Instagram CTA - always shown
+        const ctaEmojis = { A: '🏆', B: '🌟', C: '💪', D: '📖' };
+        const ctaTitles = {
+            A: 'Luar biasa! Kamu juara Alkitab! 🏆',
+            B: 'Kerja bagus! Terus semangat! 🌟',
+            C: 'Kamu sudah berusaha! Terus belajar! 💪',
+            D: 'Jangan menyerah! Coba lagi! 📖'
+        };
+        document.getElementById('cta-emoji').textContent = ctaEmojis[grade] || '🎉';
+        document.getElementById('cta-title').textContent = ctaTitles[grade] || 'Selamat telah menyelesaikan permainan!';
+
         // Save best scores
         const key = gameMode === 'quiz' ? 'best_quiz' : 'best_tokoh';
         const prev = parseInt(localStorage.getItem(key) || '0');
@@ -767,8 +926,8 @@
         const gp = parseInt(localStorage.getItem('games_played') || '0') + 1;
         localStorage.setItem('games_played', gp);
 
-        // Confetti for high scores
-        if (pct >= 75) launchConfetti();
+        // Confetti always launched to celebrate completion
+        launchConfetti();
     }
 
     function playAgain() { startGame(gameMode); }
