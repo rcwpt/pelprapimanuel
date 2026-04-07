@@ -200,7 +200,7 @@
             <div class="mode-card text-white shadow-2xl" style="background: linear-gradient(135deg, #1d4ed8, #4f46e5);" onclick="startGame('quiz')">
                 <div class="text-5xl mb-4">📖</div>
                 <h3 class="text-2xl font-bold mb-2">Kuis Alkitab</h3>
-                <p class="text-blue-200 text-sm mb-4">15 pertanyaan pilihan ganda dari 120+ soal seputar Alkitab Perjanjian Lama & Baru.</p>
+                <p class="text-blue-200 text-sm mb-4">15 pertanyaan pilihan ganda dari 135+ soal seputar Alkitab Perjanjian Lama & Baru.</p>
                 <div class="flex gap-3 text-xs">
                     <span class="bg-white/20 px-3 py-1 rounded-full">⏱️ 30 detik/soal</span>
                     <span class="bg-white/20 px-3 py-1 rounded-full">📝 15 soal</span>
@@ -776,7 +776,9 @@
         // Animate the selected button
         const btns = document.querySelectorAll('.opt-btn');
         if (btns[selected]) {
-            btns[selected].classList.add(isCorrect ? 'pop-in' : 'shake');
+            const animClass = isCorrect ? 'pop-in' : 'shake';
+            btns[selected].classList.add(animClass);
+            btns[selected].addEventListener('animationend', () => btns[selected].classList.remove(animClass), { once: true });
         }
 
         highlightAnswer(correctIdx, selected);
@@ -836,16 +838,19 @@
         wrap.classList.remove('hidden');
         bar.style.transition = 'none';
         bar.style.width = '100%';
-        // Force reflow so transition applies properly
-        bar.offsetWidth;
+        bar.offsetWidth; // Force reflow so CSS transition restarts correctly
         bar.style.transition = `width ${delayMs}ms linear`;
         bar.style.width = '0%';
-        if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+        clearAutoAdvance();
         autoAdvanceTimer = setTimeout(() => nextQuestion(), delayMs);
     }
 
-    function skipToNext() {
+    function clearAutoAdvance() {
         if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+    }
+
+    function skipToNext() {
+        clearAutoAdvance();
         nextQuestion();
     }
 
@@ -853,7 +858,7 @@
     // NEXT QUESTION
     // ============================================================
     function nextQuestion() {
-        if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+        clearAutoAdvance();
         document.getElementById('auto-bar-wrap').classList.add('hidden');
         currentQ++;
         if (currentQ >= questions.length) {
