@@ -153,6 +153,72 @@
             left: 50%;
             transform: translateX(-50%);
         }
+
+        /* SCROLL TO TOP */
+        #scroll-top-btn {
+            position: fixed;
+            bottom: 56px;
+            right: 16px;
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        #scroll-top-btn.visible { opacity: 1; pointer-events: auto; }
+
+        /* MODAL */
+        #schedule-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 9990;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        #schedule-modal.open { display: flex; }
+        #schedule-modal .modal-box {
+            background: white;
+            border-radius: 1rem;
+            max-width: 420px;
+            width: 100%;
+            overflow: hidden;
+            animation: modalIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* FILTER BUTTONS */
+        .filter-btn { transition: all 0.2s ease; }
+        .filter-btn.active { background-color: #4f46e5; color: white; }
+
+        /* BIBLE GAME */
+        .quiz-option {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+            background: white;
+        }
+        .quiz-option:hover:not(:disabled) { border-color: #6366f1; background: #eef2ff; color: #4338ca; }
+        .quiz-option.correct { background: #d1fae5; border-color: #10b981; color: #065f46; }
+        .quiz-option.wrong   { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .quiz-option:disabled { cursor: not-allowed; }
+
+        @keyframes cardPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+        .card-pulse { animation: cardPulse 0.4s ease; }
+
+        /* MEMBER CARD HOVER */
+        .member-item { transition: all 0.2s ease; cursor: default; }
+        .member-item:hover { background: #e0e7ff; color: #3730a3; transform: scale(1.03); border-radius: 0.375rem; }
+
+        /* Schedule card clickable */
+        .schedule-card-clickable { cursor: pointer; }
+        .schedule-card-clickable:hover:not(.past-event) { transform: scale(1.03) translateY(-2px); }
     </style>
 </head>
 <body class="text-gray-800">
@@ -378,6 +444,21 @@
             </h2>
             <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full font-bold">Tahun 2026</span>
         </div>
+
+        <!-- Month Filter -->
+        <div class="flex flex-wrap gap-2 mb-6" id="month-filters">
+            <button class="filter-btn active text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-300 bg-indigo-600 text-white" data-month="all" onclick="filterSchedule(this)">Semua</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="1" onclick="filterSchedule(this)">Feb</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="2" onclick="filterSchedule(this)">Mar</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="3" onclick="filterSchedule(this)">Apr</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="4" onclick="filterSchedule(this)">Mei</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="5" onclick="filterSchedule(this)">Jun</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="6" onclick="filterSchedule(this)">Jul</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="7" onclick="filterSchedule(this)">Agu</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="8" onclick="filterSchedule(this)">Sep</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="9" onclick="filterSchedule(this)">Okt</button>
+            <button class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-indigo-400" data-month="10" onclick="filterSchedule(this)">Nov</button>
+        </div>
         
         <!-- Grid Container - Content populated by JS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="schedule-grid">
@@ -390,10 +471,10 @@
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500 mb-8">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                <div class="p-2 bg-gray-50 rounded">1. Rezhky Christian</div><div class="p-2 bg-gray-50 rounded">2. Laudya Iroth</div><div class="p-2 bg-gray-50 rounded">3. Ribka Sumolang</div><div class="p-2 bg-gray-50 rounded">4. Delon Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">5. Rifky Tidayoh</div><div class="p-2 bg-gray-50 rounded">6. Briando Maki</div><div class="p-2 bg-gray-50 rounded">7. Josafat Tidayoh</div><div class="p-2 bg-gray-50 rounded">8. Elsya Mokobimbing</div>
-                <div class="p-2 bg-gray-50 rounded">9. Efraim Sumolang</div><div class="p-2 bg-gray-50 rounded">10. Maria Manampiring</div><div class="p-2 bg-gray-50 rounded">11. Avrilia Tidayoh</div><div class="p-2 bg-gray-50 rounded">12. Citra Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">13. Novita Tidayoh</div><div class="p-2 bg-gray-50 rounded">14. Kezia Jacob</div><div class="p-2 bg-gray-50 rounded">15. Gloria Rembet</div>
+                <div class="p-2 bg-gray-50 rounded member-item">1. Rezhky Christian</div><div class="p-2 bg-gray-50 rounded member-item">2. Laudya Iroth</div><div class="p-2 bg-gray-50 rounded member-item">3. Ribka Sumolang</div><div class="p-2 bg-gray-50 rounded member-item">4. Delon Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded member-item">5. Rifky Tidayoh</div><div class="p-2 bg-gray-50 rounded member-item">6. Briando Maki</div><div class="p-2 bg-gray-50 rounded member-item">7. Josafat Tidayoh</div><div class="p-2 bg-gray-50 rounded member-item">8. Elsya Mokobimbing</div>
+                <div class="p-2 bg-gray-50 rounded member-item">9. Efraim Sumolang</div><div class="p-2 bg-gray-50 rounded member-item">10. Maria Manampiring</div><div class="p-2 bg-gray-50 rounded member-item">11. Avrilia Tidayoh</div><div class="p-2 bg-gray-50 rounded member-item">12. Citra Tidayoh</div>
+                <div class="p-2 bg-gray-50 rounded member-item">13. Novita Sumolang</div><div class="p-2 bg-gray-50 rounded member-item">14. Kezia Jacob</div><div class="p-2 bg-gray-50 rounded member-item">15. Gloria Rembet</div>
             </div>
         </div>
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
@@ -405,6 +486,92 @@
             </div>
         </div>
     </section>
+
+    <!-- BIBLE QUIZ GAME SECTION -->
+    <section class="max-w-4xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-2xl shadow-xl border-t-8 border-yellow-500 overflow-hidden">
+            <div class="bg-gradient-to-r from-yellow-500 to-amber-600 p-6 text-white text-center">
+                <h2 class="text-2xl md:text-3xl font-bold mb-1"><i class="fas fa-bible mr-2"></i>Kuis Alkitab</h2>
+                <p class="text-yellow-100 text-sm">Uji pengetahuan Alkitabmu! Pilih jawaban yang benar.</p>
+            </div>
+            <div class="p-6">
+                <!-- Progress & Score -->
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm text-gray-500 font-medium">Pertanyaan <span id="q-current" class="font-bold text-indigo-700">1</span> / <span id="q-total" class="font-bold text-indigo-700">15</span></span>
+                    <span class="bg-yellow-100 text-yellow-800 font-bold px-4 py-1 rounded-full text-sm shadow-sm">🏆 Skor: <span id="q-score">0</span></span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                    <div class="bg-gradient-to-r from-yellow-400 to-amber-500 h-2.5 rounded-full transition-all duration-700" id="q-progress" style="width: 0%"></div>
+                </div>
+
+                <!-- Question Card -->
+                <div id="q-card" class="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl p-6 shadow-2xl mb-5 min-h-[110px] flex items-center justify-center text-white text-center relative overflow-hidden">
+                    <div class="absolute top-2 right-3 text-white/20 text-6xl font-black select-none">?</div>
+                    <p class="text-base md:text-lg font-bold leading-snug z-10 relative" id="q-question">Memuat pertanyaan...</p>
+                </div>
+
+                <!-- Options -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4" id="q-options"></div>
+
+                <!-- Result Message -->
+                <div id="q-result" class="hidden mt-2 p-4 rounded-xl text-center font-bold text-base"></div>
+
+                <!-- Verse hint (shown after answering) -->
+                <div id="q-verse" class="hidden mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-xl text-sm text-yellow-900 text-center italic"></div>
+
+                <!-- Action Buttons -->
+                <button id="q-next" class="hidden w-full mt-4 bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 active:scale-95 transition text-sm md:text-base" onclick="nextQuestion()">
+                    Pertanyaan Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+                <div id="q-final" class="hidden text-center mt-4">
+                    <div class="text-5xl mb-3" id="q-final-emoji">🎉</div>
+                    <p class="text-xl font-bold text-gray-800 mb-1" id="q-final-msg"></p>
+                    <p class="text-gray-500 text-sm mb-4" id="q-final-sub"></p>
+                    <button class="bg-yellow-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-yellow-600 active:scale-95 transition shadow-md" onclick="restartGame()">
+                        <i class="fas fa-redo mr-2"></i> Main Lagi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Detail Modal -->
+    <div id="schedule-modal" onclick="closeModal(event)">
+        <div class="modal-box shadow-2xl">
+            <div class="p-5" id="modal-header-bar">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest mb-1 opacity-70" id="modal-badge-text">Ibadah Kunjungan</p>
+                        <h3 class="text-xl font-extrabold text-white" id="modal-title">Tuan Rumah</h3>
+                    </div>
+                    <button onclick="document.getElementById('schedule-modal').classList.remove('open')" class="text-white/70 hover:text-white text-2xl leading-none">&times;</button>
+                </div>
+            </div>
+            <div class="p-5 space-y-3">
+                <div class="flex items-center gap-3 text-gray-700">
+                    <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-calendar text-indigo-600 text-sm"></i></div>
+                    <span class="font-semibold" id="modal-date">—</span>
+                </div>
+                <div class="flex items-center gap-3 text-gray-700">
+                    <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marker-alt text-red-500 text-sm"></i></div>
+                    <span id="modal-loc">—</span>
+                </div>
+                <div class="flex items-center gap-3 text-gray-700">
+                    <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-clock text-yellow-600 text-sm"></i></div>
+                    <span id="modal-time">17.00 WIT</span>
+                </div>
+                <div class="bg-indigo-50 rounded-lg p-3 border border-indigo-100 text-indigo-800 text-sm italic text-center" id="modal-verse"></div>
+                <button onclick="document.getElementById('schedule-modal').classList.remove('open')" class="w-full mt-2 bg-indigo-600 text-white py-2.5 rounded-xl font-bold hover:bg-indigo-700 transition text-sm">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll To Top Button -->
+    <button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="w-11 h-11 bg-indigo-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-indigo-700 active:scale-90 transition"
+        aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Headline Ticker -->
     <div class="ticker-label">INFO PELPRAP</div>
@@ -419,14 +586,14 @@
             { date: '2026-02-22', host: 'GABUNGAN WILAYAH', loc: 'GPDI Efata', time: '16.00 WIT', type: 'special' }, 
             { date: '2026-03-07', host: 'Laudya Iroth', loc: 'Kilo 7' }, 
             { date: '2026-03-21', host: 'Ribka Sumolang', loc: 'Nawaripi' }, 
-            { date: '2026-04-04', host: 'Elsya Mokobimbing', loc: 'Pastori' }, 
+            { date: '2026-04-19', host: 'Elsya Mokobimbing', loc: 'Pastori' }, 
             { date: '2026-04-18', host: 'Efraim Sumolang', loc: 'Nawaripi' }, 
             { date: '2026-05-09', host: 'Avrilia Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-05-14', host: 'DOA 10 MALAM', loc: 'Pentakosta', sub: '14-23 Mei 2026', type: 'doa' }, 
             { date: '2026-06-06', host: 'Gloria Rembet', loc: 'Pastori' }, 
             { date: '2026-06-20', host: 'Josafat Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-07-04', host: 'Briando Maki', loc: 'Nawaripi' }, 
-            { date: '2026-07-18', host: 'Novita Tidayoh', loc: 'Nawaripi' }, 
+            { date: '2026-07-18', host: 'Novita Sumolang', loc: 'Nawaripi' }, 
             { date: '2026-08-08', host: 'Rifky Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-08-22', host: 'Kezia Jacob', loc: 'Pastori' }, 
             { date: '2026-09-05', host: 'Citra Tidayoh', loc: 'Busiri ujung' }, 
@@ -473,7 +640,7 @@
                 if (event.type === 'special') {
                     // Special Card (Gabungan)
                     cardHTML = `
-                        <div class="bg-fuchsia-50 rounded-xl shadow-lg overflow-hidden schedule-card border-fuchsia-600 flex flex-col ${pastClass}" data-date="${event.date}">
+                        <div class="bg-fuchsia-50 rounded-xl shadow-lg overflow-hidden schedule-card border-fuchsia-600 flex flex-col ${pastClass} schedule-card-clickable" data-date="${event.date}" data-host="${event.host}" data-loc="${event.loc}" data-time="${event.time || '16.00 WIT'}" data-type="special" onclick="openModal(this)">
                             <div class="bg-fuchsia-600 text-white p-3 flex justify-between items-center">
                                 <span class="font-bold text-sm sm:text-base">${dateStr}</span>
                                 <i class="fas fa-church opacity-70"></i>
@@ -506,9 +673,9 @@
                             </div>
                         </div>`;
                 } else {
-                    // Standard Card
+                    // Standard Card with click handler
                     cardHTML = `
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card ${colors.border} ${pastClass}" data-date="${event.date}">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card ${colors.border} ${pastClass} schedule-card-clickable" data-date="${event.date}" data-host="${event.host}" data-loc="${event.loc}" data-time="17.00 WIT" onclick="openModal(this)">
                             <div class="${colors.bg} text-white p-3 flex justify-between items-center">
                                 <span class="font-bold text-sm sm:text-base">${dateStr}</span>
                                 <i class="${colors.icon} opacity-50"></i>
@@ -518,10 +685,11 @@
                                     <i class="fas fa-user ${colors.text} w-6"></i>
                                     <span class="font-semibold text-gray-700 text-sm">${event.host}</span>
                                 </div>
-                                <div class="flex items-center">
+                                <div class="flex items-center mb-3">
                                     <i class="fas fa-map-marker-alt text-gray-400 w-6"></i>
                                     <span class="text-xs text-gray-500">${event.loc}</span>
                                 </div>
+                                <div class="text-center text-xs text-indigo-400 font-medium"><i class="fas fa-hand-pointer mr-1"></i>Klik untuk detail</div>
                             </div>
                         </div>`;
                 }
@@ -628,11 +796,210 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderSchedule(); // Render first!
+            renderSchedule();
             updateDashboard();
             setInterval(updateDashboard, 1000); 
-            setInterval(moveSlider, 5000); 
+            setInterval(moveSlider, 5000);
+            initGame();
+
+            // Scroll-to-top visibility
+            window.addEventListener('scroll', () => {
+                const btn = document.getElementById('scroll-top-btn');
+                if (window.scrollY > 400) btn.classList.add('visible');
+                else btn.classList.remove('visible');
+            });
         });
+
+        // ── SCHEDULE FILTER ────────────────────────────────────────
+        function filterSchedule(btn) {
+            const month = btn.dataset.month;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active', 'bg-indigo-600', 'text-white');
+                b.classList.add('bg-white', 'text-gray-600');
+            });
+            btn.classList.add('active', 'bg-indigo-600', 'text-white');
+            btn.classList.remove('bg-white', 'text-gray-600');
+
+            document.querySelectorAll('#schedule-grid > div').forEach(card => {
+                if (month === 'all') {
+                    card.style.display = '';
+                } else {
+                    const d = new Date(card.dataset.date);
+                    card.style.display = (d.getMonth() === parseInt(month)) ? '' : 'none';
+                }
+            });
+        }
+
+        // ── MODAL ──────────────────────────────────────────────────
+        const encouragements = [
+            '"Sebab itu, saudara-saudaraku, jadilah teguh, jangan goyah." — 1 Kor 15:58',
+            '"Tuhan adalah gembalaku, takkan kekurangan aku." — Mazmur 23:1',
+            '"Kuatkan dan teguhkan hatimu, janganlah takut." — Yosua 1:9',
+            '"Kasihilah Tuhan Allahmu dengan segenap hatimu." — Mat 22:37',
+            '"Segala perkara dapat kutanggung di dalam Dia." — Filipi 4:13',
+            '"Tuhan adalah terangku dan keselamatanku." — Mazmur 27:1',
+            '"Percayalah kepada Tuhan dengan segenap hatimu." — Ams 3:5',
+        ];
+        function openModal(card) {
+            if (card.classList.contains('past-event')) return;
+            const host = card.dataset.host;
+            const loc = card.dataset.loc;
+            const time = card.dataset.time || '17.00 WIT';
+            const dateRaw = card.dataset.date;
+            const d = new Date(dateRaw);
+            const dateStr = d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            const isSpecial = card.dataset.type === 'special';
+
+            const headerBar = document.getElementById('modal-header-bar');
+            headerBar.className = 'p-5 ' + (isSpecial ? 'bg-fuchsia-600' : 'bg-indigo-600');
+            document.getElementById('modal-badge-text').textContent = isSpecial ? 'Ibadah Gabungan Wilayah' : 'Ibadah Kunjungan';
+            document.getElementById('modal-title').textContent = host;
+            document.getElementById('modal-date').textContent = dateStr;
+            document.getElementById('modal-loc').textContent = loc;
+            document.getElementById('modal-time').textContent = time;
+            const verse = encouragements[Math.floor(Math.random() * encouragements.length)];
+            document.getElementById('modal-verse').textContent = verse;
+
+            document.getElementById('schedule-modal').classList.add('open');
+        }
+        function closeModal(e) {
+            if (e.target === document.getElementById('schedule-modal'))
+                document.getElementById('schedule-modal').classList.remove('open');
+        }
+
+        // ── BIBLE QUIZ GAME ────────────────────────────────────────
+        const bibleQuestions = [
+            { q: "Siapakah yang membunuh raksasa Goliat?", opts: ["Musa", "Saul", "Daud", "Salomo"], ans: 2, verse: "1 Samuel 17:50 — Daud mengalahkan Goliat dengan ketapel dan batu." },
+            { q: "Berapa lama Yesus berpuasa di padang gurun?", opts: ["7 hari", "20 hari", "30 hari", "40 hari 40 malam"], ans: 3, verse: "Matius 4:2 — Yesus berpuasa 40 hari 40 malam." },
+            { q: "Di kota manakah Yesus Kristus dilahirkan?", opts: ["Yerusalem", "Betlehem", "Nazaret", "Kapernaum"], ans: 1, verse: "Lukas 2:11 — Lahirlah bagimu Juruselamat, yaitu Kristus, Tuhan, di kota Daud." },
+            { q: "Siapakah yang membangun bahtera besar dalam Alkitab?", opts: ["Abraham", "Musa", "Nuh", "Yosua"], ans: 2, verse: "Kejadian 6:14 — Buatlah bagimu sebuah bahtera dari kayu gofir." },
+            { q: "Berapa jumlah murid (rasul) Yesus?", opts: ["7", "10", "12", "15"], ans: 2, verse: "Markus 3:14 — Ia menetapkan dua belas orang untuk menyertai Dia." },
+            { q: "Siapakah yang mengkhianati Yesus dengan 30 keping perak?", opts: ["Petrus", "Yohanes", "Tomas", "Yudas Iskariot"], ans: 3, verse: "Matius 26:15 — Mereka membayar tiga puluh uang perak kepadanya." },
+            { q: "Di sungai manakah Yesus dibaptis oleh Yohanes?", opts: ["Sungai Nil", "Sungai Tigris", "Sungai Yordan", "Sungai Efrat"], ans: 2, verse: "Matius 3:13 — Yesus datang dari Galilea ke Yordan untuk dibaptis." },
+            { q: "Apa yang diciptakan Tuhan pada hari pertama penciptaan?", opts: ["Langit dan bumi", "Terang", "Ikan dan burung", "Manusia"], ans: 1, verse: "Kejadian 1:3 — Berfirmanlah Allah: Jadilah terang. Lalu terang itu jadi." },
+            { q: "Berapa lama Yunus berada di dalam perut ikan besar?", opts: ["1 hari 1 malam", "3 hari 3 malam", "7 hari", "40 hari"], ans: 1, verse: "Yunus 1:17 — Yunus tinggal di dalam perut ikan itu tiga hari tiga malam." },
+            { q: "Siapakah raja Israel yang pertama?", opts: ["Daud", "Salomo", "Saul", "Yosafat"], ans: 2, verse: "1 Samuel 10:24 — Saul diurapi menjadi raja atas Israel." },
+            { q: "Di gunung manakah Tuhan memberikan 10 Perintah kepada Musa?", opts: ["Gunung Zion", "Gunung Karmel", "Gunung Sinai", "Gunung Tabor"], ans: 2, verse: "Keluaran 20:1 — Allah berfirman... di Gunung Sinai." },
+            { q: "Siapakah yang membawa bangsa Israel keluar dari tanah Mesir?", opts: ["Abraham", "Yosef", "Musa", "Harun"], ans: 2, verse: "Keluaran 12:51 — Tuhan membawa Israel keluar dari Mesir di bawah pimpinan Musa." },
+            { q: "Kitab manakah yang paling panjang dalam Alkitab?", opts: ["Yesaya", "Kejadian", "Mazmur", "Yeremia"], ans: 2, verse: "Mazmur memiliki 150 pasal, menjadikannya kitab terpanjang dalam Alkitab." },
+            { q: "Siapakah yang menulis sebagian besar surat-surat dalam Perjanjian Baru?", opts: ["Petrus", "Paulus", "Yohanes", "Yakobus"], ans: 1, verse: "Paulus menulis 13 surat dalam Perjanjian Baru, terbanyak dari rasul manapun." },
+            { q: "Dalam perumpamaan tentang anak yang hilang, apa yang dilakukan sang ayah saat anaknya pulang?", opts: ["Memarahinya", "Mengusirnya", "Menyambutnya dengan sukacita", "Menghukumnya"], ans: 2, verse: "Lukas 15:20 — Sementara ia masih jauh, ayahnya melihatnya... berlari... memeluknya." },
+        ];
+
+        let qIndex = 0;
+        let qScore = 0;
+        let qAnswered = false;
+        let qOrder = [];
+
+        function shuffleArray(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function initGame() {
+            qIndex = 0;
+            qScore = 0;
+            qAnswered = false;
+            qOrder = shuffleArray([...Array(bibleQuestions.length).keys()]);
+            document.getElementById('q-total').textContent = bibleQuestions.length;
+            document.getElementById('q-final').classList.add('hidden');
+            document.getElementById('q-next').classList.add('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = bibleQuestions[qOrder[qIndex]];
+            qAnswered = false;
+
+            document.getElementById('q-current').textContent = qIndex + 1;
+            document.getElementById('q-score').textContent = qScore;
+            document.getElementById('q-progress').style.width = (qIndex / bibleQuestions.length * 100) + '%';
+            document.getElementById('q-question').textContent = q.q;
+            document.getElementById('q-result').classList.add('hidden');
+            document.getElementById('q-verse').classList.add('hidden');
+            document.getElementById('q-next').classList.add('hidden');
+            document.getElementById('q-final').classList.add('hidden');
+
+            // Pulse animation on card
+            const card = document.getElementById('q-card');
+            card.classList.remove('card-pulse');
+            void card.offsetWidth; // reflow
+            card.classList.add('card-pulse');
+
+            const optContainer = document.getElementById('q-options');
+            optContainer.innerHTML = '';
+            q.opts.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerHTML = `<span class="inline-block w-6 h-6 mr-2 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold text-center leading-6">${['A','B','C','D'][i]}</span>${opt}`;
+                btn.onclick = () => answerQuestion(i, q.ans, q.verse);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function answerQuestion(chosen, correct, verse) {
+            if (qAnswered) return;
+            qAnswered = true;
+
+            const btns = document.querySelectorAll('.quiz-option');
+            btns.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === correct) btn.classList.add('correct');
+                else if (i === chosen) btn.classList.add('wrong');
+            });
+
+            const result = document.getElementById('q-result');
+            result.classList.remove('hidden');
+            if (chosen === correct) {
+                qScore++;
+                document.getElementById('q-score').textContent = qScore;
+                result.textContent = '✅ Benar! Luar biasa!';
+                result.className = 'mt-2 p-4 rounded-xl text-center font-bold text-base bg-green-100 text-green-800';
+            } else {
+                result.textContent = `❌ Salah. Jawaban yang benar: ${bibleQuestions[qOrder[qIndex]].opts[correct]}`;
+                result.className = 'mt-2 p-4 rounded-xl text-center font-bold text-base bg-red-100 text-red-800';
+            }
+
+            const verseEl = document.getElementById('q-verse');
+            verseEl.textContent = verse;
+            verseEl.classList.remove('hidden');
+
+            if (qIndex < bibleQuestions.length - 1) {
+                document.getElementById('q-next').classList.remove('hidden');
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function nextQuestion() {
+            qIndex++;
+            renderQuestion();
+        }
+
+        function showFinalResult() {
+            const total = bibleQuestions.length;
+            const pct = Math.round(qScore / total * 100);
+            let emoji = '😊', msg = 'Kerja Bagus!', sub = '';
+            if (pct === 100) { emoji = '🏆'; msg = 'Sempurna! Luar Biasa!'; sub = 'Kamu menjawab semua pertanyaan dengan benar!'; }
+            else if (pct >= 80) { emoji = '🎉'; msg = 'Hebat!'; sub = `Skor kamu ${qScore} dari ${total}. Terus belajar Firman Tuhan!`; }
+            else if (pct >= 50) { emoji = '📖'; msg = 'Cukup Baik!'; sub = `Skor kamu ${qScore} dari ${total}. Rajin membaca Alkitab ya!`; }
+            else { emoji = '💪'; msg = 'Semangat Belajar!'; sub = `Skor kamu ${qScore} dari ${total}. Jangan menyerah, baca Alkitab setiap hari!`; }
+
+            document.getElementById('q-progress').style.width = '100%';
+            document.getElementById('q-final-emoji').textContent = emoji;
+            document.getElementById('q-final-msg').textContent = msg;
+            document.getElementById('q-final-sub').textContent = sub;
+            document.getElementById('q-final').classList.remove('hidden');
+            document.getElementById('q-next').classList.add('hidden');
+        }
+
+        function restartGame() {
+            initGame();
+        }
     </script>
 </body>
 </html>
