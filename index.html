@@ -414,7 +414,7 @@
         <div class="bg-white rounded-xl shadow-xl p-8 border-t-8 border-indigo-600 relative overflow-hidden">
             <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Struktur Organisasi</h2>
             <div class="flex flex-col items-center relative z-10 w-full">
-                <!-- Pembina & Ketua (Same structure) -->
+                <!-- Pembina & Ketua -->
                 <div class="w-full max-w-md relative mb-8 flex flex-col items-center">
                     <div class="bg-indigo-900 text-white px-6 py-4 rounded-lg shadow-lg border-2 border-indigo-700 w-full text-center relative z-10">
                         <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider mb-1">Pembina</p>
@@ -485,7 +485,7 @@
                 <i class="fas fa-info-circle text-blue-500 mr-3 text-xl"></i>
                 <div>
                     <p class="font-bold text-blue-800">Informasi Perubahan Jadwal</p>
-                    <p class="text-sm text-blue-700">Mulai 21 Februari 2026, jadwal petugas ibadah bergeser ke pertemuan berikutnya (selisih 2 minggu) karena adanya Ibadah Gabungan Wilayah.</p>
+                    <p class="text-sm text-blue-700">Mulai 21 Februari 2026, jadwal petugas ibadah bergeser ke pertemuan berikutnya (selisih 2 minggu) karena adanya Ibadah Gabungan Wilayah dan Penyesuaian Jadwal Doa 10 Malam.</p>
                 </div>
             </div>
         </div>
@@ -555,40 +555,42 @@
 
     <!-- LOGIC -->
     <script>
+        // Data Jadwal yang Telah Disesuaikan Berdasarkan Semua Pergeseran
         const scheduleData = [
             { date: '2026-02-07', host: 'Pastori', loc: 'G. Gereja Km.9' },
             { date: '2026-02-22', host: 'GABUNGAN WILAYAH', loc: 'GPDI Efata', time: '16.00 WIT', type: 'special' }, 
             { date: '2026-03-07', host: 'Laudya Iroth', loc: 'Kilo 7' }, 
             { date: '2026-03-21', host: 'Ribka Sumolang', loc: 'Nawaripi' }, 
-            { date: '2026-04-18', host: 'Elsya Mokobimbing', loc: 'Pastori' }, 
-            { date: '2026-05-02', host: 'Efraim Sumolang', loc: 'Nawaripi' }, 
-            { date: '2026-05-23', host: 'Avrilia Tidayoh', loc: 'Busiri ujung' }, 
-            { date: '2026-05-28', host: 'DOA 10 MALAM', loc: 'Pentakosta', sub: '28 Mei - 6 Juni 2026', type: 'doa' }, 
+            { date: '2026-04-04', host: 'Elsya Mokobimbing', loc: 'Pastori' }, 
+            { date: '2026-04-18', host: 'Efraim Sumolang', loc: 'Nawaripi' }, 
+            { date: '2026-05-14', host: 'DOA 10 MALAM', loc: 'Pentakosta', sub: '14-23 Mei 2026', type: 'doa' }, 
+            { date: '2026-06-06', host: 'Avrilia Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-06-20', host: 'Gloria Rembet', loc: 'Pastori' }, 
             { date: '2026-07-04', host: 'Josafat Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-07-18', host: 'Briando Maki', loc: 'Nawaripi' }, 
-            { date: '2026-08-01', host: 'Novita Sumolang', loc: 'Nawaripi' }, 
+            { date: '2026-08-08', host: 'Novita Tidayoh', loc: 'Nawaripi' }, 
             { date: '2026-08-22', host: 'Rifky Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-09-05', host: 'Kezia Jacob', loc: 'Pastori' }, 
             { date: '2026-09-19', host: 'Citra Tidayoh', loc: 'Busiri ujung' }, 
-            { date: '2026-10-03', host: 'Gloria Rembet', loc: 'Pastori' }, 
+            { date: '2026-10-10', host: 'Gloria Rembet', loc: 'Pastori' }, 
             { date: '2026-10-24', host: 'Maria Manampiring', loc: 'Busiri ujung' }, 
-            { date: '2026-11-07', host: 'Delon Tidayoh', loc: 'Busiri ujung' }, 
-            { date: '2026-11-21', host: 'Pastori', loc: 'G.Gereja km 9' } 
+            { date: '2026-11-07', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' }, 
+            { date: '2026-11-21', host: 'Delon Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-12-05', host: 'Pastori', loc: 'G.Gereja km 9' } 
         ];
 
-        // Month Colors Map
         const monthColors = {
-            1: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-500', icon: 'far fa-heart' },    // Feb
-            2: { border: 'border-emerald-500', bg: 'bg-emerald-600', text: 'text-emerald-600', icon: 'fas fa-leaf' }, // Mar
-            3: { border: 'border-yellow-500', bg: 'bg-yellow-500', text: 'text-yellow-600', icon: 'fas fa-dove' },   // Apr
-            4: { border: 'border-cyan-500', bg: 'bg-cyan-600', text: 'text-cyan-600', icon: 'fas fa-cloud-sun' },    // May
-            5: { border: 'border-violet-500', bg: 'bg-violet-600', text: 'text-violet-600', icon: 'fas fa-music' },  // Jun
-            6: { border: 'border-indigo-500', bg: 'bg-indigo-600', text: 'text-indigo-600', icon: 'fas fa-users' },  // Jul
-            7: { border: 'border-red-600', bg: 'bg-red-600', text: 'text-red-600', icon: 'fas fa-flag' },           // Aug
-            8: { border: 'border-teal-500', bg: 'bg-teal-600', text: 'text-teal-600', icon: 'fas fa-globe-asia' },   // Sep
-            9: { border: 'border-orange-500', bg: 'bg-orange-600', text: 'text-orange-600', icon: 'fas fa-book-open' }, // Oct
-            10: { border: 'border-sky-500', bg: 'bg-sky-600', text: 'text-sky-600', icon: 'fas fa-hand-holding-heart' } // Nov
+            1: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-500', icon: 'far fa-heart' },    
+            2: { border: 'border-emerald-500', bg: 'bg-emerald-600', text: 'text-emerald-600', icon: 'fas fa-leaf' }, 
+            3: { border: 'border-yellow-500', bg: 'bg-yellow-500', text: 'text-yellow-600', icon: 'fas fa-dove' },   
+            4: { border: 'border-cyan-500', bg: 'bg-cyan-600', text: 'text-cyan-600', icon: 'fas fa-cloud-sun' },    
+            5: { border: 'border-violet-500', bg: 'bg-violet-600', text: 'text-violet-600', icon: 'fas fa-music' },  
+            6: { border: 'border-indigo-500', bg: 'bg-indigo-600', text: 'text-indigo-600', icon: 'fas fa-users' },  
+            7: { border: 'border-red-600', bg: 'bg-red-600', text: 'text-red-600', icon: 'fas fa-flag' },           
+            8: { border: 'border-teal-500', bg: 'bg-teal-600', text: 'text-teal-600', icon: 'fas fa-globe-asia' },   
+            9: { border: 'border-orange-500', bg: 'bg-orange-600', text: 'text-orange-600', icon: 'fas fa-book-open' }, 
+            10: { border: 'border-sky-500', bg: 'bg-sky-600', text: 'text-sky-600', icon: 'fas fa-hand-holding-heart' },
+            11: { border: 'border-emerald-700', bg: 'bg-emerald-700', text: 'text-emerald-700', icon: 'fas fa-star' } 
         };
 
         function renderSchedule() {
@@ -598,20 +600,18 @@
 
             scheduleData.forEach(event => {
                 const dateObj = new Date(event.date);
-                // Set default formatting options
+                // Tambahkan hari dan tahun pada kartu
                 const dateStr = dateObj.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' });
                 const monthIdx = dateObj.getMonth();
-                const colors = monthColors[monthIdx] || monthColors[1]; // Default to Feb if not found
+                const colors = monthColors[monthIdx] || monthColors[1];
 
                 let cardHTML = '';
 
-                // Add past-event class if needed
                 const isPast = new Date(event.date);
                 isPast.setHours(23, 59, 59);
                 const pastClass = isPast < today ? 'past-event' : '';
 
                 if (event.type === 'special') {
-                    // Special Card (Gabungan)
                     cardHTML = `
                         <div class="bg-fuchsia-50 rounded-xl shadow-lg overflow-hidden schedule-card border-fuchsia-600 flex flex-col ${pastClass}" data-date="${event.date}">
                             <div class="bg-fuchsia-600 text-white p-3 flex justify-between items-center">
@@ -633,7 +633,6 @@
                             </div>
                         </div>`;
                 } else if (event.type === 'doa') {
-                    // Doa 10 Malam
                      cardHTML = `
                         <div class="bg-orange-50 rounded-xl shadow-lg overflow-hidden schedule-card border-orange-500 flex flex-col ${pastClass}" data-date="${event.date}">
                             <div class="bg-orange-500 text-white p-3 flex justify-between items-center">
@@ -646,7 +645,6 @@
                             </div>
                         </div>`;
                 } else {
-                    // Standard Card
                     cardHTML = `
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden schedule-card ${colors.border} ${pastClass}" data-date="${event.date}">
                             <div class="${colors.bg} text-white p-3 flex justify-between items-center">
@@ -669,7 +667,6 @@
             });
         }
 
-        // --- Logic from previous blocks ---
         function getCleaningGroup(now) {
             const startDate = new Date('2026-02-08T00:00:00').getTime();
             const diffTime = now.getTime() - startDate;
@@ -746,6 +743,21 @@
                     document.getElementById('ticker-container').style.display = 'block';
                 }
             }
+            
+            // Re-evaluasi jadwal yang sudah kedaluwarsa secara live (berguna jika app dibiarkan terbuka melewati pergantian hari)
+            const cards = document.querySelectorAll('.schedule-card');
+            cards.forEach(card => {
+                const dateStr = card.getAttribute('data-date');
+                if (dateStr) {
+                    const cardDate = new Date(dateStr);
+                    cardDate.setHours(23, 59, 59); 
+                    if (cardDate < now) {
+                        card.classList.add('past-event');
+                    } else {
+                        card.classList.remove('past-event');
+                    }
+                }
+            });
         }
 
         let currentSlide = 0;
@@ -768,12 +780,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderSchedule(); // Render first!
+            renderSchedule(); 
             updateDashboard();
             setInterval(updateDashboard, 1000); 
             setInterval(moveSlider, 5000);
 
-            // Entrance animations via IntersectionObserver
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, i) => {
                     if (entry.isIntersecting) {
@@ -786,7 +797,6 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
-            // Ripple effect on schedule cards
             document.addEventListener('click', (e) => {
                 const card = e.target.closest('.schedule-card');
                 if (!card || card.classList.contains('past-event')) return;
@@ -799,7 +809,6 @@
                 setTimeout(() => ripple.remove(), 700);
             });
 
-            // Restore settings
             if (localStorage.getItem('darkMode') === 'on') { document.body.classList.add('dark'); document.getElementById('dark-indicator').textContent = 'ON'; }
             const savedFont = localStorage.getItem('fontSize') || 'medium';
             setFontSize(savedFont);
@@ -825,5 +834,3 @@
     </script>
 </body>
 </html>
-
-
