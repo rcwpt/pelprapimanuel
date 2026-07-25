@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; padding-bottom: 50px; }
         
@@ -248,7 +249,7 @@
             <p class="text-lg md:text-3xl font-light opacity-100 mb-6 md:mb-8 drop-shadow-md">Program Kerja & Kalender Kegiatan 2026</p>
             <div class="inline-flex items-center bg-indigo-600/80 px-4 py-2 md:px-8 md:py-3 rounded-full backdrop-blur-md border border-white/20 shadow-2xl hover:bg-indigo-600 transition duration-300">
                 <i class="fas fa-users mr-2 md:mr-3 text-yellow-300 text-sm md:text-xl"></i>
-                <span class="font-bold tracking-wide text-xs md:text-lg">Komunitas: 15 Anggota Aktif</span>
+                <span class="font-bold tracking-wide text-xs md:text-lg">Komunitas: 17 Anggota Aktif</span>
             </div>
         </div>
         <div class="absolute bottom-4 md:bottom-8 animate-bounce text-white/70"><i class="fas fa-chevron-down text-xl md:text-3xl"></i></div>
@@ -273,7 +274,47 @@
         </div>
     </section>
 
-    <!-- Renungan Harian Section -->
+    <!-- Members & Cleaning -->
+    <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
+        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500 mb-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
+                <div class="flex items-center text-xs font-semibold gap-3">
+                    <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-emerald-100 border border-emerald-500 mr-1"></span> Sudah Tuan Rumah</span>
+                    <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-gray-50 border border-gray-200 mr-1"></span> Belum / Mendatang</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm" id="member-list-container">
+                <!-- Data anggota akan dirender oleh JavaScript agar bisa dinamis warnanya -->
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200" id="group-1">
+                    <h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3>
+                    <ul class="space-y-1 text-sm text-gray-700" id="cleaning-list-1">
+                        <!-- Render via JS -->
+                    </ul>
+                </div>
+                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200" id="group-2">
+                    <h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3>
+                    <ul class="space-y-1 text-sm text-gray-700" id="cleaning-list-2">
+                         <!-- Render via JS -->
+                    </ul>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200" id="group-3">
+                    <h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3>
+                    <ul class="space-y-1 text-sm text-gray-700" id="cleaning-list-3">
+                         <!-- Render via JS -->
+                    </ul>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 italic">* Ketua Pelprap tidak dimasukkan dalam jadwal kebersihan rutin.</p>
+        </div>
+    </section>
+
     <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
         <div class="bg-white rounded-xl shadow-xl p-1 border-t-8 border-yellow-500 overflow-hidden">
             <h2 class="text-2xl font-bold text-center my-6 text-gray-800"><i class="fas fa-bible text-yellow-600 mr-2"></i>Renungan Harian</h2>
@@ -285,7 +326,6 @@
         </div>
     </section>
 
-    <!-- Games Alkitab Section -->
     <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
         <div class="rounded-xl shadow-xl overflow-hidden" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a21caf 100%);">
             <div class="p-8 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -318,7 +358,6 @@
         </div>
     </section>
 
-    <!-- KABAR PELPRAP -->
     <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center">
@@ -379,7 +418,6 @@
         </div>
     </section>
 
-    <!-- Strategy Section -->
     <section class="max-w-5xl mx-auto px-4 py-8 fade-in-up">
         <div class="bg-white rounded-xl shadow-md p-6 md:p-8 border-l-8 border-indigo-600">
             <h2 class="text-2xl font-bold text-indigo-900 mb-6"><i class="fas fa-bullseye mr-2"></i>Strategi Pelayanan</h2>
@@ -393,7 +431,7 @@
                         <div class="space-y-3">
                             <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm border-l-4 border-indigo-500">
                                 <span class="font-semibold text-gray-700">Minggu Genap</span>
-                                <span class="bg-indigo-600 text-white text-xs px-3 py-1 rounded-full">PELPRAP (15 Orang)</span>
+                                <span class="bg-indigo-600 text-white text-xs px-3 py-1 rounded-full">PELPRAP (17 Orang)</span>
                             </div>
                             <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm border-l-4 border-gray-300 opacity-70">
                                 <span class="font-semibold text-gray-500">Minggu Ganjil</span>
@@ -402,14 +440,13 @@
                         </div>
                     </div>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
-                        Dengan jumlah anggota inti 15 orang, strategi kita bergeser dari pendekatan "Mass Event" menjadi <strong>"Deep Connection"</strong>. Kita fokus pada diskusi dua arah dan mobilisasi yang fleksibel.
+                        Dengan jumlah anggota inti yang terus bertumbuh, strategi kita bergeser dari pendekatan "Mass Event" menjadi <strong>"Deep Connection"</strong>. Kita fokus pada diskusi dua arah dan mobilisasi yang fleksibel.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Organization Chart Section -->
     <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
         <div class="bg-white rounded-xl shadow-xl p-8 border-t-8 border-indigo-600 relative overflow-hidden">
             <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Struktur Organisasi</h2>
@@ -478,14 +515,13 @@
         </div>
     </section>
 
-    <!-- SCHEDULE SECTION (DYNAMIC JS GENERATED) -->
     <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded shadow-sm">
             <div class="flex items-center">
                 <i class="fas fa-info-circle text-blue-500 mr-3 text-xl"></i>
                 <div>
-                    <p class="font-bold text-blue-800">Informasi Perubahan Jadwal</p>
-                    <p class="text-sm text-blue-700">Mulai 21 Februari 2026, jadwal petugas ibadah bergeser ke pertemuan berikutnya (selisih 2 minggu) karena adanya Ibadah Gabungan Wilayah dan Penyesuaian Jadwal Doa 10 Malam.</p>
+                    <p class="font-bold text-blue-800">Informasi Perubahan Jadwal Terbaru</p>
+                    <p class="text-sm text-blue-700">Terdapat penyesuaian jadwal bagi Rifky, Cingmey, Citra, Ryuka. Serta penyambutan untuk Gloria dan Vino Tidayoh mulai bulan Oktober 2026. Penutupan Ibadah digeser menjadi 21 November 2026.</p>
                 </div>
             </div>
         </div>
@@ -496,34 +532,11 @@
             <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full font-bold">Tahun 2026</span>
         </div>
         
-        <!-- Grid Container - Content populated by JS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="schedule-grid">
             <!-- Loading placeholder if needed, otherwise empty -->
         </div>
     </section>
 
-    <!-- Members & Cleaning -->
-    <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
-        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                <div class="p-2 bg-gray-50 rounded">1. Rezhky Christian</div><div class="p-2 bg-gray-50 rounded">2. Laudya Iroth</div><div class="p-2 bg-gray-50 rounded">3. Ribka Sumolang</div><div class="p-2 bg-gray-50 rounded">4. Delon Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">5. Rifky Tidayoh</div><div class="p-2 bg-gray-50 rounded">6. Briando Maki</div><div class="p-2 bg-gray-50 rounded">7. Josafat Tidayoh</div><div class="p-2 bg-gray-50 rounded">8. Elsya Mokobimbing</div>
-                <div class="p-2 bg-gray-50 rounded">9. Efraim Sumolang</div><div class="p-2 bg-gray-50 rounded">10. Ryuka</div><div class="p-2 bg-gray-50 rounded">11. Avrilia Tidayoh</div><div class="p-2 bg-gray-50 rounded">12. Citra Tidayoh</div>
-                <div class="p-2 bg-gray-50 rounded">13. Novita Sumolang</div><div class="p-2 bg-gray-50 rounded">14. Cingmey Iroth</div><div class="p-2 bg-gray-50 rounded">15. Gloria Rembet</div><div class="p-2 bg-gray-50 rounded">16. Maria Manampiring</div>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center"><i class="fas fa-broom text-cyan-600 mr-3"></i>Jadwal Kebersihan</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-cyan-50 rounded-lg p-5 border border-cyan-200" id="group-1"><h3 class="font-bold text-lg text-cyan-900 mb-2">Kelompok 1</h3><ul class="space-y-1 text-sm text-gray-700"><li>Laudya, Briando, Gloria, Rifky, Josafat</li></ul></div>
-                <div class="bg-teal-50 rounded-lg p-5 border border-teal-200" id="group-2"><h3 class="font-bold text-lg text-teal-900 mb-2">Kelompok 2</h3><ul class="space-y-1 text-sm text-gray-700"><li>Ribka, Delon, Cingmey Iroth, Elsa, Novita Sumolang</li></ul></div>
-                <div class="bg-blue-50 rounded-lg p-5 border border-blue-200" id="group-3"><h3 class="font-bold text-lg text-blue-900 mb-2">Kelompok 3</h3><ul class="space-y-1 text-sm text-gray-700"><li>Efraim, Avril, Samuel, Ryuka, Citra</li></ul></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Settings Panel -->
     <div id="settings-panel">
         <div id="settings-box">
             <div>
@@ -547,7 +560,6 @@
         </button>
     </div>
 
-    <!-- Headline Ticker -->
     <div class="ticker-label">INFO PELPRAP</div>
     <div class="ticker-wrap" id="ticker-container"><div class="ticker"><div class="ticker-item" id="ticker-text"></div></div></div>
 
@@ -568,13 +580,38 @@
             { date: '2026-06-20', host: 'Josafat Tidayoh', loc: 'Busiri ujung' }, 
             { date: '2026-07-04', host: 'Briando Maki', loc: 'Nawaripi' }, 
             { date: '2026-07-18', host: 'Novita Sumolang', loc: 'Nawaripi' }, 
-            { date: '2026-08-08', host: 'Rifky Tidayoh', loc: 'Busiri ujung' }, 
-            { date: '2026-08-22', host: 'Cingmey Iroth', loc: 'Pastori' }, 
-            { date: '2026-09-05', host: 'Citra Tidayoh', loc: 'Busiri ujung' }, 
-            { date: '2026-09-19', host: 'Ryuka', loc: 'Pastori' }, 
-            { date: '2026-10-10', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' }, 
-            { date: '2026-10-24', host: 'PENUTUPAN IBADAH', loc: 'G. Gereja Km.9', time: '17.00 WIT', type: 'special' } 
+            
+            // JADWAL PERGESERAN
+            { date: '2026-08-08', host: 'Cingmey Iroth', loc: 'Pastori' }, 
+            { date: '2026-08-22', host: 'Citra Tidayoh', loc: 'Busiri ujung' }, 
+            { date: '2026-09-05', host: 'Ryuka', loc: 'Pastori' }, 
+            { date: '2026-09-19', host: 'Rifky Tidayoh', loc: 'Busiri ujung' }, 
+            
+            // JADWAL PENAMBAHAN
+            { date: '2026-10-10', host: 'Gloria', loc: 'Menyesuaikan' }, 
+            { date: '2026-10-24', host: 'Vino Tidayoh', loc: 'Menyesuaikan' }, 
+            
+            // DILANJUTKAN KETUA DAN PENUTUPAN
+            { date: '2026-11-07', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' }, 
+            { date: '2026-11-21', host: 'PENUTUPAN IBADAH', loc: 'G. Gereja Km.9', time: '17.00 WIT', type: 'special' } 
         ];
+
+        // Daftar Anggota Master
+        const membersList = [
+            "Rezhky Christian", "Laudya Iroth", "Ribka Sumolang", "Delon Tidayoh",
+            "Rifky Tidayoh", "Briando Maki", "Josafat Tidayoh", "Elsya Mokobimbing",
+            "Efraim Sumolang", "Ryuka", "Avrilia Tidayoh", "Citra Tidayoh",
+            "Novita Sumolang", "Cingmey Iroth", "Gloria Rembet", "Maria Manampiring",
+            "Vino Tidayoh"
+        ];
+
+        // Definisi Grup Kebersihan (tanpa Rezhky Christian)
+        // Didistribusikan agar seimbang (total 16 orang, 5-6 orang per kelompok)
+        const cleaningGroups = {
+            1: ["Laudya Iroth", "Briando Maki", "Gloria Rembet", "Rifky Tidayoh", "Josafat Tidayoh", "Vino Tidayoh"], // 6 orang
+            2: ["Ribka Sumolang", "Delon Tidayoh", "Cingmey Iroth", "Elsya Mokobimbing", "Novita Sumolang"], // 5 orang
+            3: ["Efraim Sumolang", "Avrilia Tidayoh", "Maria Manampiring", "Ryuka", "Citra Tidayoh"] // 5 orang
+        };
 
         const monthColors = {
             1: { border: 'border-pink-500', bg: 'bg-pink-500', text: 'text-pink-500', icon: 'far fa-heart' },    
@@ -594,6 +631,9 @@
             const container = document.getElementById('schedule-grid');
             container.innerHTML = '';
             const today = new Date();
+            
+            // Array untuk melacak siapa saja yang sudah menjadi tuan rumah
+            const hostedMembers = [];
 
             scheduleData.forEach(event => {
                 const dateObj = new Date(event.date);
@@ -606,7 +646,26 @@
 
                 const isPast = new Date(event.date);
                 isPast.setHours(23, 59, 59);
-                const pastClass = isPast < today ? 'past-event' : '';
+                const isPastEvent = isPast < today;
+                const pastClass = isPastEvent ? 'past-event' : '';
+
+                // Jika event sudah lewat, tambahkan host ke array hostedMembers
+                if (isPastEvent && event.type !== 'special' && event.type !== 'doa') {
+                    // Cari kecocokan nama parsial jika penulisan di jadwal beda dengan daftar anggota
+                    let hostName = event.host.toLowerCase();
+                    let matchedMember = membersList.find(m => m.toLowerCase().includes(hostName) || hostName.includes(m.toLowerCase()));
+                    
+                    // Kasus khusus untuk nama panggilan di jadwal vs nama lengkap di daftar
+                    if(hostName === 'gloria') matchedMember = "Gloria Rembet";
+                    if(hostName === 'ketua pelprap') matchedMember = "Rezhky Christian";
+
+                    if(matchedMember) {
+                        hostedMembers.push(matchedMember);
+                    } else {
+                        // fallback jika tidak ketemu (masukkan string aslinya saja, jaga-jaga)
+                        hostedMembers.push(event.host);
+                    }
+                }
 
                 if (event.type === 'special') {
                     cardHTML = `
@@ -662,6 +721,44 @@
                 }
                 container.innerHTML += cardHTML;
             });
+
+            renderMembers(hostedMembers);
+            renderCleaningGroups();
+        }
+
+        function renderMembers(hostedMembers) {
+            const container = document.getElementById('member-list-container');
+            container.innerHTML = '';
+
+            membersList.forEach((member, index) => {
+                const isHosted = hostedMembers.includes(member);
+                
+                let baseClasses = "p-2 rounded border ";
+                let colorClasses = isHosted 
+                    ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-medium" 
+                    : "bg-gray-50 border-gray-200 text-gray-700";
+                
+                // Highlight khusus untuk ketua jika belum dapat giliran, opsional (disini disamakan)
+                
+                const icon = isHosted ? '<i class="fas fa-check-circle text-emerald-500 mr-1"></i>' : '';
+
+                container.innerHTML += `
+                    <div class="${baseClasses} ${colorClasses} flex items-center overflow-hidden whitespace-nowrap text-ellipsis" title="${member}">
+                        <span class="w-5 text-gray-400 font-mono text-xs mr-1">${index + 1}.</span> 
+                        <span class="truncate">${icon} ${member}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function renderCleaningGroups() {
+            [1, 2, 3].forEach(groupId => {
+                const listContainer = document.getElementById(`cleaning-list-${groupId}`);
+                listContainer.innerHTML = '';
+                cleaningGroups[groupId].forEach(member => {
+                    listContainer.innerHTML += `<li><i class="fas fa-user-tag text-gray-400 text-[10px] mr-2"></i>${member}</li>`;
+                });
+            });
         }
 
         function getCleaningGroup(now) {
@@ -672,12 +769,11 @@
             const safeWeeks = weeksPassed >= 0 ? weeksPassed : 0;
             const groupIndex = safeWeeks % 3;
             const currentGroup = groupSequence[groupIndex];
-            const groupNames = {
-                1: "Laudya, Briando, Gloria, Rifky, Josafat",
-                2: "Ribka, Delon, Cingmey Iroth, Elsa, Novita Sumolang",
-                3: "Efraim, Avril, Samuel, Ryuka, Citra"
-            };
-            return { groupNumber: currentGroup, members: groupNames[currentGroup] };
+            
+            // Format nama member jadi string ber-koma untuk ticker
+            const memberString = cleaningGroups[currentGroup].join(", ");
+            
+            return { groupNumber: currentGroup, members: memberString };
         }
 
         function updateCleaningDOM(cleaningInfo) {
@@ -741,7 +837,6 @@
                 }
             }
             
-            // Re-evaluasi jadwal yang sudah kedaluwarsa secara live (berguna jika app dibiarkan terbuka melewati pergantian hari)
             const cards = document.querySelectorAll('.schedule-card');
             cards.forEach(card => {
                 const dateStr = card.getAttribute('data-date');
