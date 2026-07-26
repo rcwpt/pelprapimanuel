@@ -160,6 +160,7 @@
         body.dark .bg-white { background-color: #1f2937 !important; }
         body.dark .bg-gray-50 { background-color: #374151 !important; }
         body.dark .bg-gray-100 { background-color: #374151 !important; }
+        body.dark .bg-gray-200 { background-color: #4b5563 !important; }
         body.dark .bg-blue-50 { background-color: #1e3a5f !important; }
         body.dark .bg-indigo-50 { background-color: #2e2065 !important; }
         body.dark .bg-purple-50 { background-color: #3b0764 !important; }
@@ -175,6 +176,7 @@
         body.dark .text-gray-700 { color: #d1d5db !important; }
         body.dark .text-gray-600 { color: #9ca3af !important; }
         body.dark .text-gray-500 { color: #9ca3af !important; }
+        body.dark .border-gray-100 { border-color: #374151 !important; }
         body.dark .shadow-md, body.dark .shadow-xl, body.dark .shadow-lg { box-shadow: 0 4px 24px rgba(0,0,0,0.5); }
         body.dark .past-event { background-color: #374151 !important; }
         body.dark footer { background-color: #030712 !important; }
@@ -243,20 +245,43 @@
 <body class="text-gray-800">
 
     <!-- Header Section -->
-    <header class="hero-pattern text-white min-h-[60vh] md:min-h-[80vh] flex flex-col justify-center items-center px-4 shadow-xl mb-8 relative transition-all duration-500">
-        <div class="max-w-6xl mx-auto text-center relative z-10 p-4 md:p-6 rounded-xl bg-black/20 backdrop-blur-sm w-full">
-            <h1 class="text-3xl md:text-7xl font-bold mb-2 md:mb-4 tracking-tight drop-shadow-lg" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">PELPRAP IMANUEL</h1>
-            <p class="text-lg md:text-3xl font-light opacity-100 mb-6 md:mb-8 drop-shadow-md">Program Kerja & Kalender Kegiatan 2026</p>
-            <div class="inline-flex items-center bg-indigo-600/80 px-4 py-2 md:px-8 md:py-3 rounded-full backdrop-blur-md border border-white/20 shadow-2xl hover:bg-indigo-600 transition duration-300">
-                <i class="fas fa-users mr-2 md:mr-3 text-yellow-300 text-sm md:text-xl"></i>
-                <span class="font-bold tracking-wide text-xs md:text-lg">Komunitas: 17 Anggota Aktif</span>
+    <header class="hero-pattern text-white min-h-[60vh] md:min-h-[85vh] flex flex-col justify-center items-center px-4 shadow-xl mb-8 relative transition-all duration-500">
+        <div class="max-w-6xl mx-auto text-center relative z-10 p-4 md:p-8 rounded-xl bg-black/40 backdrop-blur-md w-full mt-12 md:mt-16 border border-white/10">
+            
+            <!-- Logo Section -->
+            <div class="flex justify-center items-center gap-6 md:gap-16 mb-6 md:mb-8">
+                <a href="https://rcwpt.github.io/pelprapimanuel/logo.html" title="Arti Logo GPdI" class="group transition-transform duration-300 hover:scale-110">
+                    <img src="https://raw.githubusercontent.com/rcwpt/pelprapimanuel/main/gpdi-smally.png" alt="Logo GPdI" class="h-16 md:h-24 object-contain drop-shadow-[0_5px_5px_rgba(255,255,255,0.3)]">
+                </a>
+                <a href="https://rcwpt.github.io/pelprapimanuel/logo.html" title="Arti Logo PELPRAP IMANUEL" class="group transition-transform duration-300 hover:scale-110">
+                    <img src="https://raw.githubusercontent.com/rcwpt/pelprapimanuel/main/transparentlogo.png" alt="Logo PELPRAP Imanuel" class="h-24 md:h-36 object-contain drop-shadow-[0_10px_10px_rgba(255,255,255,0.4)]">
+                </a>
+                <a href="https://rcwpt.github.io/pelprapimanuel/logo.html" title="Arti Logo PELPRAP Pusat" class="group transition-transform duration-300 hover:scale-110">
+                    <img src="https://raw.githubusercontent.com/rcwpt/pelprapimanuel/main/pelprap-pusat.png" alt="Logo PELPRAP Pusat" class="h-16 md:h-24 object-contain drop-shadow-[0_5px_5px_rgba(255,255,255,0.3)]">
+                </a>
             </div>
+
+            <h1 class="text-3xl md:text-7xl font-bold mb-2 md:mb-4 tracking-tight drop-shadow-xl text-white" style="text-shadow: 0px 4px 10px rgba(0,0,0,0.8);">PELPRAP IMANUEL</h1>
+            <p class="text-lg md:text-3xl font-light opacity-100 mb-8 md:mb-10 drop-shadow-md text-gray-200">Program Kerja & Kalender Kegiatan 2026</p>
+            
+            <!-- Info & Button Section -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <div class="inline-flex items-center bg-indigo-600/90 px-6 py-3 rounded-full backdrop-blur-md border border-indigo-400/50 shadow-2xl hover:bg-indigo-500 transition duration-300">
+                    <i class="fas fa-users mr-3 text-yellow-300 text-lg md:text-xl"></i>
+                    <span class="font-bold tracking-wide text-sm md:text-lg">Komunitas: 17 Anggota Aktif</span>
+                </div>
+                <a href="https://rcwpt.github.io/pelprapimanuel/logo.html" class="inline-flex items-center bg-white/20 px-6 py-3 rounded-full backdrop-blur-md border border-white/50 shadow-xl hover:bg-white/30 transition duration-300 text-white font-semibold">
+                    <i class="fas fa-info-circle mr-2 text-white text-lg"></i>
+                    <span class="text-sm md:text-lg">Arti Logo</span>
+                </a>
+            </div>
+
         </div>
         <div class="absolute bottom-4 md:bottom-8 animate-bounce text-white/70"><i class="fas fa-chevron-down text-xl md:text-3xl"></i></div>
     </header>
 
     <!-- COUNTDOWN SECTION -->
-    <section id="countdown-section" class="max-w-4xl mx-auto px-4 -mt-16 md:-mt-20 mb-12 md:mb-16 relative z-20 hidden">
+    <section id="countdown-section" class="max-w-4xl mx-auto px-4 -mt-16 md:-mt-20 mb-12 relative z-20 hidden">
         <div class="bg-indigo-600/95 backdrop-blur rounded-xl shadow-2xl p-4 md:p-6 text-white text-center border-4 border-indigo-400/50">
             <h3 class="text-xs md:text-sm uppercase tracking-widest font-bold text-indigo-200 mb-2">Menuju Ibadah Selanjutnya</h3>
             <div id="countdown-info" class="mb-4">
@@ -274,8 +299,42 @@
         </div>
     </section>
 
-    <!-- Members & Cleaning -->
+    <!-- TENTANG GPdI DAN PELPRAP -->
     <section class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-indigo-500 mb-8">
+            <div class="grid md:grid-cols-2">
+                <!-- Tentang GPdI -->
+                <div class="p-6 md:p-10 border-b md:border-b-0 md:border-r border-gray-100 flex flex-col justify-center">
+                    <div class="flex items-center mb-6">
+                        <img src="https://raw.githubusercontent.com/rcwpt/pelprapimanuel/main/gpdi-smally.png" alt="GPdI Logo" class="h-16 w-16 object-contain mr-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Apa itu GPdI?</h2>
+                    </div>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed text-justify mb-4">
+                        <strong>Gereja Pantekosta di Indonesia (GPdI)</strong> adalah salah satu denominasi gereja beraliran Pantekosta terbesar di Indonesia. GPdI memiliki ciri khas yang sangat menekankan pada peranan dan karunia Roh Kudus, pengalaman rohani secara pribadi, serta gaya ibadah yang ekspresif dan dinamis.
+                    </p>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed text-justify">
+                        Sebagai sebuah organisasi gereja, GPdI hadir untuk menjadi terang bagi dunia, memberitakan Injil, dan membangun iman jemaatnya agar terus bertumbuh dan berbuah di dalam pengenalan akan Yesus Kristus berlandaskan kebenaran Firman Tuhan.
+                    </p>
+                </div>
+                <!-- Tentang PELPRAP -->
+                <div class="p-6 md:p-10 bg-indigo-50 flex flex-col justify-center transition-colors">
+                    <div class="flex items-center mb-6">
+                        <img src="https://raw.githubusercontent.com/rcwpt/pelprapimanuel/main/pelprap-pusat.png" alt="PELPRAP Logo" class="h-16 w-16 object-contain mr-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-indigo-900">Apa itu PELPRAP?</h2>
+                    </div>
+                    <p class="text-gray-700 text-sm md:text-base leading-relaxed text-justify mb-4">
+                        <strong>PELPRAP (Pelayanan Pemuda dan Remaja Pantekosta)</strong> merupakan wadah kategorial resmi di bawah naungan GPdI yang secara khusus berfokus pada pembinaan kerohanian generasi muda, yakni pemuda dan remaja.
+                    </p>
+                    <p class="text-gray-700 text-sm md:text-base leading-relaxed text-justify">
+                        Tujuan utama PELPRAP adalah untuk mengakomodasi, membimbing, dan mengembangkan potensi setiap generasi muda agar memiliki karakter serupa Kristus. Karena kaum muda adalah tiang penyangga gereja dan calon pemimpin masa depan, PELPRAP hadir agar mereka dapat bersinar melayani Tuhan, gereja, dan masyarakat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members & Cleaning -->
+    <section class="max-w-6xl mx-auto px-4 py-4 fade-in-up">
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-indigo-500 mb-8">
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
                 <h2 class="text-2xl font-bold text-gray-800 flex items-center"><i class="fas fa-id-card text-indigo-600 mr-3"></i>Daftar Anggota Aktif</h2>
@@ -606,11 +665,10 @@
         ];
 
         // Definisi Grup Kebersihan (tanpa Rezhky Christian)
-        // Didistribusikan agar seimbang (total 16 orang, 5-6 orang per kelompok)
         const cleaningGroups = {
-            1: ["Laudya Iroth", "Briando Maki", "Gloria Rembet", "Rifky Tidayoh", "Josafat Tidayoh", "Vino Tidayoh"], // 6 orang
-            2: ["Ribka Sumolang", "Delon Tidayoh", "Cingmey Iroth", "Elsya Mokobimbing", "Novita Sumolang"], // 5 orang
-            3: ["Efraim Sumolang", "Avrilia Tidayoh", "Maria Manampiring", "Ryuka", "Citra Tidayoh"] // 5 orang
+            1: ["Laudya Iroth", "Briando Maki", "Gloria Rembet", "Rifky Tidayoh", "Josafat Tidayoh", "Vino Tidayoh"], 
+            2: ["Ribka Sumolang", "Delon Tidayoh", "Cingmey Iroth", "Elsya Mokobimbing", "Novita Sumolang"], 
+            3: ["Efraim Sumolang", "Avrilia Tidayoh", "Maria Manampiring", "Ryuka", "Citra Tidayoh"] 
         };
 
         const monthColors = {
@@ -632,12 +690,10 @@
             container.innerHTML = '';
             const today = new Date();
             
-            // Array untuk melacak siapa saja yang sudah menjadi tuan rumah
             const hostedMembers = [];
 
             scheduleData.forEach(event => {
                 const dateObj = new Date(event.date);
-                // Tambahkan hari dan tahun pada kartu
                 const dateStr = dateObj.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' });
                 const monthIdx = dateObj.getMonth();
                 const colors = monthColors[monthIdx] || monthColors[1];
@@ -649,20 +705,16 @@
                 const isPastEvent = isPast < today;
                 const pastClass = isPastEvent ? 'past-event' : '';
 
-                // Jika event sudah lewat, tambahkan host ke array hostedMembers
                 if (isPastEvent && event.type !== 'special' && event.type !== 'doa') {
-                    // Cari kecocokan nama parsial jika penulisan di jadwal beda dengan daftar anggota
                     let hostName = event.host.toLowerCase();
                     let matchedMember = membersList.find(m => m.toLowerCase().includes(hostName) || hostName.includes(m.toLowerCase()));
                     
-                    // Kasus khusus untuk nama panggilan di jadwal vs nama lengkap di daftar
                     if(hostName === 'gloria') matchedMember = "Gloria Rembet";
                     if(hostName === 'ketua pelprap') matchedMember = "Rezhky Christian";
 
                     if(matchedMember) {
                         hostedMembers.push(matchedMember);
                     } else {
-                        // fallback jika tidak ketemu (masukkan string aslinya saja, jaga-jaga)
                         hostedMembers.push(event.host);
                     }
                 }
@@ -738,8 +790,6 @@
                     ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-medium" 
                     : "bg-gray-50 border-gray-200 text-gray-700";
                 
-                // Highlight khusus untuk ketua jika belum dapat giliran, opsional (disini disamakan)
-                
                 const icon = isHosted ? '<i class="fas fa-check-circle text-emerald-500 mr-1"></i>' : '';
 
                 container.innerHTML += `
@@ -770,9 +820,7 @@
             const groupIndex = safeWeeks % 3;
             const currentGroup = groupSequence[groupIndex];
             
-            // Format nama member jadi string ber-koma untuk ticker
             const memberString = cleaningGroups[currentGroup].join(", ");
-            
             return { groupNumber: currentGroup, members: memberString };
         }
 
