@@ -244,6 +244,34 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- ANNIVERSARY POP-UP (Hanya muncul tanggal 28 Januari) -->
+    <div id="anniversary-popup" class="fixed inset-0 z-[10000] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-500">
+        <div class="bg-gradient-to-br from-indigo-900 to-purple-900 p-1 rounded-2xl shadow-2xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-500" id="anniversary-popup-content">
+            <div class="bg-gray-900 rounded-xl p-6 text-center relative overflow-hidden border border-purple-500/50">
+                <!-- Ornamen cahaya -->
+                <div class="absolute -top-10 -left-10 w-32 h-32 bg-purple-500 rounded-full blur-3xl opacity-20"></div>
+                <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-indigo-500 rounded-full blur-3xl opacity-20"></div>
+                
+                <button onclick="document.getElementById('anniversary-popup').classList.add('hidden')" class="absolute top-2 right-3 text-gray-400 hover:text-white transition">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200 mb-2 mt-4 animate-pulse">🎉 HAPPY ANNIVERSARY!</h2>
+                <h3 class="text-xl font-bold text-white mb-4">PELPRAP IMANUEL</h3>
+                
+                <div class="flex justify-center items-end gap-2 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+                    <span class="text-6xl font-black text-white leading-none" id="anniversary-age"></span>
+                    <span class="text-2xl font-bold text-yellow-400 mb-1">TAHUN</span>
+                </div>
+                
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">Terus bertumbuh dalam pelayanan, kasih, dan persaudaraan. Tetaplah menjadi terang bagi generasi muda!</p>
+                <button onclick="document.getElementById('anniversary-popup').classList.add('hidden')" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-yellow-950 font-bold py-2 px-8 rounded-full hover:scale-105 transition-transform shadow-[0_0_15px_rgba(234,179,8,0.4)]">
+                    Amin, Haleluya!
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header Section -->
     <header class="hero-pattern text-white min-h-[60vh] md:min-h-[85vh] flex flex-col justify-center items-center px-4 shadow-xl mb-8 relative transition-all duration-500">
         <div class="max-w-6xl mx-auto text-center relative z-10 p-4 md:p-8 rounded-xl bg-black/40 backdrop-blur-md w-full mt-12 md:mt-16 border border-white/10">
@@ -274,6 +302,12 @@
                     <i class="fas fa-info-circle mr-2 text-white text-lg"></i>
                     <span class="text-sm md:text-lg">Arti Logo</span>
                 </a>
+            </div>
+
+            <!-- Road to Anniversary Badge (Otomatis muncul 3 bulan sebelum 28 Jan) -->
+            <div id="road-to-anniv" class="hidden mt-6 inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full border border-pink-400/50 shadow-[0_0_15px_rgba(236,72,153,0.5)] animate-pulse">
+                <i class="fas fa-gift mr-2 text-yellow-300"></i>
+                <span class="font-bold text-white text-sm md:text-base tracking-wide" id="road-to-anniv-text">Menuju HUT PELPRAP: -- Hari Lagi!</span>
             </div>
 
         </div>
@@ -580,7 +614,7 @@
                 <i class="fas fa-info-circle text-blue-500 mr-3 text-xl"></i>
                 <div>
                     <p class="font-bold text-blue-800">Informasi Perubahan Jadwal Terbaru</p>
-                    <p class="text-sm text-blue-700">Terdapat penyesuaian jadwal bagi Rifky, Cingmey, Citra, Ryuka. Serta penyambutan untuk Gloria dan Vino Tidayoh mulai bulan Oktober 2026. Penutupan Ibadah digeser menjadi 21 November 2026.</p>
+                    <p class="text-sm text-blue-700">Terdapat penyesuaian jadwal bagi Rifky, Cingmey, Citra, Ryuka. Serta penyambutan untuk Gloria dan Vino Tidayoh mulai bulan Oktober 2026. <strong>Ibadah bulan November (Tuan Rumah Ketua & Penutupan) ditiadakan.</strong></p>
                 </div>
             </div>
         </div>
@@ -648,11 +682,7 @@
             
             // JADWAL PENAMBAHAN
             { date: '2026-10-10', host: 'Gloria', loc: 'Menyesuaikan' }, 
-            { date: '2026-10-24', host: 'Vino Tidayoh', loc: 'Menyesuaikan' }, 
-            
-            // DILANJUTKAN KETUA DAN PENUTUPAN
-            { date: '2026-11-07', host: 'Ketua Pelprap', loc: 'Sp 4/ Yos Sudarso' }, 
-            { date: '2026-11-21', host: 'PENUTUPAN IBADAH', loc: 'G. Gereja Km.9', time: '17.00 WIT', type: 'special' } 
+            { date: '2026-10-24', host: 'Vino Tidayoh', loc: 'Menyesuaikan' }
         ];
 
         // Daftar Anggota Master
@@ -824,6 +854,61 @@
             return { groupNumber: currentGroup, members: memberString };
         }
 
+        function checkAnniversaryStatus(now) {
+            const birthYear = 2024;
+            let currentAge = now.getFullYear() - birthYear;
+            
+            // Jika bulan saat ini sebelum Januari, atau bulan Januari tapi belum tanggal 28
+            if (now.getMonth() === 0 && now.getDate() < 28) {
+                currentAge--;
+            }
+
+            // Tentukan tahun Ulang Tahun SELANJUTNYA
+            let nextAnnivYear = now.getFullYear();
+            if (now.getMonth() > 0 || (now.getMonth() === 0 && now.getDate() > 28)) {
+                nextAnnivYear++; // Jika sudah lewat 28 Jan, HUT selanjutnya tahun depan
+            }
+            
+            const nextAnnivDate = new Date(nextAnnivYear, 0, 28);
+            const diffTime = nextAnnivDate.getTime() - now.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            const roadToAnnivEl = document.getElementById('road-to-anniv');
+            const roadToAnnivText = document.getElementById('road-to-anniv-text');
+
+            // Cek apakah hari ini tepat tanggal 28 Januari
+            if (now.getMonth() === 0 && now.getDate() === 28) {
+                // Tampilkan Pop-Up (menggunakan sessionStorage agar tidak mengganggu jika di-refresh berulang kali di sesi yg sama)
+                if (!sessionStorage.getItem('annivPopupShown')) {
+                    const popup = document.getElementById('anniversary-popup');
+                    document.getElementById('anniversary-age').innerText = currentAge;
+                    popup.classList.remove('hidden');
+                    setTimeout(() => {
+                        document.getElementById('anniversary-popup-content').classList.remove('scale-95');
+                        document.getElementById('anniversary-popup-content').classList.add('scale-100');
+                    }, 50);
+                    sessionStorage.setItem('annivPopupShown', 'true');
+                }
+                
+                // Ubah Badge menjadi spesial Hari H
+                roadToAnnivEl.classList.remove('hidden');
+                roadToAnnivText.innerText = `🎉 HARI INI: HUT ke-${currentAge} PELPRAP IMANUEL! 🎉`;
+                roadToAnnivEl.classList.replace('from-purple-600', 'from-yellow-500');
+                roadToAnnivEl.classList.replace('to-pink-600', 'to-orange-500');
+                
+            } else if (diffDays > 0 && diffDays <= 92) {
+                // Tampilkan badge "Road to Anniversary" jika kurang dari atau sama dengan 3 Bulan (92 hari)
+                roadToAnnivEl.classList.remove('hidden');
+                roadToAnnivText.innerText = `Menuju HUT ke-${nextAnnivYear - birthYear} PELPRAP: ${diffDays} Hari Lagi! 🎉`;
+                roadToAnnivEl.classList.replace('from-yellow-500', 'from-purple-600');
+                roadToAnnivEl.classList.replace('to-orange-500', 'to-pink-600');
+            } else {
+                roadToAnnivEl.classList.add('hidden');
+            }
+
+            return Math.max(0, currentAge); // Pastikan umur tidak negatif
+        }
+
         function updateCleaningDOM(cleaningInfo) {
             [1, 2, 3].forEach(id => {
                 const el = document.getElementById(`group-${id}`);
@@ -835,6 +920,7 @@
 
         function updateDashboard() {
             const now = new Date();
+            const currentAge = checkAnniversaryStatus(now);
             let upcomingEvent = null;
 
             for (let event of scheduleData) {
@@ -878,7 +964,8 @@
                 updateCleaningDOM(cleaningInfo);
 
                 const tickerText = document.getElementById('ticker-text');
-                let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}).  *** 🧹 JADWAL KEBERSIHAN MINGGU INI: Kelompok ${cleaningInfo.groupNumber} (${cleaningInfo.members}). Semangat Melayani!  *** Tuhan Yesus Memberkati.`;
+                let message = `INFO IBADAH: Ibadah selanjutnya pada ${nextDate.innerText}. Bertempat di: ${upcomingEvent.loc} (Tuan Rumah: ${upcomingEvent.host}).  *** 🧹 JADWAL KEBERSIHAN MINGGU INI: Kelompok ${cleaningInfo.groupNumber} (${cleaningInfo.members}). Semangat Melayani!  *** 🎂 Usia PELPRAP saat ini: ${currentAge} Tahun (Berdiri sejak 28 Jan 2024). *** Tuhan Yesus Memberkati.`;
+                
                 if (tickerText.innerText !== message) {
                     tickerText.innerText = message;
                     document.getElementById('ticker-container').style.display = 'block';
