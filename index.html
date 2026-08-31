@@ -778,67 +778,96 @@
             </div>
             <!-- Slider Dots & Arrows -->
             <div class="flex items-center gap-2">
-                <button onclick="prevSlide()" class="p-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition text-sm" aria-label="Sebelumnya">
+                <button onclick="prevSlide()" class="p-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition text-sm shadow-sm" aria-label="Sebelumnya">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="flex space-x-1.5 px-2" id="slider-dots">
                     <span class="h-2.5 w-6 rounded-full bg-rose-500 transition-all duration-300 cursor-pointer" onclick="goToSlide(0)"></span>
                     <span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-700 transition-all duration-300 cursor-pointer" onclick="goToSlide(1)"></span>
                 </div>
-                <button onclick="nextSlide()" class="p-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition text-sm" aria-label="Selanjutnya">
+                <button onclick="nextSlide()" class="p-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition text-sm shadow-sm" aria-label="Selanjutnya">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
         </div>
 
-        <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 min-h-[580px] sm:min-h-[520px] md:h-[460px] lg:h-[420px]">
-            <div class="flex transition-transform duration-700 ease-out h-full" id="kabar-slider">
+        <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900">
+            <div class="flex transition-transform duration-700 ease-out items-stretch" id="kabar-slider">
+                
                 <!-- SLIDE 1: HUT ke-2 PELPRAP -->
-                <div class="min-w-full flex-shrink-0 relative h-full bg-slate-900">
-                    <div class="flex flex-col md:flex-row h-full">
-                        <div class="h-56 sm:h-64 md:h-full md:w-1/2 bg-black flex items-center justify-center relative overflow-hidden group cursor-pointer flex-shrink-0" onclick="openLightbox('PELPRAP2tahun.jpg', 'HUT ke-2 PELPRAP IMANUEL (28 Januari 2024)')">
-                            <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-md" alt="Background Blur">
-                            <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="relative z-10 w-full h-full object-contain p-3 group-hover:scale-105 transition duration-300" alt="HUT Pelprap">
-                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center z-20">
-                                <span class="bg-black/70 text-white text-xs font-bold px-3 py-1.5 rounded-full"><i class="fas fa-expand mr-1"></i> Perbesar Foto</span>
-                            </div>
+                <div class="min-w-full w-full flex-shrink-0 flex flex-col md:flex-row bg-slate-900">
+                    <!-- Photo Showcase -->
+                    <div class="w-full md:w-5/12 lg:w-1/2 min-h-[260px] sm:min-h-[320px] md:min-h-[420px] bg-black/60 flex items-center justify-center relative overflow-hidden group cursor-pointer p-4" onclick="openLightbox('PELPRAP2tahun.jpg', 'HUT ke-2 PELPRAP IMANUEL (28 Januari 2024)')">
+                        <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-lg scale-110" alt="Background Blur">
+                        <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="relative z-10 max-h-[340px] md:max-h-[380px] w-auto max-w-full object-contain rounded-2xl shadow-2xl group-hover:scale-105 transition duration-300 border border-white/10" alt="HUT Pelprap">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center z-20">
+                            <span class="bg-black/80 text-white text-xs font-bold px-4 py-2 rounded-full backdrop-blur-md border border-white/20 flex items-center gap-1.5">
+                                <i class="fas fa-expand"></i> Perbesar Foto
+                            </span>
                         </div>
-                        <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center flex-grow text-white bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 overflow-y-auto">
-                            <span class="bg-amber-500 text-slate-950 text-[10px] sm:text-[11px] font-extrabold px-3 py-1 rounded-full w-fit mb-2.5 uppercase tracking-wider">Momen Bersejarah</span>
-                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-1.5 text-white">HUT ke-2 PELPRAP</h3>
-                            <p class="text-xs sm:text-sm mb-2.5 font-medium text-amber-300">
-                                Berdiri sejak <strong>28 Januari 2024</strong>
-                            </p>
-                            <p class="text-xs sm:text-sm leading-relaxed text-slate-300">
-                                Perjalanan iman yang penuh anugerah dan penyertaan Tuhan. Mari terus bertumbuh dalam kebenaran, berakar kuat, dan berbuah lebat bagi kemuliaan nama-Nya!
+                    </div>
+
+                    <!-- Content & Typography -->
+                    <div class="w-full md:w-7/12 lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white border-t md:border-t-0 md:border-l border-white/10">
+                        <div class="inline-flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-3 w-fit">
+                            <i class="fas fa-crown text-amber-400"></i> Momen Bersejarah
+                        </div>
+                        
+                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-2 leading-tight">
+                            HUT ke-2 PELPRAP
+                        </h3>
+                        
+                        <div class="inline-flex items-center gap-2 text-amber-300 font-bold text-xs sm:text-sm mb-4 bg-amber-500/10 px-3.5 py-1.5 rounded-xl border border-amber-500/20 w-fit">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Berdiri sejak 28 Januari 2024</span>
+                        </div>
+                        
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 backdrop-blur-sm mt-1 shadow-inner">
+                            <p class="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed italic">
+                                "Perjalanan iman yang penuh anugerah dan penyertaan Tuhan. Mari terus bertumbuh dalam kebenaran, berakar kuat, dan berbuah lebat bagi kemuliaan nama-Nya!"
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- SLIDE 2: Dokumentasi Kebersamaan -->
-                <div class="min-w-full flex-shrink-0 relative h-full bg-slate-900">
-                    <div class="flex flex-col md:flex-row h-full">
-                        <div class="h-56 sm:h-64 md:h-full md:w-1/2 bg-black grid grid-cols-2 grid-rows-2 gap-1 p-1 flex-shrink-0">
-                            <div class="row-span-2 relative overflow-hidden group cursor-pointer rounded-l-xl" onclick="openLightbox('pelprap (1).jpeg', 'Dokumentasi Persekutuan PELPRAP')">
-                                <img src="pelprap (1).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(1).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 1">
-                            </div>
-                            <div class="relative overflow-hidden group cursor-pointer rounded-tr-xl" onclick="openLightbox('pelprap (2).jpeg', 'Dokumentasi Pelayanan Musik & Pujian')">
-                                <img src="pelprap (2).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 2">
-                            </div>
-                            <div class="relative overflow-hidden group cursor-pointer rounded-br-xl" onclick="openLightbox('pelprap (3).jpeg', 'Dokumentasi Kebersamaan Pemuda')">
-                                <img src="pelprap (3).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 3">
-                            </div>
+                <div class="min-w-full w-full flex-shrink-0 flex flex-col md:flex-row bg-slate-900">
+                    <!-- Photo Collage Grid -->
+                    <div class="w-full md:w-5/12 lg:w-1/2 min-h-[260px] sm:min-h-[320px] md:min-h-[420px] bg-black/60 grid grid-cols-2 grid-rows-2 gap-2 p-3 sm:p-4">
+                        <div class="row-span-2 relative overflow-hidden group cursor-pointer rounded-2xl border border-white/10" onclick="openLightbox('pelprap (1).jpeg', 'Dokumentasi Persekutuan PELPRAP')">
+                            <img src="pelprap (1).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(1).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 1">
                         </div>
-                        <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center flex-grow text-white bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 overflow-y-auto">
-                            <span class="bg-indigo-500 text-white text-[10px] sm:text-[11px] font-extrabold px-3 py-1 rounded-full w-fit mb-2.5 uppercase tracking-wider">Persekutuan</span>
-                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 text-white">Momen Kebersamaan</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed text-indigo-100">
-                                Setiap potret mengabadikan sukacita dalam persekutuan doa, pujian, dan pelayanan bersama sebagai satu tubuh di dalam Kristus.
+                        <div class="relative overflow-hidden group cursor-pointer rounded-2xl border border-white/10" onclick="openLightbox('pelprap (2).jpeg', 'Dokumentasi Pelayanan Musik & Pujian')">
+                            <img src="pelprap (2).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(2).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 2">
+                        </div>
+                        <div class="relative overflow-hidden group cursor-pointer rounded-2xl border border-white/10" onclick="openLightbox('pelprap (3).jpeg', 'Dokumentasi Kebersamaan Pemuda')">
+                            <img src="pelprap (3).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 3">
+                        </div>
+                    </div>
+
+                    <!-- Content & Typography -->
+                    <div class="w-full md:w-7/12 lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white border-t md:border-t-0 md:border-l border-white/10">
+                        <div class="inline-flex items-center gap-1.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-3 w-fit">
+                            <i class="fas fa-heart text-indigo-400"></i> Persekutuan &amp; Kasih
+                        </div>
+                        
+                        <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-2 leading-tight">
+                            Momen Kebersamaan
+                        </h3>
+                        
+                        <div class="inline-flex items-center gap-2 text-indigo-300 font-bold text-xs sm:text-sm mb-4 bg-indigo-500/10 px-3.5 py-1.5 rounded-xl border border-indigo-500/20 w-fit">
+                            <i class="fas fa-users"></i>
+                            <span>Dokumentasi Pelayanan &amp; Doa</span>
+                        </div>
+                        
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 backdrop-blur-sm mt-1 shadow-inner">
+                            <p class="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed">
+                                Setiap potret mengabadikan sukacita dalam persekutuan doa, pujian, dan pelayanan bersama sebagai satu tubuh di dalam Kristus. Bertumbuh bersama dalam iman dan kasih persaudaraan.
                             </p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
