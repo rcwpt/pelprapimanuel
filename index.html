@@ -869,145 +869,296 @@
 
     <!-- STRUKTUR ORGANISASI -->
     <section id="organisasi-section" class="max-w-6xl mx-auto px-4 py-8 fade-in-up">
-        <div class="glass-card rounded-3xl shadow-xl p-6 sm:p-10 border-t-8 border-indigo-600 dark:border-indigo-500">
+        <div class="glass-card rounded-3xl shadow-xl p-6 sm:p-10 border-t-8 border-indigo-600 dark:border-indigo-500 overflow-hidden relative">
             <div class="text-center mb-10">
-                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Kepengurusan</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-800 dark:text-white">Struktur Organisasi 2026</h2>
-                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">Bagan hierarki dan pembagian tugas kepengurusan PELPRAP IMANUEL</p>
+                <div class="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest border border-indigo-500/20 mb-2">
+                    <i class="fas fa-sitemap"></i> Bagan Kepengurusan
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Struktur Organisasi 2026</h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-xl mx-auto">
+                    Hierarki kepengurusan resmi Komunitas Pemuda dan Remaja (PELPRAP) GPdI Imanuel periode tahun pelayanan 2026.
+                </p>
             </div>
 
-            <div class="flex flex-col items-center max-w-4xl mx-auto">
-                <!-- Pembina Card -->
-                <div class="w-full max-w-md mb-6">
-                    <div class="bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-indigo-500/40 text-center relative">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-400 bg-indigo-950 px-3 py-1 rounded-full border border-indigo-800">Pembina</span>
-                        <h3 class="font-extrabold text-base sm:text-lg mt-2">Ibu Majelis Jemaat Todingbua Krey</h3>
-                        <details class="group mt-3 border-t border-slate-800 pt-2 text-left">
-                            <summary class="flex justify-between items-center cursor-pointer text-xs text-indigo-300 hover:text-white transition font-semibold">
-                                <span>Tugas Pokok &amp; Fungsi</span>
-                                <i class="fas fa-chevron-down group-open:rotate-180 transition"></i>
+            <!-- DESKTOP HIERARCHICAL TREE (md:flex) -->
+            <div class="hidden md:flex flex-col items-center max-w-4xl mx-auto relative">
+                
+                <!-- LEVEL 1: PEMBINA -->
+                <div class="w-full max-w-md relative z-10">
+                    <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white p-5 rounded-3xl shadow-xl border border-indigo-500/40 text-center transform hover:scale-[1.02] transition duration-200">
+                        <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-xl border border-indigo-400/30">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-900/60 px-3 py-0.5 rounded-full border border-indigo-700/50">
+                            Pembina Rohani
+                        </span>
+                        <h3 class="font-extrabold text-base lg:text-lg mt-2 text-white">Ibu Majelis Jemaat Todingbua Krey</h3>
+                        <p class="text-xs text-indigo-200 mt-0.5">Penasihat Pastoral &amp; Majelis Gereja</p>
+                        
+                        <details class="group mt-3 border-t border-indigo-800/60 pt-2 text-left">
+                            <summary class="flex justify-between items-center cursor-pointer text-xs text-indigo-300 hover:text-white transition font-bold list-none">
+                                <span><i class="fas fa-list-check mr-1.5"></i> Tupoksi Pembina</span>
+                                <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
                             </summary>
                             <ul class="list-disc pl-5 mt-2 text-xs text-slate-300 space-y-1">
-                                <li>Bimbingan rohani dan nasihat pastoral.</li>
-                                <li>Komunikasi dan koordinasi dengan Bapak Gembala Sidang.</li>
+                                <li>Memberikan arahan rohani, bimbingan, dan nasihat pastoral.</li>
+                                <li>Penghubung koordinasi resmi dengan Bapak Gembala Sidang.</li>
                             </ul>
                         </details>
                     </div>
                 </div>
 
-                <div class="h-6 w-0.5 bg-indigo-300 dark:bg-indigo-700 mb-6"></div>
+                <!-- CONNECTOR: Pembina to Ketua -->
+                <div class="w-0.5 h-8 bg-indigo-400 dark:bg-indigo-600"></div>
 
-                <!-- Ketua Card -->
-                <div class="w-full max-w-md mb-8">
-                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-5 rounded-2xl shadow-2xl border border-indigo-400 text-center relative">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-100 bg-indigo-800/80 px-3 py-1 rounded-full">Ketua</span>
-                        <h3 class="font-black text-lg sm:text-xl mt-2">Rezhky Christian</h3>
-                        <details class="group mt-3 border-t border-indigo-500/60 pt-2 text-left">
-                            <summary class="flex justify-between items-center cursor-pointer text-xs text-indigo-100 hover:text-white transition font-semibold">
-                                <span>Tugas Pokok &amp; Fungsi</span>
-                                <i class="fas fa-chevron-down group-open:rotate-180 transition"></i>
+                <!-- LEVEL 2: KETUA -->
+                <div class="w-full max-w-md relative z-10">
+                    <div class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white p-5 rounded-3xl shadow-2xl border-2 border-indigo-300/40 text-center transform hover:scale-[1.02] transition duration-200 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 w-20 h-20 bg-amber-400/20 rounded-full blur-xl"></div>
+                        <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-white/20 text-amber-300 flex items-center justify-center text-xl border border-white/30">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-amber-300 bg-black/30 px-3 py-0.5 rounded-full border border-amber-400/30">
+                            Ketua Pelprap
+                        </span>
+                        <h3 class="font-black text-lg lg:text-xl mt-2 text-white">Rezhky Christian</h3>
+                        <p class="text-xs text-indigo-100 mt-0.5">Pemimpin Umum &amp; Koordinator Program</p>
+                        
+                        <details class="group mt-3 border-t border-indigo-400/50 pt-2 text-left">
+                            <summary class="flex justify-between items-center cursor-pointer text-xs text-indigo-100 hover:text-white transition font-bold list-none">
+                                <span><i class="fas fa-list-check mr-1.5"></i> Tupoksi Ketua</span>
+                                <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
                             </summary>
                             <ul class="list-disc pl-5 mt-2 text-xs text-indigo-50 space-y-1">
-                                <li>Memimpin seluruh program dan kegiatan pelayanan.</li>
-                                <li>Pengambilan keputusan akhir rapat pengurus.</li>
-                                <li>Mengayomi seluruh anggota komunitas pemuda &amp; remaja.</li>
+                                <li>Memimpin seluruh program, ibadah, dan kegiatan pelayanan pemuda.</li>
+                                <li>Pengambil keputusan akhir dan penanggung jawab seluruh rapat kerja.</li>
+                                <li>Mengayomi dan memelihara kesatuan seluruh anggota.</li>
                             </ul>
                         </details>
                     </div>
                 </div>
 
-                <!-- Core Staff Row: Sekretaris 1, Bendahara, Sekretaris 2 -->
-                <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <!-- TREE BRANCHING CONNECTOR: Ketua to Core Staff -->
+                <div class="w-0.5 h-6 bg-indigo-400 dark:bg-indigo-600"></div>
+                <div class="w-[72%] h-0.5 bg-indigo-400 dark:bg-indigo-600 relative">
+                    <div class="absolute left-0 top-0 w-0.5 h-6 bg-indigo-400 dark:bg-indigo-600"></div>
+                    <div class="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 h-6 bg-indigo-400 dark:bg-indigo-600"></div>
+                    <div class="absolute right-0 top-0 w-0.5 h-6 bg-indigo-400 dark:bg-indigo-600"></div>
+                </div>
+                <div class="h-6"></div>
+
+                <!-- LEVEL 3: PENGURUS INTI (3 Cols: Sekretaris 1, Bendahara, Sekretaris 2) -->
+                <div class="w-full grid grid-cols-3 gap-5 relative z-10">
                     <!-- Sekretaris 1 -->
-                    <div class="bg-white dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-800 p-4 rounded-2xl shadow-md">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
-                                <i class="fas fa-pen-nib"></i>
+                    <div class="bg-white dark:bg-slate-900 border-2 border-blue-200 dark:border-blue-900/60 p-4 rounded-3xl shadow-lg hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm">
+                                    <i class="fas fa-pen-fancy"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-black uppercase text-blue-600 dark:text-blue-400 tracking-wider">Sekretaris 1</span>
+                                    <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Laudya Iroth</h4>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase">Sekretaris 1</p>
-                                <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Laudya Iroth</h4>
-                            </div>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Humas &amp; Korespondensi</p>
                         </div>
-                        <details class="group mt-2 border-t border-slate-100 dark:border-slate-800 pt-2 text-xs">
-                            <summary class="flex justify-between items-center cursor-pointer text-blue-600 dark:text-blue-400 font-semibold">
+                        <details class="group mt-3 border-t border-slate-100 dark:border-slate-800 pt-2 text-xs">
+                            <summary class="flex justify-between items-center cursor-pointer text-blue-600 dark:text-blue-400 font-bold list-none">
                                 <span>Tupoksi</span>
-                                <i class="fas fa-chevron-down group-open:rotate-180 transition"></i>
+                                <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
                             </summary>
-                            <ul class="list-disc pl-4 mt-2 text-slate-600 dark:text-slate-400 space-y-0.5">
-                                <li>Humas Eksternal.</li>
-                                <li>Surat menyurat &amp; dokumentasi.</li>
+                            <ul class="list-disc pl-4 mt-2 text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
+                                <li>Humas eksternal &amp; publikasi jadwal.</li>
+                                <li>Surat menyurat &amp; arsip organisasi.</li>
                             </ul>
                         </details>
                     </div>
 
-                    <!-- Bendahara -->
-                    <div class="bg-white dark:bg-slate-900 border-2 border-emerald-100 dark:border-slate-800 p-4 rounded-2xl shadow-md">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
-                                <i class="fas fa-wallet"></i>
+                    <!-- Bendahara (Center) -->
+                    <div class="bg-white dark:bg-slate-900 border-2 border-emerald-200 dark:border-emerald-900/60 p-4 rounded-3xl shadow-lg hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-black uppercase text-emerald-600 dark:text-emerald-400 tracking-wider">Bendahara</span>
+                                    <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Delon Tidayoh</h4>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase">Bendahara</p>
-                                <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Delon Tidayoh</h4>
-                            </div>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Keuangan &amp; Kas Pelayanan</p>
                         </div>
-                        <details class="group mt-2 border-t border-slate-100 dark:border-slate-800 pt-2 text-xs">
-                            <summary class="flex justify-between items-center cursor-pointer text-emerald-600 dark:text-emerald-400 font-semibold">
+                        <details class="group mt-3 border-t border-slate-100 dark:border-slate-800 pt-2 text-xs">
+                            <summary class="flex justify-between items-center cursor-pointer text-emerald-600 dark:text-emerald-400 font-bold list-none">
                                 <span>Tupoksi</span>
-                                <i class="fas fa-chevron-down group-open:rotate-180 transition"></i>
+                                <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
                             </summary>
-                            <ul class="list-disc pl-4 mt-2 text-slate-600 dark:text-slate-400 space-y-0.5">
-                                <li>Pengelolaan kas &amp; persembahan.</li>
-                                <li>Laporan keuangan rutin.</li>
+                            <ul class="list-disc pl-4 mt-2 text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
+                                <li>Pengelolaan kas, perpuluhan, dan persembahan.</li>
+                                <li>Penyusunan laporan keuangan rutin.</li>
                             </ul>
                         </details>
                     </div>
 
                     <!-- Sekretaris 2 -->
-                    <div class="bg-white dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-800 p-4 rounded-2xl shadow-md">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
-                                <i class="fas fa-clipboard-list"></i>
+                    <div class="bg-white dark:bg-slate-900 border-2 border-sky-200 dark:border-sky-900/60 p-4 rounded-3xl shadow-lg hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-2xl bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-sm">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-black uppercase text-sky-600 dark:text-sky-400 tracking-wider">Sekretaris 2</span>
+                                    <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Ribka Sumolang</h4>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase">Sekretaris 2</p>
-                                <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Ribka Sumolang</h4>
-                            </div>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Absensi &amp; Notulensi Rapat</p>
                         </div>
-                        <details class="group mt-2 border-t border-slate-100 dark:border-slate-800 pt-2 text-xs">
-                            <summary class="flex justify-between items-center cursor-pointer text-blue-600 dark:text-blue-400 font-semibold">
+                        <details class="group mt-3 border-t border-slate-100 dark:border-slate-800 pt-2 text-xs">
+                            <summary class="flex justify-between items-center cursor-pointer text-sky-600 dark:text-sky-400 font-bold list-none">
                                 <span>Tupoksi</span>
-                                <i class="fas fa-chevron-down group-open:rotate-180 transition"></i>
+                                <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
                             </summary>
-                            <ul class="list-disc pl-4 mt-2 text-slate-600 dark:text-slate-400 space-y-0.5">
-                                <li>Absensi kehadiran ibadah.</li>
-                                <li>Notulensi rapat evaluasi.</li>
+                            <ul class="list-disc pl-4 mt-2 text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
+                                <li>Pencatatan absensi kehadiran anggota.</li>
+                                <li>Notulensi hasil keputusan rapat kerja.</li>
                             </ul>
                         </details>
                     </div>
                 </div>
 
-                <!-- Seksi Musik & Pujian -->
-                <div class="w-full max-w-md">
-                    <div class="bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 p-4 rounded-2xl shadow-sm text-center">
-                        <p class="text-[10px] font-bold uppercase tracking-widest text-purple-600 dark:text-purple-400 mb-1">Seksi Musik &amp; Pujian</p>
-                        <div class="flex items-center justify-center gap-2 mb-1">
-                            <i class="fas fa-guitar text-purple-600"></i>
-                            <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Rifky Tidayoh</h4>
+                <!-- CONNECTOR: To Seksi Musik -->
+                <div class="w-0.5 h-8 bg-indigo-400 dark:bg-indigo-600"></div>
+
+                <!-- LEVEL 4: SEKSI MUSIK & PUJIAN -->
+                <div class="w-full max-w-md relative z-10">
+                    <div class="bg-gradient-to-r from-purple-50 via-purple-100 to-indigo-50 dark:from-purple-950/40 dark:via-purple-900/30 dark:to-indigo-950/40 border-2 border-purple-300 dark:border-purple-800/80 p-5 rounded-3xl shadow-lg text-center">
+                        <div class="w-11 h-11 mx-auto mb-2 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-lg shadow-md">
+                            <i class="fas fa-music"></i>
                         </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Koordinator Alat Musik &amp; Song Leader</p>
-                        <details class="group mt-2 border-t border-purple-200/60 dark:border-purple-800 pt-2 text-left">
-                            <summary class="flex justify-between items-center cursor-pointer text-purple-600 dark:text-purple-400 text-xs font-semibold">
-                                <span>Tupoksi</span>
-                                <i class="fas fa-chevron-down group-open:rotate-180 transition"></i>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-purple-700 dark:text-purple-300 bg-purple-200/80 dark:bg-purple-900/60 px-3 py-0.5 rounded-full">
+                            Seksi Musik &amp; Pujian
+                        </span>
+                        <h4 class="font-black text-base mt-2 text-slate-800 dark:text-white">Rifky Tidayoh</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Koordinator Alat Musik, Pemain Musik &amp; WL</p>
+                        
+                        <details class="group mt-3 border-t border-purple-200 dark:border-purple-800/60 pt-2 text-left">
+                            <summary class="flex justify-between items-center cursor-pointer text-xs text-purple-700 dark:text-purple-400 font-bold list-none">
+                                <span><i class="fas fa-list-check mr-1"></i> Tupoksi Musik</span>
+                                <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
                             </summary>
-                            <ul class="list-disc pl-4 mt-2 text-xs text-slate-600 dark:text-slate-400 space-y-0.5">
-                                <li>Penanggung jawab perawatan alat musik.</li>
-                                <li>Jadwal latihan musik dan singer.</li>
-                                <li>Penanggung jawab susunan lagu &amp; WL.</li>
+                            <ul class="list-disc pl-5 mt-2 text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
+                                <li>Perawatan dan pengaturan inventaris alat musik gereja.</li>
+                                <li>Jadwal latihan musik, singer, dan worship leader (WL).</li>
+                                <li>Penyusunan tema lagu pujian per ibadah persekutuan.</li>
                             </ul>
                         </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOBILE TIMELINE/TREE FLOW (md:hidden) -->
+            <div class="md:hidden space-y-4">
+                <!-- 1. Pembina Mobile -->
+                <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-4 rounded-2xl border border-indigo-500/40 shadow-md">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-base flex-shrink-0">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-black uppercase tracking-wider text-indigo-300 bg-indigo-900/60 px-2 py-0.5 rounded-full border border-indigo-700/50">Pembina</span>
+                            <h4 class="font-extrabold text-sm text-white mt-0.5">Ibu Majelis Todingbua Krey</h4>
+                        </div>
+                    </div>
+                    <details class="group mt-2 border-t border-indigo-800/60 pt-2 text-xs">
+                        <summary class="flex justify-between items-center cursor-pointer text-[11px] text-indigo-300 font-bold list-none">
+                            <span>Tupoksi Pembina</span>
+                            <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
+                        </summary>
+                        <p class="text-[11px] text-slate-300 mt-1 pl-2">Bimbingan pastoral rohani &amp; koordinasi dengan Gembala Sidang.</p>
+                    </details>
+                </div>
+
+                <div class="flex justify-center -my-2 text-indigo-400"><i class="fas fa-arrow-down text-xs"></i></div>
+
+                <!-- 2. Ketua Mobile -->
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white p-4 rounded-2xl border-2 border-indigo-400/40 shadow-xl">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 text-amber-300 flex items-center justify-center font-bold text-base flex-shrink-0">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-black uppercase tracking-wider text-amber-300 bg-black/30 px-2 py-0.5 rounded-full">Ketua</span>
+                            <h4 class="font-black text-base text-white mt-0.5">Rezhky Christian</h4>
+                        </div>
+                    </div>
+                    <details class="group mt-2 border-t border-indigo-400/50 pt-2 text-xs">
+                        <summary class="flex justify-between items-center cursor-pointer text-[11px] text-indigo-100 font-bold list-none">
+                            <span>Tupoksi Ketua</span>
+                            <i class="fas fa-chevron-down group-open:rotate-180 transition text-[10px]"></i>
+                        </summary>
+                        <p class="text-[11px] text-indigo-50 mt-1 pl-2">Memimpin seluruh kegiatan, keputusan rapat, dan mengayomi seluruh pemuda.</p>
+                    </details>
+                </div>
+
+                <div class="flex justify-center -my-2 text-indigo-400"><i class="fas fa-arrow-down text-xs"></i></div>
+
+                <!-- 3. Pengurus Inti Mobile -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <!-- Sek 1 -->
+                    <div class="bg-white dark:bg-slate-900 border-2 border-blue-200 dark:border-blue-900/60 p-3.5 rounded-2xl shadow-sm">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 text-xs flex items-center justify-center font-bold">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-black uppercase text-blue-600 dark:text-blue-400">Sekretaris 1</span>
+                                <h4 class="font-extrabold text-xs text-slate-800 dark:text-white">Laudya Iroth</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bendahara -->
+                    <div class="bg-white dark:bg-slate-900 border-2 border-emerald-200 dark:border-emerald-900/60 p-3.5 rounded-2xl shadow-sm">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 text-xs flex items-center justify-center font-bold">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-black uppercase text-emerald-600 dark:text-emerald-400">Bendahara</span>
+                                <h4 class="font-extrabold text-xs text-slate-800 dark:text-white">Delon Tidayoh</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sek 2 -->
+                    <div class="bg-white dark:bg-slate-900 border-2 border-sky-200 dark:border-sky-900/60 p-3.5 rounded-2xl shadow-sm">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-xl bg-sky-100 dark:bg-sky-950 text-sky-600 text-xs flex items-center justify-center font-bold">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-black uppercase text-sky-600 dark:text-sky-400">Sekretaris 2</span>
+                                <h4 class="font-extrabold text-xs text-slate-800 dark:text-white">Ribka Sumolang</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center -my-2 text-indigo-400"><i class="fas fa-arrow-down text-xs"></i></div>
+
+                <!-- 4. Seksi Musik Mobile -->
+                <div class="bg-purple-50 dark:bg-purple-950/40 border-2 border-purple-200 dark:border-purple-900/60 p-3.5 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-black uppercase text-purple-700 dark:text-purple-300">Seksi Musik &amp; Pujian</span>
+                            <h4 class="font-extrabold text-xs text-slate-800 dark:text-white">Rifky Tidayoh</h4>
+                            <p class="text-[10px] text-slate-500 dark:text-slate-400">Koordinator Alat Musik &amp; Song Leader</p>
+                        </div>
                     </div>
                 </div>
             </div>

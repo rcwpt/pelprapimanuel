@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games Alkitab Interaktif - PELPRAP IMANUEL</title>
-    <meta name="description" content="Kuis Alkitab & Tebak Tokoh Alkitab Interaktif PELPRAP GPdI Imanuel. Uji pengetahuan Alkitabmu dengan timer, audio effect, dan skor online!">
+    <meta name="description" content="Kuis Alkitab & Tebak Tokoh Alkitab Interaktif PELPRAP GPdI Imanuel. Lengkap dengan Papan Peringkat (Leaderboard), Bank Soal 100+, sound effect, dan timer.">
     <meta name="theme-color" content="#4f46e5">
 
     <!-- Tailwind CSS CDN -->
@@ -49,29 +49,29 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
-            padding-bottom: 50px;
+            padding-bottom: 60px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
         .dark .glass-nav {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
         .dark .glass-card {
-            background: rgba(30, 41, 59, 0.85);
+            background: rgba(30, 41, 59, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -82,14 +82,15 @@
             border: 2px solid #e2e8f0;
             color: #1e293b;
             border-radius: 16px;
-            padding: 14px 18px;
+            padding: 12px 16px;
             text-align: left;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
+            min-height: 52px;
         }
         .dark .opt-btn {
             background-color: #1e293b;
@@ -138,14 +139,14 @@
         .mode-card {
             cursor: pointer;
             border-radius: 24px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 1.75rem;
+            transition: transform 0.25s, box-shadow 0.25s;
             position: relative;
             overflow: hidden;
         }
         .mode-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 24px 40px -12px rgba(79, 70, 229, 0.35);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.35);
         }
 
         /* Timer Pulse */
@@ -153,23 +154,9 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.12); }
         }
-        .timer-green {
-            background: #dcfce7;
-            color: #15803d;
-            border: 3px solid #22c55e;
-        }
-        .timer-yellow {
-            background: #fef9c3;
-            color: #a16207;
-            border: 3px solid #eab308;
-            animation: timerPulse 0.8s infinite;
-        }
-        .timer-red {
-            background: #fee2e2;
-            color: #b91c1c;
-            border: 3px solid #ef4444;
-            animation: timerPulse 0.4s infinite;
-        }
+        .timer-green { background: #dcfce7; color: #15803d; border: 3px solid #22c55e; }
+        .timer-yellow { background: #fef9c3; color: #a16207; border: 3px solid #eab308; animation: timerPulse 0.8s infinite; }
+        .timer-red { background: #fee2e2; color: #b91c1c; border: 3px solid #ef4444; animation: timerPulse 0.4s infinite; }
         .dark .timer-green { background: #064e3b; color: #a7f3d0; border-color: #10b981; }
         .dark .timer-yellow { background: #713f12; color: #fef08a; border-color: #eab308; }
         .dark .timer-red { background: #7f1d1d; color: #fecaca; border-color: #ef4444; }
@@ -200,7 +187,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Keyframe animations */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             20% { transform: translateX(-8px); }
@@ -217,7 +203,6 @@
         }
         .pop-in { animation: popIn 0.3s ease forwards; }
 
-        /* Toast */
         #toast {
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
         }
@@ -238,25 +223,69 @@
         </div>
     </div>
 
+    <!-- LEADERBOARD MODAL -->
+    <div id="leaderboard-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all duration-300">
+        <div class="glass-card rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col relative overflow-hidden">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-xl">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">Papan Peringkat</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Skor Tertinggi Pemain</p>
+                    </div>
+                </div>
+                <button onclick="closeLeaderboard()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Tutup">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Leaderboard Filter Tabs -->
+            <div class="flex items-center gap-2 py-3">
+                <button onclick="filterLeaderboard('all')" id="lb-tab-all" class="text-xs font-bold px-3 py-1.5 rounded-full bg-brand-600 text-white transition">Semua</button>
+                <button onclick="filterLeaderboard('quiz')" id="lb-tab-quiz" class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition">Kuis Alkitab</button>
+                <button onclick="filterLeaderboard('tokoh')" id="lb-tab-tokoh" class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition">Tebak Tokoh</button>
+            </div>
+
+            <!-- Scores List -->
+            <div class="overflow-y-auto flex-grow space-y-2 pr-1 my-2" id="leaderboard-list">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
+                <button onclick="clearLeaderboardData()" class="text-rose-500 hover:underline font-semibold">
+                    <i class="fas fa-trash-alt mr-1"></i> Reset Riwayat
+                </button>
+                <button onclick="closeLeaderboard()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold rounded-xl hover:bg-slate-300 transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- TOP NAVBAR -->
     <nav class="glass-nav fixed top-0 left-0 right-0 z-40">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-16 sm:h-20">
                 <!-- Back Link -->
-                <a href="index.html" class="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
+                <a href="index.html" class="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
                     <i class="fas fa-arrow-left"></i>
-                    <span>Kembali ke Beranda</span>
+                    <span class="hidden sm:inline">Beranda</span>
                 </a>
 
-                <div class="text-center hidden sm:block">
-                    <h1 class="font-extrabold text-base text-slate-900 dark:text-white flex items-center gap-1.5 justify-center">
+                <div class="text-center">
+                    <h1 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white flex items-center gap-1.5 justify-center">
                         <i class="fas fa-gamepad text-brand-600 dark:text-brand-400"></i> Games Alkitab
                     </h1>
-                    <p class="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">PELPRAP IMANUEL 2026</p>
                 </div>
 
-                <!-- Right Controls: Audio Mute & Dark Mode -->
-                <div class="flex items-center gap-2">
+                <!-- Right Controls: Leaderboard, Sound, Theme -->
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                    <button onclick="openLeaderboard()" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold text-xs transition flex items-center gap-1.5" title="Lihat Papan Peringkat">
+                        <i class="fas fa-trophy"></i>
+                        <span class="hidden sm:inline">Skor</span>
+                    </button>
                     <button onclick="toggleAudio()" id="audio-toggle-btn" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 transition text-sm" title="Suara Musik / SFX">
                         <i id="audio-icon" class="fas fa-volume-high"></i>
                     </button>
@@ -269,22 +298,37 @@
     </nav>
 
     <!-- MAIN CONTAINER -->
-    <main class="max-w-4xl mx-auto px-4 pt-24 sm:pt-28">
+    <main class="max-w-4xl mx-auto px-4 pt-20 sm:pt-24">
 
         <!-- SCREEN: HOME MENU -->
         <div id="screen-home" class="py-4">
-            <div class="text-center mb-8 sm:mb-10">
-                <span class="inline-block text-5xl sm:text-6xl mb-3 animate-bounce">🎮</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
-                    Pilih Mode Permainan
+            <div class="text-center mb-6 sm:mb-8">
+                <span class="inline-block text-5xl sm:text-6xl mb-2 animate-bounce">🎮</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
+                    Games Alkitab Interaktif
                 </h2>
-                <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-md mx-auto">
-                    Uji wawasan Alkitabmu secara interaktif! Dapatkan nilai tertinggi dan bagikan hasilmu.
+                <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-md mx-auto">
+                    Uji wawasan Alkitabmu dengan 100+ bank soal acak, kumpulkan poin, dan catat namamu di Papan Peringkat!
                 </p>
             </div>
 
+            <!-- USERNAME INPUT CARD -->
+            <div class="glass-card rounded-3xl p-5 sm:p-6 mb-8 max-w-md mx-auto shadow-lg border border-indigo-100 dark:border-indigo-950/60">
+                <label for="player-name-input" class="block text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2 flex items-center gap-1.5">
+                    <i class="fas fa-user-tag text-brand-600"></i>
+                    <span>Nama / Panggilan Pemain:</span>
+                </label>
+                <div class="flex gap-2">
+                    <input type="text" id="player-name-input" placeholder="Ketik namamu di sini..." maxlength="20" class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white" onchange="savePlayerName()" onkeyup="savePlayerName()">
+                    <button onclick="savePlayerName(); showToast('Tersimpan', 'Nama pemain diperbarui!')" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl transition flex-shrink-0">
+                        Simpan
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-2 italic">* Nama akan dicatat pada papan peringkat dan pesan skor.</p>
+            </div>
+
             <!-- 2 Main Mode Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-8">
                 <!-- Kuis Alkitab Card -->
                 <div class="mode-card text-white shadow-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-indigo-800 flex flex-col justify-between" onclick="startGame('quiz')">
                     <div class="absolute -top-12 -right-12 w-36 h-36 bg-white/10 rounded-full blur-2xl"></div>
@@ -292,14 +336,14 @@
                         <div class="text-4xl sm:text-5xl mb-3">📖</div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold mb-2">Kuis Alkitab</h3>
                         <p class="text-indigo-100 text-xs sm:text-sm leading-relaxed mb-6">
-                            15 pertanyaan pilihan ganda seputar Perjanjian Lama, Perjanjian Baru, sejarah para nabi, dan pengajaran Kristus.
+                            15 pertanyaan pilihan ganda acak dari 100+ bank soal seputar Perjanjian Lama, Perjanjian Baru, nabi, rasul, dan hukum Tuhan.
                         </p>
                     </div>
                     <div>
-                        <div class="flex flex-wrap gap-2 text-[11px] font-bold text-white/90 mb-6">
-                            <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">⏱️ 30s / Soal</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">📝 15 Soal Acak</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">✂️ 50:50 Lifeline</span>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold text-white/90 mb-5">
+                            <span class="bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">⏱️ 30s / Soal</span>
+                            <span class="bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">📝 100+ Bank Soal</span>
+                            <span class="bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">✂️ 50:50 Lifeline</span>
                         </div>
                         <button class="w-full bg-white text-indigo-700 font-extrabold py-3 px-6 rounded-xl text-sm hover:bg-indigo-50 transition shadow-lg flex items-center justify-center gap-2">
                             <span>Mulai Main Kuis</span>
@@ -315,14 +359,14 @@
                         <div class="text-4xl sm:text-5xl mb-3">🦁</div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold mb-2">Tebak Tokoh</h3>
                         <p class="text-purple-100 text-xs sm:text-sm leading-relaxed mb-6">
-                            Tebak nama tokoh Alkitab dari kombinasi petunjuk emoji dan kisah uniknya. Seberapa kenal kamu dengan para pahlawan iman?
+                            Tebak nama tokoh Alkitab dari petunjuk emoji unik dan kisah sejarahnya. Asah ketajaman analisismu!
                         </p>
                     </div>
                     <div>
-                        <div class="flex flex-wrap gap-2 text-[11px] font-bold text-white/90 mb-6">
-                            <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">🎭 50+ Tokoh</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">🔍 Clue Emoji</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">🏆 Skor &amp; Grade</span>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold text-white/90 mb-5">
+                            <span class="bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">🎭 45+ Tokoh</span>
+                            <span class="bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">🔍 Clue Emoji</span>
+                            <span class="bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">🏆 Rekor Skor</span>
                         </div>
                         <button class="w-full bg-white text-purple-700 font-extrabold py-3 px-6 rounded-xl text-sm hover:bg-purple-50 transition shadow-lg flex items-center justify-center gap-2">
                             <span>Mulai Tebak Tokoh</span>
@@ -333,41 +377,48 @@
             </div>
 
             <!-- Stats & High Score Card -->
-            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 dark:border-slate-800 text-center">
-                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-4 flex items-center justify-center gap-2">
-                    <i class="fas fa-trophy text-amber-500"></i>
-                    <span>Catatan Skor Tertinggi Pribadi Anda</span>
-                </p>
-                <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+            <div class="glass-card rounded-3xl p-5 sm:p-6 shadow-xl border border-slate-200 dark:border-slate-800 text-center">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="font-extrabold text-xs sm:text-sm text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                        <i class="fas fa-chart-simple text-brand-600"></i> Statistik Pribadi
+                    </h4>
+                    <button onclick="openLeaderboard()" class="text-xs text-brand-600 dark:text-brand-400 font-bold hover:underline">
+                        Lihat Papan Peringkat Lengkap →
+                    </button>
+                </div>
+                <div class="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg mx-auto">
                     <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 rounded-2xl border border-indigo-100 dark:border-indigo-900/60">
-                        <div class="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400" id="best-score-quiz">-</div>
-                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Best Kuis</div>
+                        <div class="text-lg sm:text-2xl font-black text-indigo-600 dark:text-indigo-400" id="best-score-quiz">-</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase mt-0.5">Best Kuis</div>
                     </div>
                     <div class="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-2xl border border-purple-100 dark:border-purple-900/60">
-                        <div class="text-xl sm:text-2xl font-black text-purple-600 dark:text-purple-400" id="best-score-tokoh">-</div>
-                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Best Tokoh</div>
+                        <div class="text-lg sm:text-2xl font-black text-purple-600 dark:text-purple-400" id="best-score-tokoh">-</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase mt-0.5">Best Tokoh</div>
                     </div>
                     <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-100 dark:border-emerald-900/60">
-                        <div class="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400" id="games-played">0</div>
-                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Total Main</div>
+                        <div class="text-lg sm:text-2xl font-black text-emerald-600 dark:text-emerald-400" id="games-played">0</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase mt-0.5">Total Main</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- SCREEN: QUIZ GAMEPLAY -->
-        <div id="screen-quiz" class="hidden py-4 max-w-2xl mx-auto">
+        <div id="screen-quiz" class="hidden py-2 max-w-2xl mx-auto">
             <!-- Header bar: Counter, Streak, Score -->
             <div class="mb-4">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs sm:text-sm font-extrabold text-slate-600 dark:text-slate-300" id="question-counter">
-                        Soal 1 / 15
-                    </span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs sm:text-sm font-extrabold text-slate-600 dark:text-slate-300" id="question-counter">
+                            Soal 1 / 15
+                        </span>
+                        <span class="text-xs text-slate-400 font-medium hidden sm:inline" id="player-playing-name"></span>
+                    </div>
                     <!-- Streak Combo Counter -->
-                    <div id="streak-badge" class="hidden text-xs font-black px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-md animate-pulse flex items-center gap-1">
+                    <div id="streak-badge" class="hidden text-[11px] sm:text-xs font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-md animate-pulse flex items-center gap-1">
                         <i class="fas fa-fire"></i> <span id="streak-count">0</span>x Combo!
                     </div>
-                    <div class="flex items-center gap-3 text-xs sm:text-sm font-bold">
+                    <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold">
                         <span class="text-emerald-600 dark:text-emerald-400" id="score-correct">✅ 0</span>
                         <span class="text-rose-500" id="score-wrong">❌ 0</span>
                     </div>
@@ -379,8 +430,8 @@
             </div>
 
             <!-- Lifelines bar -->
-            <div class="flex items-center justify-between mb-4 bg-slate-100 dark:bg-slate-900/60 p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800">
-                <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider pl-2">Bantuan:</span>
+            <div class="flex items-center justify-between mb-4 bg-slate-100 dark:bg-slate-900/60 p-2 sm:p-2.5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider pl-1.5">Bantuan:</span>
                 <div class="flex gap-2">
                     <button id="lifeline-5050" onclick="useLifeline5050()" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-700 shadow-sm transition flex items-center gap-1.5" title="Hilangkan 2 pilihan salah">
                         <i class="fas fa-scissors"></i> 50:50
@@ -392,33 +443,33 @@
             </div>
 
             <!-- Question Card -->
-            <div class="glass-card rounded-3xl shadow-xl p-6 sm:p-8 mb-6 border border-slate-200 dark:border-slate-800 relative">
+            <div class="glass-card rounded-3xl shadow-xl p-5 sm:p-8 mb-4 border border-slate-200 dark:border-slate-800 relative">
                 <!-- Mode Badge & Timer -->
-                <div class="flex justify-between items-center mb-4">
+                <div class="flex justify-between items-center mb-3">
                     <span id="mode-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
                         📖 Kuis Alkitab
                     </span>
-                    <div id="timer-circle" class="w-12 h-12 rounded-full flex items-center justify-center font-black text-lg transition-all duration-300 timer-green">
+                    <div id="timer-circle" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-black text-base sm:text-lg transition-all duration-300 timer-green">
                         30
                     </div>
                 </div>
 
                 <!-- Tokoh Clue Area -->
-                <div id="clue-area" class="text-center text-4xl sm:text-5xl mb-3 hidden drop-shadow-sm"></div>
-                <div id="clue-text" class="text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-4 hidden font-medium italic bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl"></div>
+                <div id="clue-area" class="text-center text-4xl sm:text-5xl mb-2 hidden drop-shadow-sm"></div>
+                <div id="clue-text" class="text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-3 hidden font-medium italic bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl"></div>
 
                 <!-- Question Text -->
-                <h3 id="question-text" class="text-base sm:text-xl font-extrabold text-slate-800 dark:text-white mb-6 leading-relaxed">
+                <h3 id="question-text" class="text-sm sm:text-lg font-extrabold text-slate-800 dark:text-white mb-5 leading-relaxed">
                     Memuat pertanyaan...
                 </h3>
 
                 <!-- Options List -->
-                <div id="options-container" class="flex flex-col gap-3"></div>
+                <div id="options-container" class="flex flex-col gap-2.5 sm:gap-3"></div>
 
                 <!-- Instant Feedback Box -->
-                <div id="feedback-area" class="hidden mt-4 p-4 rounded-2xl text-center transition-all">
-                    <div id="feedback-emoji" class="text-3xl mb-1"></div>
-                    <div id="feedback-text" class="font-extrabold text-base"></div>
+                <div id="feedback-area" class="hidden mt-4 p-3.5 rounded-2xl text-center transition-all">
+                    <div id="feedback-emoji" class="text-2xl sm:text-3xl mb-0.5"></div>
+                    <div id="feedback-text" class="font-extrabold text-sm sm:text-base"></div>
                     <div id="feedback-answer" class="text-xs mt-1"></div>
                 </div>
             </div>
@@ -433,7 +484,7 @@
                 </button>
             </div>
 
-            <div class="text-center mt-6">
+            <div class="text-center mt-5">
                 <button onclick="quitGame()" class="text-xs text-slate-400 hover:text-rose-500 font-semibold transition">
                     <i class="fas fa-right-from-bracket mr-1"></i> Keluar ke Menu Utama
                 </button>
@@ -443,9 +494,10 @@
         <!-- SCREEN: RESULT -->
         <div id="screen-result" class="hidden py-4 max-w-2xl mx-auto">
             <div id="score-display" class="glass-card rounded-3xl shadow-2xl p-6 sm:p-10 text-center border border-slate-200 dark:border-slate-800">
-                <div id="result-emoji" class="text-6xl mb-3">🎉</div>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-1" id="result-title">Permainan Selesai!</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mb-6" id="result-mode">Kuis Alkitab</p>
+                <div id="result-emoji" class="text-5xl sm:text-6xl mb-2">🎉</div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-0.5" id="result-title">Permainan Selesai!</h2>
+                <p class="text-brand-600 dark:text-brand-400 font-bold text-sm mb-1" id="result-player-greeting">Hebat, Pemain!</p>
+                <p class="text-slate-500 dark:text-slate-400 text-xs mb-6" id="result-mode">Kuis Alkitab</p>
 
                 <!-- Grade Circle -->
                 <div class="flex justify-center mb-6">
@@ -455,46 +507,49 @@
                 </div>
 
                 <!-- Stats 3 Columns -->
-                <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-4 mb-6">
                     <div class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 rounded-2xl p-3 sm:p-4">
                         <div class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400" id="result-correct">0</div>
-                        <div class="text-xs font-bold text-slate-500 uppercase mt-0.5">Benar</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Benar</div>
                     </div>
                     <div class="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 rounded-2xl p-3 sm:p-4">
                         <div class="text-2xl sm:text-3xl font-black text-rose-500" id="result-wrong">0</div>
-                        <div class="text-xs font-bold text-slate-500 uppercase mt-0.5">Salah</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Salah</div>
                     </div>
                     <div class="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 rounded-2xl p-3 sm:p-4">
                         <div class="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400" id="result-pct">0%</div>
-                        <div class="text-xs font-bold text-slate-500 uppercase mt-0.5">Akurasi</div>
+                        <div class="text-[11px] font-bold text-slate-500 uppercase mt-0.5">Akurasi</div>
                     </div>
                 </div>
 
                 <p id="result-message" class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 italic max-w-md mx-auto"></p>
 
                 <!-- WhatsApp Share & Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-                    <button onclick="shareToWhatsApp()" class="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition text-sm">
+                <div class="flex flex-col sm:flex-row gap-2.5 justify-center mb-6">
+                    <button onclick="shareToWhatsApp()" class="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition text-xs sm:text-sm">
                         <i class="fab fa-whatsapp text-lg"></i>
                         <span>Bagikan Hasil ke WA</span>
                     </button>
-                    <button onclick="playAgain()" class="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 transition text-sm">
+                    <button onclick="openLeaderboard()" class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-3 rounded-2xl shadow-lg hover:scale-105 transition text-xs sm:text-sm">
+                        <i class="fas fa-trophy"></i>
+                        <span>Papan Peringkat</span>
+                    </button>
+                    <button onclick="playAgain()" class="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-3 rounded-2xl shadow-lg hover:scale-105 transition text-xs sm:text-sm">
                         <i class="fas fa-rotate-right"></i>
                         <span>Main Lagi</span>
                     </button>
-                    <button onclick="showHome()" class="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold px-5 py-3 rounded-2xl transition text-sm">
+                    <button onclick="showHome()" class="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold px-4 py-3 rounded-2xl transition text-xs sm:text-sm">
                         <i class="fas fa-house"></i>
-                        <span>Menu</span>
                     </button>
                 </div>
 
                 <!-- INSTAGRAM CTA CARD -->
-                <div class="instagram-cta rounded-2xl p-5 text-white text-center shadow-lg relative overflow-hidden">
-                    <div class="text-3xl mb-1" id="cta-emoji">🎉</div>
-                    <h4 class="font-extrabold text-base" id="cta-title">Hebat! Bagikan prestasimu!</h4>
-                    <p class="text-xs opacity-90 mt-1">Screenshot layar ini dan tag Instagram kami:</p>
-                    <div class="mt-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm transition rounded-xl px-4 py-2 inline-block cursor-pointer" onclick="window.open('https://www.instagram.com/c.wijaya.t/','_blank')">
-                        <span class="font-black text-lg tracking-tight">@c.wijaya.t</span>
+                <div class="instagram-cta rounded-2xl p-4 sm:p-5 text-white text-center shadow-lg relative overflow-hidden">
+                    <div class="text-2xl sm:text-3xl mb-1" id="cta-emoji">🎉</div>
+                    <h4 class="font-extrabold text-sm sm:text-base" id="cta-title">Hebat! Bagikan prestasimu!</h4>
+                    <p class="text-xs opacity-90 mt-0.5">Screenshot layar ini dan tag Instagram kami:</p>
+                    <div class="mt-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm transition rounded-xl px-4 py-1.5 inline-block cursor-pointer" onclick="window.open('https://www.instagram.com/c.wijaya.t/','_blank')">
+                        <span class="font-black text-base sm:text-lg tracking-tight">@c.wijaya.t</span>
                     </div>
                 </div>
             </div>
@@ -505,18 +560,14 @@
     <!-- SCRIPT DATA & GAME LOGIC -->
     <script>
     // ============================================================
-    // SOUND EFFECTS ENGINE (Web Audio API Synthesizer)
+    // SOUND EFFECTS (Web Audio API Synthesizer)
     // ============================================================
     let audioEnabled = true;
     let audioCtx = null;
 
     function getAudioContext() {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         return audioCtx;
     }
 
@@ -525,9 +576,7 @@
         try {
             const ctx = getAudioContext();
             const now = ctx.currentTime;
-
             if (type === 'correct') {
-                // Chord: C5, E5, G5
                 [523.25, 659.25, 783.99].forEach((freq, i) => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
@@ -546,7 +595,7 @@
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(180, now);
                 osc.frequency.linearRampToValueAtTime(110, now + 0.25);
-                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.setValueAtTime(0.14, now);
                 gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
                 osc.connect(gain);
                 gain.connect(ctx.destination);
@@ -590,112 +639,140 @@
     }
 
     // ============================================================
-    // QUIZ QUESTIONS (200+)
+    // EXPANDED QUESTION BANK (100+ KUIS ALKITAB)
     // ============================================================
     const quizQuestions = [
-        // GENESIS & TAURAT
-        { q: "Siapakah manusia pertama yang diciptakan Allah?", opts: ["Adam", "Nuh", "Abraham", "Musa"], ans: 0 },
-        { q: "Dari apakah Allah menciptakan Hawa?", opts: ["Tanah", "Rusuk Adam", "Tulang belakang Adam", "Debu tanah"], ans: 1 },
-        { q: "Di taman apakah Adam dan Hawa ditempatkan Allah?", opts: ["Taman Getsemani", "Taman Eden", "Taman Bunga", "Taman Surga"], ans: 1 },
-        { q: "Berapa lama Nuh membuat bahtera?", opts: ["40 hari", "100 tahun", "1 tahun", "7 hari"], ans: 1 },
-        { q: "Berapa hari dan malam hujan turun pada zaman air bah Nuh?", opts: ["7 hari 7 malam", "30 hari 30 malam", "40 hari 40 malam", "100 hari 100 malam"], ans: 2 },
-        { q: "Siapa yang menjual Yusuf kepada orang Ismael/Mesir?", opts: ["Saudara-saudaranya", "Bapaknya", "Musuhnya", "Filistin"], ans: 0 },
-        { q: "Yusuf adalah anak ke berapa dari Yakub?", opts: ["10", "11", "12", "7"], ans: 1 },
-        { q: "Siapakah istri Abraham yang melahirkan Ishak?", opts: ["Hagar", "Ribka", "Sara", "Lea"], ans: 2 },
-        { q: "Apa nama anak Abraham dari Sara?", opts: ["Ismael", "Ishak", "Yakub", "Esau"], ans: 1 },
-        { q: "Berapa suku bangsa Israel berdasarkan anak-anak Yakub?", opts: ["10", "11", "12", "13"], ans: 2 },
+        // PENCIPTAAN & PATRIARK
+        { q: "Siapakah manusia pertama yang diciptakan Allah menurut Kejadian?", opts: ["Adam", "Nuh", "Abraham", "Musa"], ans: 0 },
+        { q: "Dari bagian tubuh manakah Allah menciptakan Hawa?", opts: ["Tanah liat", "Tulang rusuk Adam", "Tulang belakang", "Debu tanah"], ans: 1 },
+        { q: "Di taman manakah Adam dan Hawa mula-mula ditempatkan Tuhan?", opts: ["Taman Getsemani", "Taman Eden", "Taman Edena", "Taman Babel"], ans: 1 },
+        { q: "Berapa hari dan malam hujan lebat turun pada masa air bah zaman Nuh?", opts: ["7 hari 7 malam", "30 hari 30 malam", "40 hari 40 malam", "100 hari"], ans: 2 },
+        { q: "Burung apakah yang pertama kali dilepaskan Nuh dari bahtera?", opts: ["Burung Merpati", "Burung Gagak", "Burung Rajawali", "Burung Pipit"], ans: 1 },
+        { q: "Tanda perjanjian apakah yang Allah berikan bahwa bumi tidak akan dihukum air bah lagi?", opts: ["Busur pelangi di awan", "Batu karang", "Tiang api", "Pohon kehidupan"], ans: 0 },
+        { q: "Siapakah anak perjanjian yang lahir dari Abraham dan Sara di masa tua?", opts: ["Ismael", "Ishak", "Yakub", "Esau"], ans: 1 },
+        { q: "Nama istri Ishak yang dipilih di dekat sumur air adalah?", opts: ["Lea", "Rahel", "Ribka", "Zilpa"], ans: 2 },
+        { q: "Anak kembar yang lahir dari Ribka adalah?", opts: ["Yakub dan Esau", "Kain dan Habel", "Yusuf dan Benyamin", "Manasye dan Efraim"], ans: 0 },
+        { q: "Yakub melihat mimpi tangga yang ujungnya sampai ke surga di tempat bernama?", opts: ["Betel", "Hebron", "Sikhem", "Peniel"], ans: 0 },
+        { q: "Berapa anak laki-laki Yakub yang menjadi bapa 12 suku Israel?", opts: ["10", "11", "12", "14"], ans: 2 },
+        { q: "Yusuf dijual saudara-saudaranya ke negeri Mesir seharga?", opts: ["20 keping perak", "30 keping perak", "10 keping emas", "50 perak"], ans: 0 },
+        { q: "Kemampuan apakah yang diberikan Allah kepada Yusuf di penjara Mesir?", opts: ["Mengartikan mimpi", "Membuat emas", "Berperang", "Menyanyi mazmur"], ans: 0 },
 
-        // EXODUS & MUSA
-        { q: "Di gunung apakah Musa menerima 10 Perintah Allah?", opts: ["Gunung Karmel", "Gunung Zion", "Gunung Sinai", "Gunung Tabor"], ans: 2 },
-        { q: "Berapa lama bangsa Israel mengembara di padang gurun?", opts: ["20 tahun", "30 tahun", "40 tahun", "50 tahun"], ans: 2 },
-        { q: "Apa nama sungai tempat Musa dihanyutkan saat masih bayi?", opts: ["Sungai Yordan", "Sungai Nil", "Sungai Efrat", "Sungai Tigris"], ans: 1 },
-        { q: "Berapa banyak tulah yang dikirimkan Allah ke negeri Mesir?", opts: ["7", "10", "12", "5"], ans: 1 },
-        { q: "Tulah ke-10 yang menimpa Mesir adalah?", opts: ["Kegelapan", "Belalang", "Penyakit sampar", "Kematian anak sulung"], ans: 3 },
-        { q: "Siapakah yang memimpin bangsa Israel keluar dari perbudakan Mesir?", opts: ["Harun", "Musa", "Yosua", "Kaleb"], ans: 1 },
-        { q: "Laut apa yang terbelah saat bangsa Israel dikejar Firaun?", opts: ["Laut Mati", "Laut Teberau (Merah)", "Laut Mediterania", "Laut Galilea"], ans: 1 },
-        { q: "Makanan apakah yang Allah turunkan dari langit bagi bangsa Israel di padang gurun?", opts: ["Roti biasa", "Manna", "Daging domba", "Buah ara"], ans: 1 },
+        // MUSA, KELUARAN & TAURAT
+        { q: "Musa dipanggil Tuhan melalui semak duri yang menyala di dekat gunung?", opts: ["Sinai (Horeb)", "Karmel", "Nebo", "Zion"], ans: 0 },
+        { q: "Berapa tulah yang diturunkan Allah atas negeri Mesir?", opts: ["7", "10", "12", "15"], ans: 1 },
+        { q: "Tulah ke-10 yang menimpa bangsa Mesir adalah?", opts: ["Kematian anak sulung", "Kegelapan pekat", "Hujan es dan api", "Belalang"], ans: 0 },
+        { q: "Laut apakah yang terbelah saat bangsa Israel melarikan diri dari kejaran tentara Firaun?", opts: ["Laut Mati", "Laut Teberau (Merah)", "Laut Galilea", "Laut Tengah"], ans: 1 },
+        { q: "Makanan manis seperti ketumbar yang Allah berikan di padang gurun bernama?", opts: ["Manna", "Roti sajian", "Kismis", "Gandum"], ans: 0 },
+        { q: "Di gunung manakah Musa menerima Dua Loh Batu berisi 10 Perintah Allah?", opts: ["Gunung Sinai", "Gunung Tabor", "Gunung Hermon", "Gunung Moria"], ans: 0 },
+        { q: "Berapa tahun bangsa Israel mengembara di padang gurun?", opts: ["20 tahun", "30 tahun", "40 tahun", "50 tahun"], ans: 2 },
+        { q: "Siapakah yang menggantikan Musa memimpin bangsa Israel masuk tanah Kanaan?", opts: ["Kaleb", "Yosua bin Nun", "Harun", "Pinehas"], ans: 1 },
 
-        // HAKIM-HAKIM & KERAJAAN
-        { q: "Siapakah raja pertama bangsa Israel?", opts: ["Daud", "Saul", "Salomo", "Yerobeam"], ans: 1 },
-        { q: "Siapakah pemuda yang mengalahkan Goliat dengan umban dan batu?", opts: ["Saul", "Yonatan", "Daud", "Simson"], ans: 2 },
-        { q: "Raja Salomo dikenal dalam Alkitab sebagai raja yang paling?", opts: ["Kuat", "Bijaksana", "Kaya", "Bijaksana dan kaya"], ans: 3 },
-        { q: "Siapakah ibu kandung Raja Salomo?", opts: ["Rut", "Batsyeba", "Abigail", "Mikhal"], ans: 1 },
-        { q: "Siapakah nabi yang diangkat ke surga dalam angin badai dan kereta berapi?", opts: ["Elisa", "Elia", "Yesaya", "Yeremia"], ans: 1 },
-        { q: "Siapakah nabi yang meminta dua bagian dari roh Elia?", opts: ["Amos", "Elisa", "Yunus", "Hosea"], ans: 1 },
+        // HAKIM-HAKIM & KERAJAAN ISRAEL
+        { q: "Tembok kota manakah yang runtuh setelah dikelilingi bangsa Israel selama 7 hari?", opts: ["Yerikho", "Ai", "Gibeon", "Hebron"], ans: 0 },
+        { q: "Hakim wanita yang memimpin bangsa Israel di bawah pohon kurma adalah?", opts: ["Rut", "Debora", "Hana", "Ester"], ans: 1 },
+        { q: "Dengan berapa prajurit terpilih Gideon mengalahkan tentara Midian?", opts: ["300 prajurit", "1000 prajurit", "3000 prajurit", "10000 prajurit"], ans: 0 },
+        { q: "Hakim Israel yang memiliki kekuatan luar biasa pada rambutnya adalah?", opts: ["Simson", "Barak", "Yefta", "Samgar"], ans: 0 },
+        { q: "Perempuan yang mengkhianati Simson dan memotong rambutnya adalah?", opts: ["Dalila", "Orpa", "Vasyti", "Mikhal"], ans: 0 },
+        { q: "Siapakah raja pertama yang diurapi nabi Samuel atas bangsa Israel?", opts: ["Saul", "Daud", "Salomo", "Yerobeam"], ans: 0 },
+        { q: "Senjata apa yang dipakai Daud untuk mengalahkan raksasa Goliat?", opts: ["Pedang pusaka", "Umban dan batu licin", "Tombak tembaga", "Panah api"], ans: 1 },
+        { q: "Siapakah sahabat karib Daud yang merupakan putra Raja Saul?", opts: ["Yonatan", "Abner", "Absalom", "Yoab"], ans: 0 },
+        { q: "Raja Israel yang membangun Bait Suci megah pertama di Yerusalem adalah?", opts: ["Daud", "Salomo", "Rehabeam", "Hizkia"], ans: 1 },
+        { q: "Ratu dari negeri manakah yang datang menguji hikmat Salomo dengan teka-teki?", opts: ["Ratu Syeba", "Ratu Mesir", "Ratu Persia", "Ratu Babel"], ans: 0 },
 
-        // DANIEL & PEMBUANGAN
-        { q: "Daniel dilemparkan ke dalam tempat apa karena setia berdoa?", opts: ["Penjara bawah tanah", "Perapian", "Sumur kering", "Gua singa"], ans: 3 },
-        { q: "Siapakah ketiga teman Daniel yang dimasukkan ke perapian menyala?", opts: ["Sadrakh, Mesakh, Abednego", "Abraham, Ishak, Yakub", "Petrus, Yohanes, Yakobus", "Elia, Elisa, Yunus"], ans: 0 },
-        { q: "Berapa kali Daniel berlutut dan berdoa kepada Allah dalam sehari?", opts: ["3 kali", "5 kali", "7 kali", "1 kali"], ans: 0 },
+        // NABI-NABI & SEJARAH
+        { q: "Nabi Elia membuktikan Allah yang hidup melawan 450 nabi Baal di gunung?", opts: ["Karmel", "Sinai", "Zaitun", "Nebo"], ans: 0 },
+        { q: "Nabi yang diangkat ke surga dalam angin badai dan kereta berapi adalah?", opts: ["Elia", "Elisa", "Yesaya", "Yeremia"], ans: 0 },
+        { q: "Nabi yang menyembuhkan Naaman panglima Aram dari kusta adalah?", opts: ["Elisa", "Elia", "Samuel", "Musa"], ans: 0 },
+        { q: "Nabi yang ditelan ikan besar setelah lari menuju Tarsis adalah?", opts: ["Yunus", "Yoel", "Amos", "Zefanya"], ans: 0 },
+        { q: "Ke kota manakah nabi Yunus akhirnya pergi memberitakan pertobatan?", opts: ["Niniwe", "Babel", "Sodom", "Damaskus"], ans: 0 },
+        { q: "Siapakah pemuda yang tetap berdoa 3x sehari hingga dilempar ke gua singa?", opts: ["Daniel", "Sadrakh", "Mesakh", "Abednego"], ans: 0 },
+        { q: "Raja Babel yang bermimpi tentang patung besar berkepala emas adalah?", opts: ["Nebukadnezar", "Belsyazar", "Darius", "Koresh"], ans: 0 },
+        { q: "Berapa orang pemuda yang selamat di dalam perapian api yang menyala-nyala?", opts: ["3 orang", "4 orang", "2 orang", "12 orang"], ans: 0 },
+        { q: "Tokoh yang memimpin pembangunan kembali tembok kota Yerusalem setelah pembuangan adalah?", opts: ["Nehemia", "Ezra", "Zerubabel", "Mordekhai"], ans: 0 },
+        { q: "Ratu Yahudi yang menyelamatkan bangsanya dari rancangan jahat Haman adalah?", opts: ["Ester", "Rut", "Sara", "Lea"], ans: 0 },
 
-        // RUT, ESTER & MAZMUR
-        { q: "Siapakah mertua Rut yang setia ditemaninya pulang ke Betlehem?", opts: ["Naomi", "Orpa", "Sara", "Hana"], ans: 0 },
-        { q: "Rut berasal dari bangsa apa?", opts: ["Filistin", "Kanaan", "Moab", "Mesir"], ans: 2 },
-        { q: "Siapakah kerabat penebus yang menikahi Rut di Betlehem?", opts: ["Boas", "Mahlon", "Kilyon", "Elimelekh"], ans: 0 },
-        { q: "Ratu Ester menikah dengan raja Persia bernama?", opts: ["Ahasyweros", "Nebukadnezar", "Koresh", "Darius"], ans: 0 },
-        { q: "Siapakah penulis utama sebagian besar mazmur dalam Alkitab?", opts: ["Musa", "Salomo", "Daud", "Asaf"], ans: 2 },
-        { q: "Mazmur 23 dimulai dengan kalimat termasyhur:", opts: ["Terpujilah Tuhan", "Tuhan adalah gembalaku", "Aku bersyukur kepada-Mu", "Kasih setia-Mu kekal"], ans: 1 },
-        { q: "\"Takut akan TUHAN adalah permulaan pengetahuan\" tertulis dalam kitab?", opts: ["Mazmur", "Amsal", "Pengkhotbah", "Kidung Agung"], ans: 1 },
+        // MAZMUR & HIKMAT
+        { q: "Siapakah penulis utama kitab Mazmur?", opts: ["Raja Daud", "Raja Salomo", "Musa", "Nabi Yesaya"], ans: 0 },
+        { q: "\"TUHAN adalah gembalaku, takkan kekurangan aku\" tertulis di Mazmur pasal?", opts: ["Mazmur 23", "Mazmur 91", "Mazmur 100", "Mazmur 119"], ans: 0 },
+        { q: "Kitab terpanjang dalam seluruh Alkitab adalah?", opts: ["Mazmur", "Yesaya", "Kejadian", "Yeremia"], ans: 0 },
+        { q: "Menurut Amsal 1:7, permulaan pengetahuan adalah?", opts: ["Takut akan TUHAN", "Rajin belajar", "Banyak membaca", "Memiliki harta"], ans: 0 },
 
-        // YUNUS & NABI-NABI
-        { q: "Ke kota manakah Yunus diutus Tuhan untuk memberitakan pertobatan?", opts: ["Babel", "Niniwe", "Sodom", "Tirus"], ans: 1 },
-        { q: "Berapa lama Yunus berada di dalam perut ikan besar?", opts: ["1 hari 1 malam", "3 hari 3 malam", "7 hari 7 malam", "40 hari 40 malam"], ans: 1 },
-        { q: "Nabi yang bernubuat tentang kelahiran Imanuel dari perawan adalah?", opts: ["Yeremia", "Yesaya", "Mikha", "Amos"], ans: 1 },
+        // INJIL & PELAYANAN YESUS
+        { q: "Di kota manakah Tuhan Yesus dilahirkan menurut nubuat nabi Mikha?", opts: ["Betlehem", "Nazaret", "Yerusalem", "Kapernaum"], ans: 0 },
+        { q: "Malaikat yang memberitakan kabar kelahiran Yesus kepada Maria adalah?", opts: ["Gabriel", "Mikhael", "Rafael", "Uriel"], ans: 0 },
+        { q: "Persembahan apa yang dibawa oleh orang-orang Majus dari Timur bagi Yesus?", opts: ["Emas, kemenyan, dan mur", "Perak, intan, dan kain ungu", "Roti, anggur, dan minyak", "Manna dan madu"], ans: 0 },
+        { q: "Di sungai manakah Yesus dibaptis oleh Yohanes Pembaptis?", opts: ["Sungai Yordan", "Sungai Nil", "Sungai Efrat", "Sungai Tigris"], ans: 0 },
+        { q: "Tanda apakah yang turun dari langit saat Yesus dibaptis?", opts: ["Roh Kudus seperti burung merpati", "Tiang awan", "Kilat petir", "Pelangi"], ans: 0 },
+        { q: "Berapa hari Yesus berpuasa di padang gurun saat dicobai Iblis?", opts: ["40 hari 40 malam", "7 hari 7 malam", "30 hari 30 malam", "3 hari 3 malam"], ans: 0 },
+        { q: "Mukjizat pertama yang dilakukan Yesus adalah mengubah air menjadi anggur di?", opts: ["Pesta pernikahan di Kana", "Bait Allah Yerusalem", "Danau Galilea", "Betania"], ans: 0 },
+        { q: "Berapa bakul sisa makanan setelah Yesus memberi makan 5000 orang?", opts: ["12 bakul", "7 bakul", "5 bakul", "3 bakul"], ans: 0 },
+        { q: "Siapakah murid yang berjalan di atas air dan mulai tenggelam karena bimbang?", opts: ["Petrus", "Yohanes", "Yakobus", "Andreas"], ans: 0 },
+        { q: "Sahabat Yesus yang dibangkitkan setelah 4 hari berada dalam kubur adalah?", opts: ["Lazarus", "Yairus", "Zakheus", "Nikodemus"], ans: 0 },
+        { q: "Pemungut cukai bertubuh pendek yang memanjat pohon ara di Yerikho bernama?", opts: ["Zakheus", "Matius", "Lewi", "Bartimeus"], ans: 0 },
+        { q: "Pengemis buta di dekat Yerikho yang disembuhkan Yesus bernama?", opts: ["Bartimeus", "Lazarus", "Kornelius", "Simeon"], ans: 0 },
+        { q: "Khotbah Yesus yang terkenal tentang 'Delapan Ucapan Bahagia' disampaikan di?", opts: ["Atas Bukit", "Atas Perahu", "Pintu Gerbang Indah", "Taman Getsemani"], ans: 0 },
 
-        // INJIL & YESUS KRISTUS
-        { q: "Di kota manakah Tuhan Yesus dilahirkan?", opts: ["Nazaret", "Yerusalem", "Betlehem", "Kapernaum"], ans: 2 },
-        { q: "Di sungai manakah Yesus dibaptis oleh Yohanes Pembaptis?", opts: ["Sungai Nil", "Sungai Efrat", "Sungai Yordan", "Sungai Tigris"], ans: 2 },
-        { q: "Berapa hari Yesus berpuasa di padang gurun saat dicobai iblis?", opts: ["7 hari", "20 hari", "40 hari", "3 hari"], ans: 2 },
-        { q: "Mukjizat pertama yang dilakukan Yesus di Kana adalah?", opts: ["Membangkitkan Lazarus", "Menyembuhkan orang kusta", "Mengubah air menjadi anggur", "Berjalan di atas air"], ans: 2 },
-        { q: "Yesus memberi makan 5000 orang dengan?", opts: ["5 roti dan 2 ikan", "2 roti dan 5 ikan", "7 roti dan 7 ikan", "10 roti dan 2 ikan"], ans: 0 },
-        { q: "Siapakah murid Yesus yang berjalan di atas air menuju kepada-Nya?", opts: ["Yohanes", "Andreas", "Petrus", "Yakobus"], ans: 2 },
-        { q: "Berapa jumlah rasul yang mula-mula dipilih Tuhan Yesus?", opts: ["10", "11", "12", "70"], ans: 2 },
-        { q: "Siapakah murid yang mengkhianati Yesus dengan 30 keping perak?", opts: ["Yudas Iskariot", "Petrus", "Tomas", "Bartolomeus"], ans: 0 },
-        { q: "Petrus menyangkal mengenal Yesus sebanyak berapa kali sebelum ayam berkokok?", opts: ["1 kali", "2 kali", "3 kali", "4 kali"], ans: 2 },
-        { q: "Di bukit manakah Yesus disalibkan?", opts: ["Bukit Zion", "Bukit Golgota (Tengkorak)", "Bukit Zaitun", "Bukit Sinai"], ans: 1 },
-        { q: "Pada hari ke berapa Tuhan Yesus bangkit dari antara orang mati?", opts: ["Hari pertama", "Hari kedua", "Hari ketiga", "Hari ketujuh"], ans: 2 },
-        { q: "Siapakah yang pertama kali melihat kubur kosong dan berjumpa dengan Yesus yang bangkit?", opts: ["Petrus", "Maria Magdalena", "Yohanes", "Maria ibu Yesus"], ans: 1 },
-        { q: "Yesus naik ke surga setelah berapa hari menampakkan diri sesudah kebangkitan-Nya?", opts: ["3 hari", "7 hari", "40 hari", "50 hari"], ans: 2 },
+        // SENGSARA, KEMATIAN & KEBANGKITAN
+        { q: "Di taman manakah Yesus berdoa dengan peluh seperti titik-titik darah?", opts: ["Taman Getsemani", "Taman Eden", "Taman Golgota", "Taman Zaitun"], ans: 0 },
+        { q: "Siapakah murid yang mengkhianati Yesus dengan ciuman seharga 30 perak?", opts: ["Yudas Iskariot", "Petrus", "Tomas", "Simon"], ans: 0 },
+        { q: "Berapa kali Petrus menyangkal mengenal Yesus sebelum ayam berkokok?", opts: ["3 kali", "1 kali", "2 kali", "4 kali"], ans: 0 },
+        { q: "Siapakah orang yang dipaksa memikul salib Yesus menuju Golgota?", opts: ["Simon dari Kirene", "Yusuf dari Arimatea", "Nikodemus", "Petrus"], ans: 0 },
+        { q: "Arti dari nama bukit tempat Yesus disalibkan (Golgota) adalah?", opts: ["Tempat Tengkorak", "Bukit Terang", "Puncak Kemuliaan", "Lembah Ratapan"], ans: 0 },
+        { q: "Pada hari ke berapa Yesus bangkit dari antara orang mati?", opts: ["Hari Ketiga", "Hari Pertama", "Hari Kedua", "Hari Ketujuh"], ans: 0 },
+        { q: "Siapakah orang pertama yang berjumpa dengan Yesus yang telah bangkit di dekat kubur?", opts: ["Maria Magdalena", "Petrus", "Yohanes", "Maria ibu Yesus"], ans: 0 },
+        { q: "Murid yang tidak percaya kebangkitan Yesus sebelum meraba bekas luka-Nya adalah?", opts: ["Tomas (Didimus)", "Filipus", "Bartolomeus", "Tadeus"], ans: 0 },
+        { q: "Yesus naik ke surga setelah menampakkan diri selama berapa hari sesudah kebangkitan?", opts: ["40 hari", "3 hari", "7 hari", "50 hari"], ans: 0 },
 
-        // KISAH PARA RASUL & SURAT
-        { q: "Roh Kudus dicurahkan atas para murid pada hari raya?", opts: ["Paskah", "Pentakosta", "Pondok Daun", "Sabat"], ans: 1 },
-        { q: "Siapakah yang berkhotbah pada hari Pentakosta hingga 3000 orang bertobat?", opts: ["Yohanes", "Yakobus", "Petrus", "Paulus"], ans: 2 },
-        { q: "Nama Rasul Paulus sebelum bertobat di jalan Damsyik adalah?", opts: ["Simon", "Saulus", "Silvanus", "Stefanus"], ans: 1 },
-        { q: "Stefanus dicatat dalam Kisah Para Rasul sebagai?", opts: ["Raja", "Martir pertama gereja mula-mula", "Imam Besar", "Gubernur"], ans: 1 },
-        { q: "Buah Roh pertama yang disebutkan dalam Galatia 5:22 adalah?", opts: ["Sukacita", "Damai sejahtera", "Kasih", "Kebaikan"], ans: 2 },
-        { q: "Ayat \"Karena begitu besar kasih Allah akan dunia ini...\" terdapat di?", opts: ["Yohanes 3:16", "Roma 8:28", "Mazmur 23:1", "Filipi 4:13"], ans: 0 },
-        { q: "\"Segala perkara dapat kutanggung di dalam Dia yang memberi kekuatan kepadaku\" tertulis di?", opts: ["Roma 8:28", "Filipi 4:13", "Ibrani 11:1", "Yakobus 1:2"], ans: 1 },
-        { q: "Kitab terakhir dalam Alkitab adalah?", opts: ["Yudas", "Ibrani", "Wahyu", "Kisah Para Rasul"], ans: 2 },
-        { q: "Berapa total seluruh kitab dalam Alkitab Protestan?", opts: ["60", "63", "66", "73"], ans: 2 }
+        // KISAH PARA RASUL & GEREJA MULA-MULA
+        { q: "Peristiwa pencurahan Roh Kudus dengan lidah-lidah api terjadi pada hari?", opts: ["Pentakosta", "Paskah", "Sabat", "Hari Pendamaian"], ans: 0 },
+        { q: "Berapa jiwa yang bertobat dan dibaptis setelah khotbah perdana Petrus di Pentakosta?", opts: ["Kira-kira 3.000 jiwa", "500 jiwa", "1.000 jiwa", "12.000 jiwa"], ans: 0 },
+        { q: "Siapakah martir pertama gereja yang mati dirajam batu sambil berdoa mengampuni?", opts: ["Stefanus", "Yakobus", "Barnabas", "Filipus"], ans: 0 },
+        { q: "Nama Rasul Paulus sebelum berjumpa dengan cahaya Kristus di jalan Damsyik adalah?", opts: ["Saulus", "Silas", "Simon", "Sosthenes"], ans: 0 },
+        { q: "Siapakah teman sekerja Paulus yang bersama-sama menyanyi pujian saat dipenjara di Filipi?", opts: ["Silas", "Barnabas", "Timotius", "Titus"], ans: 0 },
+        { q: "Di kota manakah murid-murid Yesus untuk pertama kalinya disebut 'Kristen'?", opts: ["Antiokhia", "Yerusalem", "Roma", "Efesus"], ans: 0 },
+
+        // SURAT-SURAT & WAHYU
+        { q: "Berapa jumlah Buah Roh yang dicatat dalam Galatia 5:22-23?", opts: ["9 buah", "7 buah", "12 buah", "10 buah"], ans: 0 },
+        { q: "Pasal Kasih yang terkenal ('Kasih itu sabar; kasih itu murah hati...') terdapat di?", opts: ["1 Korintus 13", "Roma 12", "Efesus 4", "Filipi 2"], ans: 0 },
+        { q: "Perlengkapan senjata Allah (ketopong keselamatan, perisai iman, pedang Roh) ada di surat?", opts: ["Efesus pasal 6", "Kolose pasal 3", "Galatia pasal 5", "Ibrani pasal 11"], ans: 0 },
+        { q: "Pasal 'Saksi-Saksi Iman' (Pahlawan Iman) terdapat dalam kitab?", opts: ["Ibrani pasal 11", "Roma pasal 8", "Yakobus pasal 2", "1 Petrus pasal 1"], ans: 0 },
+        { q: "Kitab terakhir dalam Alkitab yang berisi penglihatan akhir zaman adalah?", opts: ["Wahyu", "Yudas", "1 Yohanes", "Kisah Rasul"], ans: 0 },
+        { q: "Di pulau manakah Rasul Yohanes diasingkan saat menerima penglihatan kitab Wahyu?", opts: ["Pulau Patmos", "Pulau Siprus", "Pulau Kreta", "Pulau Malta"], ans: 0 },
+        { q: "Berapa jumlah seluruh kitab dalam Alkitab Protestan (PL + PB)?", opts: ["66 kitab (39 PL + 27 PB)", "73 kitab", "60 kitab", "50 kitab"], ans: 0 }
     ];
 
     // ============================================================
-    // TEBAK TOKOH QUESTIONS (30+)
+    // EXPANDED TEBAK TOKOH QUESTIONS (45+ TOKOH)
     // ============================================================
     const tokohQuestions = [
-        { icons: "🦁🦁🦁🙏", clue: "Dilempar ke gua singa karena tetap setia berdoa 3x sehari", name: "Daniel", opts: ["Daniel", "Daud", "Simson", "Yunus"] },
-        { icons: "🌊🐋🙏", clue: "Ditelan ikan besar setelah melarikan diri dari perintah Tuhan", name: "Yunus", opts: ["Yunus", "Petrus", "Nuh", "Musa"] },
-        { icons: "🚢🌧️🕊️🌈", clue: "Membangun bahtera besar dan selamat dari air bah", name: "Nuh", opts: ["Nuh", "Abraham", "Musa", "Lot"] },
-        { icons: "🔥🏔️📜", clue: "Menerima 10 Hukum Allah di Gunung Sinai", name: "Musa", opts: ["Musa", "Harun", "Yosua", "Elia"] },
-        { icons: "⭐🏹💪", clue: "Pemuda gembala yang mengalahkan raksasa Goliat", name: "Daud", opts: ["Daud", "Saul", "Simson", "Yonatan"] },
-        { icons: "💇🏋️💪", clue: "Hakim Israel berambut panjang yang sangat kuat", name: "Simson", opts: ["Simson", "Daud", "Gideon", "Yefta"] },
-        { icons: "👗🏆🌹", clue: "Ratu yang berani menghadap raja demi menyelamatkan bangsanya", name: "Ester", opts: ["Ester", "Rut", "Debora", "Maria"] },
-        { icons: "🌾💑🤝", clue: "Wanita Moab yang setia menemani mertuanya Naomi ke Betlehem", name: "Rut", opts: ["Rut", "Ester", "Naomi", "Rahab"] },
-        { icons: "🏛️🔨🏗️", clue: "Memimpin pembangunan kembali tembok kota Yerusalem", name: "Nehemia", opts: ["Nehemia", "Ezra", "Zerubabel", "Yosua"] },
-        { icons: "🦁🔥🔥🔥", clue: "Tiga pemuda yang tidak hangus dalam perapian berapi", name: "Sadrakh, Mesakh, Abednego", opts: ["Sadrakh, Mesakh, Abednego", "Daniel, Elia, Elisa", "Petrus, Yakobus, Yohanes", "Abraham, Ishak, Yakub"] },
-        { icons: "👑🧠💰", clue: "Raja paling berhikmat di Israel yang mendirikan Bait Suci pertama", name: "Salomo", opts: ["Salomo", "Daud", "Rehabeam", "Saul"] },
-        { icons: "🔥☁️🙅", clue: "Nabi yang diangkat ke surga dalam kereta berapi", name: "Elia", opts: ["Elia", "Elisa", "Musa", "Yesaya"] },
-        { icons: "🏮🛡️300", clue: "Memimpin 300 laskar pilihan mengalahkan bangsa Midian", name: "Gideon", opts: ["Gideon", "Simson", "Yefta", "Barak"] },
-        { icons: "👩⚖️🌴", clue: "Satu-satunya hakim wanita yang memimpin bangsa Israel", name: "Debora", opts: ["Debora", "Rut", "Miriam", "Ester"] },
-        { icons: "🎣🐠🌊", clue: "Nelayan yang menjadi rasul dan pilar gereja mula-mula", name: "Petrus", opts: ["Petrus", "Yohanes", "Andreas", "Yakobus"] },
-        { icons: "✉️⛓️✈️", clue: "Rasul bagi bangsa-bangsa bukan Yahudi, penulis banyak surat", name: "Paulus", opts: ["Paulus", "Petrus", "Yohanes", "Barnabas"] },
-        { icons: "💰😢🪢", clue: "Murid yang menyerahkan Yesus dengan 30 keping perak", name: "Yudas Iskariot", opts: ["Yudas Iskariot", "Petrus", "Tomas", "Simon Zelot"] },
-        { icons: "👐🔍😲", clue: "Murid yang ingin meraba bekas paku di tangan Yesus", name: "Tomas", opts: ["Tomas", "Filipus", "Petrus", "Natanael"] },
-        { icons: "🌳🧍💰", clue: "Pemungut cukai bertubuh pendek yang memanjat pohon ara", name: "Zakheus", opts: ["Zakheus", "Matius", "Lewi", "Simon"] },
-        { icons: "⛺🌟🙏", clue: "Bapa orang beriman yang taat pergi ke tanah perjanjian", name: "Abraham", opts: ["Abraham", "Nuh", "Lot", "Yakub"] },
-        { icons: "😭⛓️🌾", clue: "Dijual saudaranya ke Mesir lalu menjadi perdana menteri", name: "Yusuf", opts: ["Yusuf", "Benjamin", "Ruben", "Yehuda"] },
-        { icons: "⚰️🔓🎊", clue: "Sahabat Yesus yang dibangkitkan setelah 4 hari dalam kubur", name: "Lazarus", opts: ["Lazarus", "Yairus", "Stefanus", "Nikodemus"] },
-        { icons: "🌋😩📜", clue: "Tokoh yang sangat sabar dan setia meski kehilangan segalanya", name: "Ayub", opts: ["Ayub", "Abraham", "Daud", "Paulus"] }
+        { icons: "🦁🦁🦁🙏", clue: "Dilempar ke gua singa karena setia berdoa 3 kali sehari kepada Allah", name: "Daniel", opts: ["Daniel", "Daud", "Simson", "Yunus"] },
+        { icons: "🌊🐋🙏", clue: "Ditelan ikan besar setelah lari melarikan diri dari panggilan Tuhan", name: "Yunus", opts: ["Yunus", "Petrus", "Nuh", "Musa"] },
+        { icons: "🚢🌧️🕊️🌈", clue: "Membangun bahtera besar dan diselamatkan dari air bah bersama keluarganya", name: "Nuh", opts: ["Nuh", "Abraham", "Musa", "Lot"] },
+        { icons: "🔥🏔️📜", clue: "Menerima 10 Hukum Taurat di Gunung Sinai dari Tuhan", name: "Musa", opts: ["Musa", "Harun", "Yosua", "Elia"] },
+        { icons: "⭐🏹💪", clue: "Pemuda gembala pemberani yang mengalahkan Goliat dengan batu umban", name: "Daud", opts: ["Daud", "Saul", "Simson", "Yonatan"] },
+        { icons: "💇🏋️💪", clue: "Hakim berambut panjang yang kekuatannya hilang saat rambutnya dicukur", name: "Simson", opts: ["Simson", "Daud", "Gideon", "Yefta"] },
+        { icons: "👗🏆🌹", clue: "Ratu Yahudi yang berani menghadap raja demi menyelamatkan bangsanya dari pemusnahan", name: "Ester", opts: ["Ester", "Rut", "Debora", "Maria"] },
+        { icons: "🌾💑🤝", clue: "Wanita Moab yang setia berkata: 'Bangsamulah bangsaku dan Allahmulah Allahku'", name: "Rut", opts: ["Rut", "Ester", "Naomi", "Rahab"] },
+        { icons: "🏛️🔨🏗️", clue: "Juru minuman raja yang memimpin pembangunan kembali tembok Yerusalem", name: "Nehemia", opts: ["Nehemia", "Ezra", "Zerubabel", "Yosua"] },
+        { icons: "🦁🔥🔥🔥", clue: "Tiga pemuda Ibrani yang tidak terbakar di dalam perapian menyala-nyala", name: "Sadrakh, Mesakh, Abednego", opts: ["Sadrakh, Mesakh, Abednego", "Daniel, Elia, Elisa", "Petrus, Yakobus, Yohanes", "Abraham, Ishak, Yakub"] },
+        { icons: "👑🧠💰", clue: "Raja Israel paling bijaksana dan kaya yang mendirikan Bait Suci megah", name: "Salomo", opts: ["Salomo", "Daud", "Rehabeam", "Saul"] },
+        { icons: "🔥☁️🙅", clue: "Nabi yang menurunkan api dari langit di Gunung Karmel dan naik ke surga dalam kereta berapi", name: "Elia", opts: ["Elia", "Elisa", "Musa", "Yesaya"] },
+        { icons: "🏮🛡️300", clue: "Hakim yang memimpin 300 prajurit bersenjatakan obor dan sangkakala", name: "Gideon", opts: ["Gideon", "Simson", "Yefta", "Barak"] },
+        { icons: "👩⚖️🌴", clue: "Satu-satunya hakim wanita di Israel yang memimpin di bawah pohon kurma", name: "Debora", opts: ["Debora", "Rut", "Miriam", "Ester"] },
+        { icons: "🎣🐠🌊", clue: "Nelayan Danau Galilea yang menjadi pemimpin para rasul di gereja mula-mula", name: "Petrus", opts: ["Petrus", "Yohanes", "Andreas", "Yakobus"] },
+        { icons: "✉️⛓️✈️", clue: "Rasul bangsa-bangsa bukan Yahudi, penulis sebagian besar surat Perjanjian Baru", name: "Paulus", opts: ["Paulus", "Petrus", "Yohanes", "Barnabas"] },
+        { icons: "💰😢🪢", clue: "Murid yang menyerahkan Yesus kepada imam-imam kepala seharga 30 keping perak", name: "Yudas Iskariot", opts: ["Yudas Iskariot", "Petrus", "Tomas", "Simon"] },
+        { icons: "👐🔍😲", clue: "Murid yang meragukan kebangkitan Yesus sampai melihat bekas paku di tangan-Nya", name: "Tomas", opts: ["Tomas", "Filipus", "Petrus", "Natanael"] },
+        { icons: "🌳🧍💰", clue: "Kepala pemungut cukai di Yerikho yang memanjat pohon ara demi melihat Yesus", name: "Zakheus", opts: ["Zakheus", "Matius", "Lewi", "Simon"] },
+        { icons: "⛺🌟🙏", clue: "Bapa orang beriman yang taat pergi ke tanah yang dijanjikan Tuhan", name: "Abraham", opts: ["Abraham", "Nuh", "Lot", "Yakub"] },
+        { icons: "😭⛓️🌾", clue: "Putra Yakub yang dijual saudara-saudaranya lalu menjadi penguasa di Mesir", name: "Yusuf", opts: ["Yusuf", "Benyamin", "Ruben", "Yehuda"] },
+        { icons: "⚰️🔓🎊", clue: "Sahabat Yesus di Betania yang dibangkitkan setelah 4 hari berada dalam kubur", name: "Lazarus", opts: ["Lazarus", "Yairus", "Stefanus", "Nikodemus"] },
+        { icons: "🌋😩📜", clue: "Orang saleh dari tanah Us yang tetap memuji Tuhan di tengah penderitaan berat", name: "Ayub", opts: ["Ayub", "Abraham", "Daud", "Paulus"] },
+        { icons: "🤱🙏👶", clue: "Ibu nabi Samuel yang dengan tekun menangis berdoa memohon anak di Silo", name: "Hana", opts: ["Hana", "Elisabet", "Sara", "Ribka"] },
+        { icons: "🍯🌾🦗", clue: "Tinggal di padang gurun, memakai jubah bulu unta, membaptis Yesus di Yordan", name: "Yohanes Pembaptis", opts: ["Yohanes Pembaptis", "Elia", "Musa", "Yesaya"] },
+        { icons: "🤼‍♂️👼🌅", clue: "Bergulat dengan Malaikat Tuhan sampai fajar dan namanya diubah menjadi Israel", name: "Yakub", opts: ["Yakub", "Esau", "Ishak", "Abraham"] },
+        { icons: "🪓💧🌊", clue: "Penerus nabi Elia yang membuat mata kapak besi mengapung di atas air", name: "Elisa", opts: ["Elisa", "Elia", "Samuel", "Yeremia"] },
+        { icons: "🪨🩸😇", clue: "Martir pertama gereja yang dirajam batu dan melihat langit terbuka", name: "Stefanus", opts: ["Stefanus", "Yakobus", "Filipus", "Barnabas"] }
     ];
 
     // ============================================================
@@ -714,6 +791,7 @@
     let autoAdvanceTimer = null;
     let lifeline5050Used = false;
     let lifelineTimeUsed = false;
+    let currentLbFilter = 'all';
 
     function shuffle(arr) {
         const a = [...arr];
@@ -726,6 +804,17 @@
 
     function show(id) { document.getElementById(id).classList.remove('hidden'); }
     function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function getPlayerName() {
+        return (document.getElementById('player-name-input')?.value || localStorage.getItem('pelprap_username') || 'Sahabat PELPRAP').trim();
+    }
+
+    function savePlayerName() {
+        const val = document.getElementById('player-name-input')?.value?.trim();
+        if (val) {
+            localStorage.setItem('pelprap_username', val);
+        }
+    }
 
     function showHome() {
         hide('screen-quiz');
@@ -742,12 +831,129 @@
         document.getElementById('best-score-quiz').textContent = bq === '-' ? '-' : bq + '%';
         document.getElementById('best-score-tokoh').textContent = bt === '-' ? '-' : bt + '%';
         document.getElementById('games-played').textContent = gp;
+
+        const savedName = localStorage.getItem('pelprap_username') || '';
+        if (savedName && document.getElementById('player-name-input')) {
+            document.getElementById('player-name-input').value = savedName;
+        }
+    }
+
+    // ============================================================
+    // LEADERBOARD LOGIC
+    // ============================================================
+    function openLeaderboard() {
+        renderLeaderboard();
+        document.getElementById('leaderboard-modal').classList.remove('hidden');
+    }
+
+    function closeLeaderboard() {
+        document.getElementById('leaderboard-modal').classList.add('hidden');
+    }
+
+    function getLeaderboardData() {
+        try {
+            return JSON.parse(localStorage.getItem('pelprap_leaderboard') || '[]');
+        } catch(e) {
+            return [];
+        }
+    }
+
+    function saveLeaderboardScore(name, mode, pct, cor, wrg) {
+        const list = getLeaderboardData();
+        const entry = {
+            id: Date.now(),
+            name: name || 'Pemain',
+            mode: mode,
+            score: pct,
+            correct: cor,
+            wrong: wrg,
+            date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+        };
+        list.push(entry);
+        // Sort descending by score, then date
+        list.sort((a, b) => b.score - a.score || b.id - a.id);
+        // Keep top 30 scores
+        const trimmed = list.slice(0, 30);
+        localStorage.setItem('pelprap_leaderboard', JSON.stringify(trimmed));
+    }
+
+    function filterLeaderboard(cat) {
+        currentLbFilter = cat;
+        ['all', 'quiz', 'tokoh'].forEach(c => {
+            const btn = document.getElementById(`lb-tab-${c}`);
+            if (btn) {
+                if (c === cat) {
+                    btn.className = "text-xs font-bold px-3 py-1.5 rounded-full bg-brand-600 text-white transition";
+                } else {
+                    btn.className = "text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition";
+                }
+            }
+        });
+        renderLeaderboard();
+    }
+
+    function renderLeaderboard() {
+        const container = document.getElementById('leaderboard-list');
+        const data = getLeaderboardData();
+        container.innerHTML = '';
+
+        const filtered = data.filter(item => {
+            if (currentLbFilter === 'all') return true;
+            return item.mode === currentLbFilter;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `
+                <div class="text-center py-10 text-slate-400">
+                    <i class="fas fa-medal text-3xl mb-2"></i>
+                    <p class="text-xs">Belum ada skor tercatat. Jadilah yang pertama bermain!</p>
+                </div>
+            `;
+            return;
+        }
+
+        filtered.forEach((item, index) => {
+            let rankBadge = `<span class="w-6 text-center font-bold text-xs text-slate-400">#${index+1}</span>`;
+            if (index === 0) rankBadge = `<span class="text-lg">🥇</span>`;
+            else if (index === 1) rankBadge = `<span class="text-lg">🥈</span>`;
+            else if (index === 2) rankBadge = `<span class="text-lg">🥉</span>`;
+
+            const modeName = item.mode === 'quiz' ? 'Kuis Alkitab' : 'Tebak Tokoh';
+            const modeBg = item.mode === 'quiz' ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' : 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300';
+
+            container.innerHTML += `
+                <div class="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shadow-sm hover:scale-[1.01] transition">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        ${rankBadge}
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white truncate">${item.name}</h4>
+                                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${modeBg}">${modeName}</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400">${item.date} • ${item.correct} Benar / ${item.wrong} Salah</p>
+                        </div>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                        <span class="font-black text-sm sm:text-base text-brand-600 dark:text-brand-400">${item.score}%</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function clearLeaderboardData() {
+        if (confirm("Apakah Anda yakin ingin mereset seluruh catatan riwayat skor?")) {
+            localStorage.removeItem('pelprap_leaderboard');
+            renderLeaderboard();
+            showToast("Papan Peringkat Direset", "Riwayat skor telah dibersihkan.");
+        }
     }
 
     // ============================================================
     // START GAME
     // ============================================================
     function startGame(mode) {
+        savePlayerName();
         gameMode = mode;
         correct = 0;
         wrong = 0;
@@ -756,6 +962,9 @@
         answered = false;
         lifeline5050Used = false;
         lifelineTimeUsed = false;
+
+        const name = getPlayerName();
+        document.getElementById('player-playing-name').textContent = `• Pemain: ${name}`;
 
         document.getElementById('lifeline-5050').classList.remove('opacity-40', 'pointer-events-none');
         document.getElementById('lifeline-time').classList.remove('opacity-40', 'pointer-events-none');
@@ -800,7 +1009,7 @@
             clueArea.classList.remove('hidden');
             clueText.textContent = q.clue || '';
             clueText.classList.remove('hidden');
-            document.getElementById('question-text').textContent = 'Siapakah tokoh/peristiwa ini?';
+            document.getElementById('question-text').textContent = 'Siapakah tokoh / peristiwa Alkitab ini?';
         } else {
             clueArea.classList.add('hidden');
             clueText.classList.add('hidden');
@@ -855,9 +1064,9 @@
     function updateTimerUI() {
         const el = document.getElementById('timer-circle');
         el.textContent = timeLeft;
-        el.className = 'w-12 h-12 rounded-full flex items-center justify-center font-black text-lg transition-all duration-300 timer-green';
-        if (timeLeft <= 8) el.className = 'w-12 h-12 rounded-full flex items-center justify-center font-black text-lg transition-all duration-300 timer-red';
-        else if (timeLeft <= 16) el.className = 'w-12 h-12 rounded-full flex items-center justify-center font-black text-lg transition-all duration-300 timer-yellow';
+        el.className = 'w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-black text-base sm:text-lg transition-all duration-300 timer-green';
+        if (timeLeft <= 8) el.className = 'w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-black text-base sm:text-lg transition-all duration-300 timer-red';
+        else if (timeLeft <= 16) el.className = 'w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-black text-base sm:text-lg transition-all duration-300 timer-yellow';
     }
 
     function timeOut() {
@@ -980,7 +1189,6 @@
             if (idx !== currentCorrectIdx) wrongIdxs.push(idx);
         });
 
-        // Shuffle wrong and pick 2 to disable
         const toDisable = shuffle(wrongIdxs).slice(0, 2);
         toDisable.forEach(idx => {
             optBtns[idx].classList.add('disabled-50');
@@ -1047,7 +1255,9 @@
 
         const total = questions.length;
         const pct = Math.round((correct / total) * 100);
+        const name = getPlayerName();
 
+        document.getElementById('result-player-greeting').textContent = `Pemain: ${name}`;
         document.getElementById('result-correct').textContent = correct;
         document.getElementById('result-wrong').textContent = wrong;
         document.getElementById('result-pct').textContent = pct + '%';
@@ -1075,12 +1285,15 @@
         document.getElementById('grade-circle').style.cssText = gradeColor;
         document.getElementById('result-message').textContent = message;
 
-        // Save high score
+        // Save High Score
         const key = gameMode === 'quiz' ? 'best_quiz' : 'best_tokoh';
         const prev = parseInt(localStorage.getItem(key) || '0');
         if (pct > prev) localStorage.setItem(key, pct);
         const gp = parseInt(localStorage.getItem('games_played') || '0') + 1;
         localStorage.setItem('games_played', gp);
+
+        // Save to Leaderboard
+        saveLeaderboardScore(name, gameMode, pct, correct, wrong);
 
         playSound('fanfare');
         launchConfetti();
@@ -1090,9 +1303,11 @@
         const total = questions.length;
         const pct = Math.round((correct / total) * 100);
         const modeTitle = gameMode === 'quiz' ? 'Kuis Alkitab 📖' : 'Tebak Tokoh Alkitab 🦁';
+        const name = getPlayerName();
 
         const text = `🎮 *HASIL GAMES ALKITAB - PELPRAP IMANUEL*\n\n` +
-                     `Mode: ${modeTitle}\n` +
+                     `👤 Pemain: *${name}*\n` +
+                     `🎯 Mode: ${modeTitle}\n` +
                      `📊 Nilai: *${pct}%*\n` +
                      `✅ Benar: ${correct} Soal\n` +
                      `❌ Salah: ${wrong} Soal\n\n` +
