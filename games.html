@@ -990,9 +990,14 @@
 
         if (filtered.length === 0) {
             container.innerHTML = `
-                <div class="text-center py-10 text-slate-400">
-                    <i class="fas fa-medal text-3xl mb-2"></i>
-                    <p class="text-xs">Belum ada skor tercatat. Jadilah yang pertama bermain!</p>
+                <div class="text-center py-10 px-4 text-slate-400">
+                    <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-2xl border border-amber-500/20">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4 class="font-extrabold text-slate-700 dark:text-slate-200 text-sm mb-1">Papan Peringkat Bersih</h4>
+                    <p class="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
+                        Belum ada skor tercatat. Jadilah pemain pertama yang memainkan Kuis atau Tebak Tokoh dan catatkan namamu di Papan Peringkat Global! 🏆
+                    </p>
                 </div>
             `;
             return;
