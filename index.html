@@ -161,10 +161,15 @@
             overflow: hidden;
             height: 42px;
             background: #0f172a;
+            color: #ffffff !important;
             box-sizing: content-box;
             z-index: 40;
             border-top: 2px solid #f59e0b;
             box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .dark .ticker-wrap {
+            background: #090d16;
+            border-top: 2px solid #fbbf24;
         }
         .ticker-label {
             position: fixed;
@@ -173,9 +178,9 @@
             height: 42px;
             line-height: 42px;
             background: linear-gradient(135deg, #e11d48, #be123c);
-            color: white;
+            color: #ffffff !important;
             padding: 0 16px;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 0.8rem;
             letter-spacing: 0.05em;
             z-index: 50;
@@ -191,6 +196,10 @@
             white-space: nowrap;
             padding-left: 100%;
             animation: tickerSlide 32s linear infinite;
+            color: #ffffff !important;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
         }
         .ticker-content:hover {
             animation-play-state: paused;
@@ -782,23 +791,23 @@
             </div>
         </div>
 
-        <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 h-[480px] sm:h-[450px]">
+        <div class="relative overflow-hidden rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 min-h-[580px] sm:min-h-[520px] md:h-[460px] lg:h-[420px]">
             <div class="flex transition-transform duration-700 ease-out h-full" id="kabar-slider">
                 <!-- SLIDE 1: HUT ke-2 PELPRAP -->
                 <div class="min-w-full flex-shrink-0 relative h-full bg-slate-900">
                     <div class="flex flex-col md:flex-row h-full">
-                        <div class="h-1/2 md:h-full md:w-1/2 bg-black flex items-center justify-center relative overflow-hidden group cursor-pointer" onclick="openLightbox('PELPRAP2tahun.jpg', 'HUT ke-2 PELPRAP IMANUEL (28 Januari 2024)')">
+                        <div class="h-56 sm:h-64 md:h-full md:w-1/2 bg-black flex items-center justify-center relative overflow-hidden group cursor-pointer flex-shrink-0" onclick="openLightbox('PELPRAP2tahun.jpg', 'HUT ke-2 PELPRAP IMANUEL (28 Januari 2024)')">
                             <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="absolute inset-0 w-full h-full object-cover opacity-40 blur-md" alt="Background Blur">
-                            <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="relative z-10 w-full h-full object-contain p-4 group-hover:scale-105 transition duration-300" alt="HUT Pelprap">
+                            <img src="PELPRAP2tahun.jpg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/PELPRAP2tahun.jpg'" class="relative z-10 w-full h-full object-contain p-3 group-hover:scale-105 transition duration-300" alt="HUT Pelprap">
                             <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center z-20">
                                 <span class="bg-black/70 text-white text-xs font-bold px-3 py-1.5 rounded-full"><i class="fas fa-expand mr-1"></i> Perbesar Foto</span>
                             </div>
                         </div>
-                        <div class="h-1/2 md:h-full md:w-1/2 flex flex-col justify-center p-6 sm:p-10 text-white bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950">
-                            <span class="bg-amber-500 text-slate-950 text-[11px] font-extrabold px-3 py-1 rounded-full w-fit mb-3 uppercase tracking-wider">Momen Bersejarah</span>
-                            <h3 class="text-2xl sm:text-4xl font-extrabold mb-2">HUT ke-2 PELPRAP</h3>
-                            <p class="text-sm sm:text-base mb-3 font-light text-slate-300">
-                                Berdiri sejak <strong class="text-amber-300">28 Januari 2024</strong>.
+                        <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center flex-grow text-white bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 overflow-y-auto">
+                            <span class="bg-amber-500 text-slate-950 text-[10px] sm:text-[11px] font-extrabold px-3 py-1 rounded-full w-fit mb-2.5 uppercase tracking-wider">Momen Bersejarah</span>
+                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-1.5 text-white">HUT ke-2 PELPRAP</h3>
+                            <p class="text-xs sm:text-sm mb-2.5 font-medium text-amber-300">
+                                Berdiri sejak <strong>28 Januari 2024</strong>
                             </p>
                             <p class="text-xs sm:text-sm leading-relaxed text-slate-300">
                                 Perjalanan iman yang penuh anugerah dan penyertaan Tuhan. Mari terus bertumbuh dalam kebenaran, berakar kuat, dan berbuah lebat bagi kemuliaan nama-Nya!
@@ -810,7 +819,7 @@
                 <!-- SLIDE 2: Dokumentasi Kebersamaan -->
                 <div class="min-w-full flex-shrink-0 relative h-full bg-slate-900">
                     <div class="flex flex-col md:flex-row h-full">
-                        <div class="h-1/2 md:h-full md:w-1/2 bg-black grid grid-cols-2 grid-rows-2 gap-1 p-1">
+                        <div class="h-56 sm:h-64 md:h-full md:w-1/2 bg-black grid grid-cols-2 grid-rows-2 gap-1 p-1 flex-shrink-0">
                             <div class="row-span-2 relative overflow-hidden group cursor-pointer rounded-l-xl" onclick="openLightbox('pelprap (1).jpeg', 'Dokumentasi Persekutuan PELPRAP')">
                                 <img src="pelprap (1).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(1).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 1">
                             </div>
@@ -821,10 +830,10 @@
                                 <img src="pelprap (3).jpeg" onerror="this.src='https://github.com/rcwpt/pelprapimanuel/raw/main/pelprap%20(3).jpeg'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Momen 3">
                             </div>
                         </div>
-                        <div class="h-1/2 md:h-full md:w-1/2 flex flex-col justify-center p-6 sm:p-10 text-white bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950">
-                            <span class="bg-indigo-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full w-fit mb-3 uppercase tracking-wider">Persekutuan</span>
-                            <h3 class="text-2xl sm:text-4xl font-extrabold mb-2">Momen Kebersamaan</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed text-indigo-200">
+                        <div class="p-6 sm:p-8 lg:p-10 flex flex-col justify-center flex-grow text-white bg-gradient-to-b md:bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 overflow-y-auto">
+                            <span class="bg-indigo-500 text-white text-[10px] sm:text-[11px] font-extrabold px-3 py-1 rounded-full w-fit mb-2.5 uppercase tracking-wider">Persekutuan</span>
+                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 text-white">Momen Kebersamaan</h3>
+                            <p class="text-xs sm:text-sm leading-relaxed text-indigo-100">
                                 Setiap potret mengabadikan sukacita dalam persekutuan doa, pujian, dan pelayanan bersama sebagai satu tubuh di dalam Kristus.
                             </p>
                         </div>
@@ -1215,7 +1224,7 @@
         <span>INFO PELPRAP</span>
     </div>
     <div class="ticker-wrap" id="ticker-container">
-        <div class="ticker-content" id="ticker-text">
+        <div class="ticker-content text-white dark:text-white" id="ticker-text">
             Memuat informasi terbaru PELPRAP IMANUEL 2026...
         </div>
     </div>
