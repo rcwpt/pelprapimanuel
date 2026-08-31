@@ -226,26 +226,39 @@
     <!-- LEADERBOARD MODAL -->
     <div id="leaderboard-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all duration-300">
         <div class="glass-card rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col relative overflow-hidden">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
                 <div class="flex items-center gap-2.5">
                     <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-xl">
                         <i class="fas fa-trophy"></i>
                     </div>
                     <div>
-                        <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">Papan Peringkat</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Skor Tertinggi Pemain</p>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">Papan Peringkat</h3>
+                            <span class="text-[10px] font-black uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">Global</span>
+                        </div>
+                        <div id="lb-sync-status" class="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                            <i class="fas fa-circle-notch fa-spin text-[8px]"></i> Sinkronisasi Cloud...
+                        </div>
                     </div>
                 </div>
-                <button onclick="closeLeaderboard()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Tutup">
-                    <i class="fas fa-times text-lg"></i>
-                </button>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="fetchOnlineLeaderboard()" class="p-2 rounded-xl text-slate-500 hover:text-brand-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition text-xs font-bold flex items-center gap-1" title="Segarkan Data Online">
+                        <i id="lb-refresh-icon" class="fas fa-arrows-rotate"></i>
+                    </button>
+                    <button onclick="closeLeaderboard()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Tutup">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Leaderboard Filter Tabs -->
-            <div class="flex items-center gap-2 py-3">
-                <button onclick="filterLeaderboard('all')" id="lb-tab-all" class="text-xs font-bold px-3 py-1.5 rounded-full bg-brand-600 text-white transition">Semua</button>
-                <button onclick="filterLeaderboard('quiz')" id="lb-tab-quiz" class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition">Kuis Alkitab</button>
-                <button onclick="filterLeaderboard('tokoh')" id="lb-tab-tokoh" class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition">Tebak Tokoh</button>
+            <div class="flex items-center justify-between py-3">
+                <div class="flex items-center gap-1.5">
+                    <button onclick="filterLeaderboard('all')" id="lb-tab-all" class="text-xs font-bold px-3 py-1.5 rounded-full bg-brand-600 text-white transition">Semua</button>
+                    <button onclick="filterLeaderboard('quiz')" id="lb-tab-quiz" class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition">Kuis Alkitab</button>
+                    <button onclick="filterLeaderboard('tokoh')" id="lb-tab-tokoh" class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition">Tebak Tokoh</button>
+                </div>
+                <span class="text-[10px] font-bold text-slate-400 hidden sm:inline">Top 50 Skor</span>
             </div>
 
             <!-- Scores List -->
@@ -254,9 +267,9 @@
             </div>
 
             <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
-                <button onclick="clearLeaderboardData()" class="text-rose-500 hover:underline font-semibold">
-                    <i class="fas fa-trash-alt mr-1"></i> Reset Riwayat
-                </button>
+                <p class="text-[10px] text-slate-400 italic">
+                    <i class="fas fa-globe text-brand-500 mr-1"></i> Terhubung ke database cloud online
+                </p>
                 <button onclick="closeLeaderboard()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold rounded-xl hover:bg-slate-300 transition">
                     Tutup
                 </button>
@@ -839,18 +852,22 @@
     }
 
     // ============================================================
-    // LEADERBOARD LOGIC
+    // GLOBAL ONLINE LEADERBOARD (Cloud Synchronized)
     // ============================================================
+    const CLOUD_LEADERBOARD_URL = 'https://api.restful-api.dev/objects/ff808181a04ccf2d01a0578d08bd269a';
+    let isSyncingOnline = false;
+
     function openLeaderboard() {
         renderLeaderboard();
         document.getElementById('leaderboard-modal').classList.remove('hidden');
+        fetchOnlineLeaderboard();
     }
 
     function closeLeaderboard() {
         document.getElementById('leaderboard-modal').classList.add('hidden');
     }
 
-    function getLeaderboardData() {
+    function getLocalLeaderboardData() {
         try {
             return JSON.parse(localStorage.getItem('pelprap_leaderboard') || '[]');
         } catch(e) {
@@ -858,23 +875,91 @@
         }
     }
 
-    function saveLeaderboardScore(name, mode, pct, cor, wrg) {
-        const list = getLeaderboardData();
+    async function fetchOnlineLeaderboard() {
+        const syncStatus = document.getElementById('lb-sync-status');
+        const refreshIcon = document.getElementById('lb-refresh-icon');
+        if (syncStatus) syncStatus.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Memuat data online...';
+        if (refreshIcon) refreshIcon.classList.add('fa-spin');
+        
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 6000);
+            const res = await fetch(CLOUD_LEADERBOARD_URL, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            if (res.ok) {
+                const json = await res.json();
+                if (json && json.data && Array.isArray(json.data.scores)) {
+                    localStorage.setItem('pelprap_leaderboard', JSON.stringify(json.data.scores));
+                    renderLeaderboard();
+                    if (syncStatus) syncStatus.innerHTML = '<span class="text-emerald-500 font-bold"><i class="fas fa-circle text-[8px] mr-1"></i> Live Global</span>';
+                    return json.data.scores;
+                }
+            }
+        } catch (err) {
+            console.log('Online fetch fallback to local:', err);
+            if (syncStatus) syncStatus.innerHTML = '<span class="text-amber-500 font-bold"><i class="fas fa-cloud-arrow-down mr-1"></i> Mode Offline / Cache</span>';
+        } finally {
+            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+        }
+        return getLocalLeaderboardData();
+    }
+
+    async function saveLeaderboardScore(name, mode, pct, cor, wrg) {
+        const playerName = name || 'Pemain';
         const entry = {
             id: Date.now(),
-            name: name || 'Pemain',
+            name: playerName,
             mode: mode,
             score: pct,
             correct: cor,
             wrong: wrg,
             date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
         };
-        list.push(entry);
-        // Sort descending by score, then date
-        list.sort((a, b) => b.score - a.score || b.id - a.id);
-        // Keep top 30 scores
-        const trimmed = list.slice(0, 30);
-        localStorage.setItem('pelprap_leaderboard', JSON.stringify(trimmed));
+
+        // 1. Save to local first for immediate feedback
+        let localList = getLocalLeaderboardData();
+        localList.push(entry);
+        localList.sort((a, b) => b.score - a.score || b.id - a.id);
+        localList = localList.slice(0, 50);
+        localStorage.setItem('pelprap_leaderboard', JSON.stringify(localList));
+
+        // 2. Synchronize to Global Cloud
+        try {
+            // Fetch latest global list first
+            let latestList = [];
+            try {
+                const getRes = await fetch(CLOUD_LEADERBOARD_URL);
+                if (getRes.ok) {
+                    const json = await getRes.json();
+                    if (json && json.data && Array.isArray(json.data.scores)) {
+                        latestList = json.data.scores;
+                    }
+                }
+            } catch(e) {
+                latestList = localList;
+            }
+
+            // Append and sort
+            latestList.push(entry);
+            latestList.sort((a, b) => b.score - a.score || b.id - a.id);
+            const top50 = latestList.slice(0, 50);
+
+            // PUT back to cloud
+            await fetch(CLOUD_LEADERBOARD_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: 'pelprap_leaderboard_global_2026',
+                    data: { scores: top50 }
+                })
+            });
+
+            localStorage.setItem('pelprap_leaderboard', JSON.stringify(top50));
+            console.log('Global leaderboard updated successfully.');
+        } catch (e) {
+            console.log('Failed to sync score online:', e);
+        }
     }
 
     function filterLeaderboard(cat) {
@@ -894,7 +979,8 @@
 
     function renderLeaderboard() {
         const container = document.getElementById('leaderboard-list');
-        const data = getLeaderboardData();
+        const data = getLocalLeaderboardData();
+        const currentName = getPlayerName().toLowerCase();
         container.innerHTML = '';
 
         const filtered = data.filter(item => {
@@ -913,24 +999,37 @@
         }
 
         filtered.forEach((item, index) => {
-            let rankBadge = `<span class="w-6 text-center font-bold text-xs text-slate-400">#${index+1}</span>`;
-            if (index === 0) rankBadge = `<span class="text-lg">🥇</span>`;
-            else if (index === 1) rankBadge = `<span class="text-lg">🥈</span>`;
-            else if (index === 2) rankBadge = `<span class="text-lg">🥉</span>`;
+            let rankBadge = `<span class="w-7 text-center font-black text-xs text-slate-400">#${index+1}</span>`;
+            let borderGlow = 'border-slate-200 dark:border-slate-800';
+            
+            if (index === 0) {
+                rankBadge = `<span class="text-xl">🥇</span>`;
+                borderGlow = 'border-amber-400/80 bg-amber-50/40 dark:bg-amber-950/20';
+            } else if (index === 1) {
+                rankBadge = `<span class="text-xl">🥈</span>`;
+                borderGlow = 'border-slate-300 bg-slate-100/40 dark:bg-slate-800/30';
+            } else if (index === 2) {
+                rankBadge = `<span class="text-xl">🥉</span>`;
+                borderGlow = 'border-amber-700/60 bg-amber-900/10';
+            }
+
+            const isCurrentPlayer = currentName && item.name && (item.name.toLowerCase() === currentName);
+            const myBadge = isCurrentPlayer ? `<span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-indigo-600 text-white ml-1.5 shadow-xs">Kamu ⭐</span>` : '';
 
             const modeName = item.mode === 'quiz' ? 'Kuis Alkitab' : 'Tebak Tokoh';
             const modeBg = item.mode === 'quiz' ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300' : 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300';
 
             container.innerHTML += `
-                <div class="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shadow-sm hover:scale-[1.01] transition">
+                <div class="p-3 rounded-2xl bg-white dark:bg-slate-900 border ${borderGlow} flex items-center justify-between gap-3 shadow-sm hover:scale-[1.01] transition">
                     <div class="flex items-center gap-2.5 overflow-hidden">
                         ${rankBadge}
                         <div>
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1.5 flex-wrap">
                                 <h4 class="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white truncate">${item.name}</h4>
+                                ${myBadge}
                                 <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${modeBg}">${modeName}</span>
                             </div>
-                            <p class="text-[10px] text-slate-400">${item.date} • ${item.correct} Benar / ${item.wrong} Salah</p>
+                            <p class="text-[10px] text-slate-400 mt-0.5">${item.date} • ${item.correct} Benar / ${item.wrong} Salah</p>
                         </div>
                     </div>
                     <div class="text-right flex-shrink-0">
@@ -942,10 +1041,10 @@
     }
 
     function clearLeaderboardData() {
-        if (confirm("Apakah Anda yakin ingin mereset seluruh catatan riwayat skor?")) {
-            localStorage.removeItem('pelprap_leaderboard');
-            renderLeaderboard();
-            showToast("Papan Peringkat Direset", "Riwayat skor telah dibersihkan.");
+        if (confirm("Apakah Anda yakin ingin menyegarkan data papan peringkat online?")) {
+            fetchOnlineLeaderboard().then(() => {
+                showToast("Papan Peringkat Disinkronkan", "Data skor online berhasil diperbarui.");
+            });
         }
     }
 
